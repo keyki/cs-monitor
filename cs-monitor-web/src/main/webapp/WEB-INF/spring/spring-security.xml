@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<security:http auto-config="false" use-expressions="true"
+		entry-point-ref="authenticationEntryPoint">
+		<security:intercept-url pattern="/admin*"
+			access="hasRole('ROLE_ADMIN')" />
+		<security:access-denied-handler
+			error-page="/denied" />
+		<security:intercept-url pattern="/register"
+			access="permitAll" />
+		<security:intercept-url pattern="/resources/**"
+			access="permitAll" />
+		<security:intercept-url pattern="/**"
+			access="isAuthenticated()" />
+		<security:custom-filter position="CONCURRENT_SESSION_FILTER"
+			ref="concurrencyFilter" />
+		<security:custom-filter position="FORM_LOGIN_FILTER"
+			ref="authenticationFilter" />
+		<security:custom-filter position="LOGOUT_FILTER"
+			ref="logoutFilter" />
+	</security:http>
+
+	<bean id="logoutFilter"
+		class="org.springframework.security.web.authentication.logout.LogoutFilter">
+		<constructor-arg ref="securityContextLogoutHandler" />
+		<constructor-arg ref="simpleUrlLogoutSuccessHandler" />
+	</bean>
+
+	<bean id="securityContextLogoutHandler"
+		class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler" />
+
+	<bean id="simpleUrlLogoutSuccessHandler"
+		class="org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler"
+		p:defaultTargetUrl="/welcome" />
+
+	<bean id="authenticationEntryPoint"
+		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<constructor-arg value="/register" />
+	</bean>
+
+	<bean id="customAuthenticationSuccessHandler"
+		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler"
+		p:defaultTargetUrl="/welcome" />
+
+	<bean id="customAuthenticationFailureHandler"
+		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"
+		p:defaultFailureUrl="/denied" />
+
+	<bean id="authenticationFilter"
+		class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter"
+		p:sessionAuthenticationStrategy-ref="sas" p:authenticationManager-ref="authenticationManager"
+		p:authenticationFailureHandler-ref="customAuthenticationFailureHandler"
+		p:authenticationSuccessHandler-ref="customAuthenticationSuccessHandler" />
+
+	<bean id="concurrencyFilter"
+		class="org.springframework.security.web.session.ConcurrentSessionFilter">
+		<constructor-arg ref="sessionRegistry"></constructor-arg>
+	</bean>
+
+	<bean id="sessionRegistry"
+		class="org.springframework.security.core.session.SessionRegistryImpl" />
+
+	<bean id="sas"
+		class="org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy"
+		p:maximumSessions="1" p:exceptionIfMaximumExceeded="true">
+		<constructor-arg name="sessionRegistry" ref="sessionRegistry" />
+	</bean>
+
+	<bean id="passwordEncoder"
+		class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
+		<constructor-arg value="256" />
+	</bean>
+
+	<security:authentication-manager alias="authenticationManager">
+		<security:authentication-provider>
+			<security:password-encoder ref="passwordEncoder" />
+			<security:jdbc-user-service
+				data-source-ref="dataSource"
+				users-by-username-query="
+				select username,password, enabled 
+				from user where username=?"
+				authorities-by-username-query="
+				SELECT u.username, r.name FROM user_role ur 
+                INNER JOIN role r ON r.id = ur.role_id
+				INNER JOIN user u ON u.id = ur.user_id
+				WHERE u.username = ?  " />
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+</beans>
