@@ -24,14 +24,14 @@ public class UserRepository extends AbstractGenericRepository<User> {
 
         User fsanyee = new User();
         fsanyee.setEnabled(true);
-        fsanyee.setUsername("nemmondommeg");
-        fsanyee.setPassword(passwordEncoder.encodePassword("fsanyee", null));
+        fsanyee.setUsername("fsanyee");
+        fsanyee.setPassword(passwordEncoder.encodePassword("nemmondommeg", null));
         fsanyee.addRole(role_user);
         fsanyee.addRole(role_admin);
 
         User keyki = new User();
         keyki.setEnabled(true);
-        keyki.setUsername("nemmondommeg");
+        keyki.setUsername("keyki");
         keyki.setPassword(passwordEncoder.encodePassword("pina", null));
         keyki.addRole(role_user);
         keyki.addRole(role_admin);
