@@ -36,5 +36,5 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         urlBasedViewResolver.setViewClass(TilesView.class);
         return urlBasedViewResolver;
     }
-
+    
 }

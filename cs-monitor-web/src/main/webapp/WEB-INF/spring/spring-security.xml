@@ -11,12 +11,10 @@
 			access="hasRole('ROLE_ADMIN')" />
 		<security:access-denied-handler
 			error-page="/denied" />
-		<security:intercept-url pattern="/register"
+		<security:intercept-url pattern="/"
 			access="permitAll" />
 		<security:intercept-url pattern="/resources/**"
 			access="permitAll" />
-		<security:intercept-url pattern="/**"
-			access="isAuthenticated()" />
 		<security:custom-filter position="CONCURRENT_SESSION_FILTER"
 			ref="concurrencyFilter" />
 		<security:custom-filter position="FORM_LOGIN_FILTER"
@@ -36,16 +34,16 @@
 
 	<bean id="simpleUrlLogoutSuccessHandler"
 		class="org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler"
-		p:defaultTargetUrl="/welcome" />
+		p:defaultTargetUrl="/" />
 
 	<bean id="authenticationEntryPoint"
 		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
-		<constructor-arg value="/register" />
+		<constructor-arg value="/" />
 	</bean>
 
 	<bean id="customAuthenticationSuccessHandler"
 		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler"
-		p:defaultTargetUrl="/welcome" />
+		p:defaultTargetUrl="/" />
 
 	<bean id="customAuthenticationFailureHandler"
 		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"
