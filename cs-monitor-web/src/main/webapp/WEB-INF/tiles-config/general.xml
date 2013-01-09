@@ -4,8 +4,15 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
+
 	<definition name="default" template="/WEB-INF/views/home.jsp">
 	   <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="content" value="/WEB-INF/views/test.jsp" />
 	</definition>
+	
+	<definition name="denied" extends="default">
+       <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
+        <put-attribute name="content" value="/WEB-INF/views/denied.jsp" />
+    </definition>
+    
 </tiles-definitions>

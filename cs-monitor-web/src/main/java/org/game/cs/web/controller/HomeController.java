@@ -16,6 +16,11 @@ public class HomeController {
         return "default";
     }
 
+    @RequestMapping("/denied")
+    public String showDeniedPage() {
+        return "denied";
+    }
+
     @RequestMapping("/createmasterusers")
     public String createMasterusers() {
         userService.createMasterUsers();
