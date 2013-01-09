@@ -36,6 +36,11 @@
 			<artifactId>commons-beanutils</artifactId>
 			<version>1.8.3</version>
 		</dependency>
+		<dependency>
+			<groupId>cs</groupId>
+			<artifactId>gameserver</artifactId>
+			<version>1</version>
+		</dependency>
 
 	</dependencies>
 </project>

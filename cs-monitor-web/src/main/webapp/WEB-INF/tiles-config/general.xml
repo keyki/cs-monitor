@@ -7,12 +7,17 @@
 
 	<definition name="default" template="/WEB-INF/views/home.jsp">
 	   <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
-		<put-attribute name="content" value="/WEB-INF/views/test.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/main.jsp" />
 	</definition>
 	
 	<definition name="denied" extends="default">
        <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
         <put-attribute name="content" value="/WEB-INF/views/denied.jsp" />
+    </definition>
+    
+    <definition name="control" extends="default">
+       <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
+        <put-attribute name="content" value="/WEB-INF/views/admin/control.jsp" />
     </definition>
     
 </tiles-definitions>

@@ -9,10 +9,11 @@
 		entry-point-ref="authenticationEntryPoint">
 		<security:intercept-url pattern="/admin*"
 			access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/admin/*"
+			access="hasRole('ROLE_ADMIN')" />
 		<security:access-denied-handler
 			error-page="/denied" />
-		<security:intercept-url pattern="/"
-			access="permitAll" />
+		<security:intercept-url pattern="/" access="permitAll" />
 		<security:intercept-url pattern="/resources/**"
 			access="permitAll" />
 		<security:custom-filter position="CONCURRENT_SESSION_FILTER"

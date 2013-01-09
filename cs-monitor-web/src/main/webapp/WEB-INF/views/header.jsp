@@ -9,8 +9,11 @@
 	</c:set>
 	<li><a href='#'><spring:message code="text.loggedin" />
 			${username}</a></li>
+	<security:authorize access="hasRole('ROLE_ADMIN')">
+		<li><a href='<c:url value="/admin/control"/>'>Control</a></li>
+	</security:authorize>
 	<li style="padding-right: 50px"><a
-		href='<c:url value="j_spring_security_logout"/>'><spring:message
+		href='<c:url value="/j_spring_security_logout"/>'><spring:message
 				code="text.logout" /></a></li>
 </security:authorize>
 
