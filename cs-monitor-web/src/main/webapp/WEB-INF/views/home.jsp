@@ -50,4 +50,6 @@ body {
 <script src="${resources}js/bootstrap-collapse.js"></script>
 <script src="${resources}js/bootstrap-carousel.js"></script>
 <script src="${resources}js/bootstrap-typeahead.js"></script>
+
+<script src="${resources}js/control.js"></script>
 </html>

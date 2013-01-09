@@ -15,5 +15,6 @@
 			<spring:message code="text.connect" />
 		</button>
 	</form>
+	<button class="btn" id="server_basic_info">Basic Info</button>
 
 </center>
