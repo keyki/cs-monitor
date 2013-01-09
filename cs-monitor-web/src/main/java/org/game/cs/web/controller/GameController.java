@@ -36,4 +36,9 @@ public class GameController {
         return "redirect:/admin/control";
     }
 
+    @RequestMapping(value = "getbasicinfo", method = RequestMethod.GET)
+    public String showBasicInfo() {
+        System.out.println(controlService.getBasicInformation());
+        return "redirect:/admin/control";
+    }
 }
