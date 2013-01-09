@@ -13,8 +13,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.PreRemove;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "role")
 public class Role {
 
     @Id
