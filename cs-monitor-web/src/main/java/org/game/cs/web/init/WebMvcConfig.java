@@ -14,7 +14,7 @@ import org.springframework.web.servlet.view.tiles3.TilesView;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"org.game.cs.**"})
+@ComponentScan(basePackages = {"org.game.cs.web.controller"})
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     @Override

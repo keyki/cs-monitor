@@ -6,7 +6,7 @@ public enum ServerInfo {
 
     CURRENT_MAP("currentMap"),
 
-    PLAYERS("player");
+    PLAYERS("players");
 
     private String value;
 

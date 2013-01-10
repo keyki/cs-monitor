@@ -2,6 +2,7 @@ package org.game.cs.web.init;
 
 import org.game.cs.dal.init.DaoConfig;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
@@ -10,6 +11,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 @Configuration
 @Import(value = {DaoConfig.class})
 @ImportResource(value = "WEB-INF/spring/spring-security.xml")
+@ComponentScan(basePackages = {"org.game.cs.core", "org.game.cs.dal"})
 public class RootConfig {
 
     @Bean(name = "messageSource")

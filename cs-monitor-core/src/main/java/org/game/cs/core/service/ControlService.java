@@ -18,12 +18,17 @@ public class ControlService {
     @Autowired
     private ServerControl serverControl;
 
-    public SourceServer connect(String ip, int port) throws RequestTimeoutException, IOException, InterruptedException {
-        return serverControl.connect(new InetSocketAddress(ip, port));
+    public SourceServer connect(String user, String ip, int port) throws RequestTimeoutException, IOException, InterruptedException {
+        return serverControl.connect(user, new InetSocketAddress(ip, port));
     }
 
-    public Map<ServerInfo, String> getBasicInformation() {
-        return serverControl.getBasicInformation();
+    public Map<ServerInfo, String> getBasicInformation(String user) throws RequestTimeoutException, IOException, InterruptedException {
+        return serverControl.getBasicInformation(user);
+    }
+
+    public void removeServer(String user) {
+        serverControl.removeServer(user);
+        System.out.println("Removing server for user: " + user);
     }
 
 }

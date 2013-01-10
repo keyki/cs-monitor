@@ -30,8 +30,7 @@
 		<constructor-arg ref="simpleUrlLogoutSuccessHandler" />
 	</bean>
 
-	<bean id="securityContextLogoutHandler"
-		class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler" />
+	<bean id="securityContextLogoutHandler" class="org.game.cs.web.handler.CustomLogoutHandler" />
 
 	<bean id="simpleUrlLogoutSuccessHandler"
 		class="org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler"

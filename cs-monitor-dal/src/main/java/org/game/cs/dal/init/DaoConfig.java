@@ -56,7 +56,7 @@ public class DaoConfig {
 
     private Properties jpaProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create");
+        properties.setProperty("hibernate.hbm2ddl.auto", "update");
         properties.setProperty("hibernate.use_sql_comments", "false");
         properties.setProperty("hibernate.generate_statistics", "false");
         return properties;

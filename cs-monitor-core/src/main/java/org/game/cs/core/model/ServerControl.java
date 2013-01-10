@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import net.barkerjr.gameserver.GameServer.Request;
 import net.barkerjr.gameserver.GameServer.RequestTimeoutException;
@@ -14,23 +15,29 @@ import org.springframework.stereotype.Component;
 @Component
 public class ServerControl {
 
-    private SourceServer sourceServer;
+    private Map<String, SourceServer> serverMap;
 
-    public SourceServer connect(InetSocketAddress address) throws RequestTimeoutException, IOException, InterruptedException {
-        sourceServer = new SourceServer(address);
+    public ServerControl() {
+        serverMap = new ConcurrentHashMap<>();
+    }
+
+    public SourceServer connect(String user, InetSocketAddress address) throws RequestTimeoutException, IOException, InterruptedException {
+        SourceServer sourceServer = new SourceServer(address);
         sourceServer.load(5000, Request.INFORMATION);
+        serverMap.put(user, sourceServer);
         return sourceServer;
     }
 
-    public Map<ServerInfo, String> getBasicInformation() {
+    public Map<ServerInfo, String> getBasicInformation(String user) throws RequestTimeoutException, IOException, InterruptedException {
+        SourceServer server = serverMap.get(user);
         Map<ServerInfo, String> map = new HashMap<>();
-        map.put(ServerInfo.SERVER_NAME, sourceServer.getName());
-        map.put(ServerInfo.CURRENT_MAP, sourceServer.getMap());
+        map.put(ServerInfo.SERVER_NAME, server.getName());
+        map.put(ServerInfo.CURRENT_MAP, server.getMap());
         return map;
     }
 
-    public SourceServer getSourceServer() {
-        return sourceServer;
+    public void removeServer(String user) {
+        serverMap.remove(user);
     }
 
 }
