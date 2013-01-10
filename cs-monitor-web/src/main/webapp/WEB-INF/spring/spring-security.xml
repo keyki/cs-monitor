@@ -24,55 +24,11 @@
 			ref="logoutFilter" />
 	</security:http>
 
-	<bean id="logoutFilter"
-		class="org.springframework.security.web.authentication.logout.LogoutFilter">
-		<constructor-arg ref="securityContextLogoutHandler" />
-		<constructor-arg ref="simpleUrlLogoutSuccessHandler" />
-	</bean>
-
-	<bean id="securityContextLogoutHandler" class="org.game.cs.web.handler.CustomLogoutHandler" />
-
-	<bean id="simpleUrlLogoutSuccessHandler"
-		class="org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler"
-		p:defaultTargetUrl="/" />
-
-	<bean id="authenticationEntryPoint"
-		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
-		<constructor-arg value="/" />
-	</bean>
-
-	<bean id="customAuthenticationSuccessHandler"
-		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler"
-		p:defaultTargetUrl="/" />
-
-	<bean id="customAuthenticationFailureHandler"
-		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"
-		p:defaultFailureUrl="/denied" />
-
 	<bean id="authenticationFilter"
 		class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter"
 		p:sessionAuthenticationStrategy-ref="sas" p:authenticationManager-ref="authenticationManager"
 		p:authenticationFailureHandler-ref="customAuthenticationFailureHandler"
 		p:authenticationSuccessHandler-ref="customAuthenticationSuccessHandler" />
-
-	<bean id="concurrencyFilter"
-		class="org.springframework.security.web.session.ConcurrentSessionFilter">
-		<constructor-arg ref="sessionRegistry"></constructor-arg>
-	</bean>
-
-	<bean id="sessionRegistry"
-		class="org.springframework.security.core.session.SessionRegistryImpl" />
-
-	<bean id="sas"
-		class="org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy"
-		p:maximumSessions="1" p:exceptionIfMaximumExceeded="true">
-		<constructor-arg name="sessionRegistry" ref="sessionRegistry" />
-	</bean>
-
-	<bean id="passwordEncoder"
-		class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
-		<constructor-arg value="256" />
-	</bean>
 
 	<security:authentication-manager alias="authenticationManager">
 		<security:authentication-provider>

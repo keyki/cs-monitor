@@ -28,7 +28,6 @@ public class ControlService {
 
     public void removeServer(String user) {
         serverControl.removeServer(user);
-        System.out.println("Removing server for user: " + user);
     }
 
 }
