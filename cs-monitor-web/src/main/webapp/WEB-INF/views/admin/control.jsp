@@ -3,6 +3,10 @@
 
 <center>
 
-	<button class="btn" id="server_basic_info">Basic Info</button>
+	<div class="well">
+		<c:forEach items="${info}" var="element">
+            ${element.key}: ${element.value}<br />
+		</c:forEach>
+	</div>
 
 </center>
