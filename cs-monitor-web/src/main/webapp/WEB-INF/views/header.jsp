@@ -11,7 +11,7 @@
 			${username}</a></li>
 
 	<li class="dropdown"><a href="#" class="dropdown-toggle"
-		data-toggle="dropdown"><spring:message code="text.control" /><b
+		data-toggle="dropdown"><spring:message code="text.connect" /><b
 			class="caret"></b></a>
 		<ul class="dropdown-menu">
 			<form action="<c:url value='/admin/connect' />"

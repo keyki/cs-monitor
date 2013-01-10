@@ -8,7 +8,9 @@ import net.barkerjr.gameserver.GameServer.RequestTimeoutException;
 import net.barkerjr.gameserver.valve.SourceServer;
 
 import org.game.cs.core.model.ServerControl;
-import org.game.cs.core.model.ServerInfo;
+import org.game.cs.core.model.UserControl;
+import org.game.cs.core.model.enums.ServerInfo;
+import org.game.cs.core.model.enums.UserState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +19,11 @@ public class ControlService {
 
     @Autowired
     private ServerControl serverControl;
+    @Autowired
+    private UserControl userControl;
 
     public SourceServer connect(String user, String ip, int port) throws RequestTimeoutException, IOException, InterruptedException {
+        userControl.addStatus(user, UserState.CONNECTED);
         return serverControl.connect(user, new InetSocketAddress(ip, port));
     }
 
@@ -28,6 +33,11 @@ public class ControlService {
 
     public void removeServer(String user) {
         serverControl.removeServer(user);
+        userControl.removeStatus(user);
+    }
+
+    public UserState getUserState(String user) {
+        return userControl.getUserState(user);
     }
 
 }

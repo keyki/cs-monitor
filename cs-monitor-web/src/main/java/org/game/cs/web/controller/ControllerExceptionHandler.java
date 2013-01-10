@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.barkerjr.gameserver.GameServer.RequestTimeoutException;
 
+import org.game.cs.common.exception.NotConnectedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -25,6 +26,12 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(value = {IllegalArgumentException.class})
     public String handleExceptions3(Exception exception, HttpServletRequest request) {
         request.setAttribute("error", "Wrong address");
+        return "default";
+    }
+    
+    @ExceptionHandler(value = {NotConnectedException.class})
+    public String handleExceptions4(Exception exception, HttpServletRequest request){
+        request.setAttribute("error", exception.getMessage());
         return "default";
     }
 

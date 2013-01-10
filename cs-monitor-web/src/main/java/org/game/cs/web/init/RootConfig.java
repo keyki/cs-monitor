@@ -10,7 +10,7 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 
 @Configuration
 @Import(value = {DaoConfig.class, SecurityConfig.class})
-@ComponentScan(basePackages = {"org.game.cs.core", "org.game.cs.dal"})
+@ComponentScan(basePackages = {"org.game.cs.core", "org.game.cs.dal", "org.game.cs.web.aop"})
 public class RootConfig {
 
     @Bean(name = "messageSource")

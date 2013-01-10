@@ -1,4 +1,4 @@
-package org.game.cs.core.model;
+package org.game.cs.core.model.enums;
 
 public enum ServerInfo {
 

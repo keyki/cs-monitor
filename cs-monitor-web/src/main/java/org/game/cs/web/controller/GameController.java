@@ -6,8 +6,9 @@ import java.util.Map;
 
 import net.barkerjr.gameserver.GameServer.RequestTimeoutException;
 
-import org.game.cs.core.model.ServerInfo;
+import org.game.cs.core.model.enums.ServerInfo;
 import org.game.cs.core.service.ControlService;
+import org.game.cs.web.annotation.CheckUserState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ public class GameController {
     @Autowired
     private ControlService controlService;
 
+    @CheckUserState
     @RequestMapping("/control")
     public String showControlPage() {
         return "control";

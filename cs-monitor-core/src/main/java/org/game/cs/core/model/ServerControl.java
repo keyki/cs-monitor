@@ -10,6 +10,7 @@ import net.barkerjr.gameserver.GameServer.Request;
 import net.barkerjr.gameserver.GameServer.RequestTimeoutException;
 import net.barkerjr.gameserver.valve.SourceServer;
 
+import org.game.cs.core.model.enums.ServerInfo;
 import org.springframework.stereotype.Component;
 
 @Component
