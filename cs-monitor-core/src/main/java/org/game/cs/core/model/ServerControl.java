@@ -34,6 +34,13 @@ public class ServerControl {
         Map<ServerInfo, String> map = new HashMap<>();
         map.put(ServerInfo.SERVER_NAME, server.getName());
         map.put(ServerInfo.CURRENT_MAP, server.getMap());
+        map.put(ServerInfo.BOT_COUNT, String.valueOf(server.getBotCount()));
+        map.put(ServerInfo.DEDICATED, server.getDedicated().toString());
+        map.put(ServerInfo.MAX_PLAYERS, String.valueOf(server.getMaximumPlayers()));
+        map.put(ServerInfo.NUMBER_OF_PLAYERS, String.valueOf(server.getNumberOfPlayers()));
+        map.put(ServerInfo.OS, server.getOperatingSystem().toString());
+        map.put(ServerInfo.PASSWORD_REQUIRED, String.valueOf(server.isPasswordRequired()));
+        map.put(ServerInfo.VAC_SECURE, String.valueOf(server.isVacSecure()));
         return map;
     }
 

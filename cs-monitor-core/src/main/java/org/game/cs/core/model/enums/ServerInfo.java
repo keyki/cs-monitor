@@ -6,7 +6,21 @@ public enum ServerInfo {
 
     CURRENT_MAP("currentMap"),
 
-    PLAYERS("players");
+    PLAYERS("players"),
+
+    BOT_COUNT("bot_count"),
+
+    DEDICATED("dedicated"),
+
+    MAX_PLAYERS("max_players"),
+
+    OS("os"),
+
+    PASSWORD_REQUIRED("password_required"),
+
+    VAC_SECURE("vac_secure"),
+
+    NUMBER_OF_PLAYERS("number_of_players");
 
     private String value;
 
