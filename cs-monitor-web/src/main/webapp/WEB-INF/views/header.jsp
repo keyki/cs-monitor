@@ -9,9 +9,24 @@
 	</c:set>
 	<li><a href='#'><spring:message code="text.loggedin" />
 			${username}</a></li>
-	<security:authorize access="hasRole('ROLE_ADMIN')">
-		<li><a href='<c:url value="/admin/control"/>'>Control</a></li>
-	</security:authorize>
+
+	<li class="dropdown"><a href="#" class="dropdown-toggle"
+		data-toggle="dropdown"><spring:message code="text.control" /><b
+			class="caret"></b></a>
+		<ul class="dropdown-menu">
+			<form action="<c:url value='/admin/connect' />"
+				method="post" style="text-align: center;">
+				<input type="text"
+					placeholder="<spring:message code="text.ip.or.host"/>"
+					name="ip" required /> <input type="text"
+					placeholder="<spring:message code="text.port"/>"
+					name="port" required value="27015"/>
+				<button type="submit" class="btn">
+					<spring:message code="text.connect" />
+				</button>
+			</form>
+		</ul></li>
+
 	<li style="padding-right: 50px"><a
 		href='<c:url value="/j_spring_security_logout"/>'><spring:message
 				code="text.logout" /></a></li>

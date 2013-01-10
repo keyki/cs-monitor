@@ -29,7 +29,7 @@ public class GameController {
     }
 
     @RequestMapping(value = "/connect", method = RequestMethod.POST)
-    public String connect(@RequestParam String ip, @RequestParam String port, @RequestParam String rcon) {
+    public String connect(@RequestParam String ip, @RequestParam String port) {
         try {
             controlService.connect(getLoggedInUserName(), ip, Integer.valueOf(port));
         } catch (NumberFormatException | RequestTimeoutException | IOException | InterruptedException e) {
