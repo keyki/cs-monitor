@@ -29,12 +29,9 @@ public class GameController {
     }
 
     @RequestMapping(value = "/connect", method = RequestMethod.POST)
-    public String connect(@RequestParam String ip, @RequestParam String port) {
-        try {
-            controlService.connect(getLoggedInUserName(), ip, Integer.valueOf(port));
-        } catch (NumberFormatException | RequestTimeoutException | IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
+    public String connect(@RequestParam String ip, @RequestParam String port) throws NumberFormatException, RequestTimeoutException, IOException,
+        InterruptedException {
+        controlService.connect(getLoggedInUserName(), ip, Integer.valueOf(port));
         return "redirect:/admin/control";
     }
 
