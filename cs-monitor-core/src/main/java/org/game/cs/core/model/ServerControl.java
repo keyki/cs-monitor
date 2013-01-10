@@ -2,9 +2,12 @@ package org.game.cs.core.model;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import javax.security.auth.login.FailedLoginException;
 
 import net.barkerjr.gameserver.GameServer.Request;
 import net.barkerjr.gameserver.GameServer.RequestTimeoutException;
@@ -24,13 +27,14 @@ public class ServerControl {
 
     public SourceServer connect(String user, InetSocketAddress address) throws RequestTimeoutException, IOException, InterruptedException {
         SourceServer sourceServer = new SourceServer(address);
-        sourceServer.load(5000, Request.INFORMATION);
+        loadInformation(sourceServer);
         serverMap.put(user, sourceServer);
         return sourceServer;
     }
 
     public Map<ServerInfo, String> getBasicInformation(String user) throws RequestTimeoutException, IOException, InterruptedException {
         SourceServer server = serverMap.get(user);
+        loadInformation(server);
         Map<ServerInfo, String> map = new HashMap<>();
         map.put(ServerInfo.SERVER_NAME, server.getName());
         map.put(ServerInfo.CURRENT_MAP, server.getMap());
@@ -46,6 +50,16 @@ public class ServerControl {
 
     public void removeServer(String user) {
         serverMap.remove(user);
+    }
+
+    private void loadInformation(SourceServer sourceServer) throws IOException, InterruptedException, RequestTimeoutException {
+        sourceServer.load(5000, Request.INFORMATION);
+    }
+
+    public String executeCommand(String user, String password, String command) throws FailedLoginException, SocketTimeoutException {
+        SourceServer server = serverMap.get(user);
+        server.setRconPassword(password);
+        return server.sendRcon(command);
     }
 
 }

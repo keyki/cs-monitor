@@ -2,7 +2,10 @@ package org.game.cs.core.service;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.SocketTimeoutException;
 import java.util.Map;
+
+import javax.security.auth.login.FailedLoginException;
 
 import net.barkerjr.gameserver.GameServer.RequestTimeoutException;
 import net.barkerjr.gameserver.valve.SourceServer;
@@ -38,6 +41,10 @@ public class ControlService {
 
     public UserState getUserState(String user) {
         return userControl.getUserState(user);
+    }
+    
+    public String executeCommand(String user, String password, String command) throws FailedLoginException, SocketTimeoutException{
+        return serverControl.executeCommand(user, password, command);
     }
 
 }

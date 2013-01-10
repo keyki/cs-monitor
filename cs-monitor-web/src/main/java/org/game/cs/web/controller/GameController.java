@@ -1,6 +1,9 @@
 package org.game.cs.web.controller;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
+
+import javax.security.auth.login.FailedLoginException;
 
 import net.barkerjr.gameserver.GameServer.RequestTimeoutException;
 
@@ -32,6 +35,12 @@ public class GameController {
     public String connect(@RequestParam String ip, @RequestParam String port) throws NumberFormatException, RequestTimeoutException, IOException,
         InterruptedException {
         controlService.connect(getLoggedInUserName(), ip, Integer.valueOf(port));
+        return "redirect:/admin/control";
+    }
+
+    @RequestMapping(value = "/executerconcommand", method = RequestMethod.POST)
+    public String setRcon(@RequestParam String rcon, @RequestParam String rcon_command) throws FailedLoginException, SocketTimeoutException {
+        controlService.executeCommand(getLoggedInUserName(), rcon, rcon_command);
         return "redirect:/admin/control";
     }
 
