@@ -13,6 +13,7 @@ import net.barkerjr.gameserver.GameServer.Request;
 import net.barkerjr.gameserver.GameServer.RequestTimeoutException;
 import net.barkerjr.gameserver.valve.SourceServer;
 
+import org.game.cs.core.model.enums.RconCommand;
 import org.game.cs.core.model.enums.ServerInfo;
 import org.springframework.stereotype.Component;
 
@@ -60,7 +61,7 @@ public class ServerControl {
     }
 
     private void loadInformation(SourceServer sourceServer) throws IOException, InterruptedException, RequestTimeoutException {
-        sourceServer.load(5000, Request.INFORMATION);
+        sourceServer.load(10000, Request.INFORMATION);
     }
 
     public String executeCommand(String user, String password, String command) throws FailedLoginException, SocketTimeoutException {
@@ -75,6 +76,12 @@ public class ServerControl {
 
     public String getAvaliableMaps(String user) throws FailedLoginException, SocketTimeoutException {
         SourceServer server = serverMap.get(user);
-        return executeCommand(server, "maps *");
+        return executeCommand(server, RconCommand.MAP_LIST.getValue());
     }
+
+    public void changeMap(String user, String map) throws FailedLoginException, SocketTimeoutException {
+        SourceServer server = serverMap.get(user);
+        executeCommand(server, RconCommand.CHANGE_MAP.getValue() + map);
+    }
+
 }

@@ -3,7 +3,7 @@ package org.game.cs.core.service;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.SocketTimeoutException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -67,8 +67,17 @@ public class ControlService {
     }
 
     public Collection<String> getAvailableMaps(String user) throws FailedLoginException, SocketTimeoutException {
-        List<String> mapList = Arrays.asList(serverControl.getAvaliableMaps(user));
-        return mapList;
+        List<String> list = new ArrayList<>();
+        for (String s : serverControl.getAvaliableMaps(user).split(" ")) {
+            if (s.contains("_")) {
+                list.add(s.substring(0, s.lastIndexOf('.')));
+            }
+        }
+        return list;
+    }
+
+    public void changeMap(String user, String map) throws FailedLoginException, SocketTimeoutException {
+        serverControl.changeMap(user, map);
     }
 
 }

@@ -2,6 +2,7 @@ package org.game.cs.web.controller;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.HtmlUtils;
 
 @Controller
 @RequestMapping("/admin")
@@ -40,10 +42,29 @@ public class GameController {
     }
 
     @CheckUserState
-    @RequestMapping("/changelevel")
+    @RequestMapping(value = "/changelevel", method = RequestMethod.GET)
     public String showChangeLevelPage(Model model) throws FailedLoginException, SocketTimeoutException {
-        model.addAttribute("maps", controlService.getAvailableMaps(getLoggedInUserName()));
+        model.addAttribute("maps", constructMapString((List<String>) htmlEscape(controlService.getAvailableMaps(getLoggedInUserName()))));
         return "changelevel";
+    }
+
+    @CheckUserState
+    @RequestMapping(value = "/changelevel", method = RequestMethod.POST)
+    public String changeLevel(@RequestParam String map) throws FailedLoginException, SocketTimeoutException {
+        controlService.changeMap(getLoggedInUserName(), map);
+        return "redirect:/admin/changelevel";
+    }
+
+    private String constructMapString(List<String> collection) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < collection.size(); i++) {
+            if (i == collection.size() - 1) {
+                stringBuilder.append("&quot;" + collection.get(i) + "&quot;");
+            } else {
+                stringBuilder.append("&quot;" + collection.get(i) + "&quot;,");
+            }
+        }
+        return stringBuilder.toString();
     }
 
     @RequestMapping(value = "/connect", method = RequestMethod.POST)
@@ -92,6 +113,17 @@ public class GameController {
 
     private String getLoggedInUserName() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
+    private Collection<String> htmlEscape(Collection<String> collection) {
+        for (String s : collection) {
+            s = htmlEscape(s);
+        }
+        return collection;
+    }
+
+    private String htmlEscape(String s) {
+        return HtmlUtils.htmlEscape(s);
     }
 
 }
