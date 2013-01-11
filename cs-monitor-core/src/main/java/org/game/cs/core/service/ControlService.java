@@ -36,15 +36,20 @@ public class ControlService {
 
     public void removeServer(String user) {
         serverControl.removeServer(user);
-        userControl.removeStatus(user);
+        userControl.removeUser(user);
     }
 
     public UserState getUserState(String user) {
         return userControl.getUserState(user);
     }
-    
-    public String executeCommand(String user, String password, String command) throws FailedLoginException, SocketTimeoutException{
+
+    public String executeCommand(String user, String password, String command) throws FailedLoginException, SocketTimeoutException {
         return serverControl.executeCommand(user, password, command);
+    }
+
+    public void expireConnection(String user) {
+        serverControl.removeServer(user);
+        userControl.addStatus(user, UserState.IDLE);
     }
 
 }

@@ -2,15 +2,21 @@ package org.game.cs.web.controller;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
+import java.util.Date;
+import java.util.List;
 
 import javax.security.auth.login.FailedLoginException;
 
 import net.barkerjr.gameserver.GameServer.RequestTimeoutException;
 
+import org.game.cs.core.model.enums.UserState;
 import org.game.cs.core.service.ControlService;
 import org.game.cs.web.annotation.CheckUserState;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.session.SessionInformation;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +29,8 @@ public class GameController {
 
     @Autowired
     private ControlService controlService;
+    @Autowired
+    private SessionRegistry sessionRegistry;
 
     @CheckUserState
     @RequestMapping("/control")
@@ -38,10 +46,37 @@ public class GameController {
         return "redirect:/admin/control";
     }
 
+    @CheckUserState
     @RequestMapping(value = "/executerconcommand", method = RequestMethod.POST)
     public String setRcon(@RequestParam String rcon, @RequestParam String rcon_command) throws FailedLoginException, SocketTimeoutException {
         controlService.executeCommand(getLoggedInUserName(), rcon, rcon_command);
         return "redirect:/admin/control";
+    }
+
+    /**
+     * expires the connection to the server if the last action performed more than 10 minutes ago
+     * checks it every minute
+    */
+    @Scheduled(fixedRate = 60000)
+    public void clear() {
+        List<Object> allPrincipals = sessionRegistry.getAllPrincipals();
+        for (Object o : allPrincipals) {
+            List<SessionInformation> allSessions = sessionRegistry.getAllSessions(o, false);
+            for (SessionInformation si : allSessions) {
+                String userName = ((org.springframework.security.core.userdetails.User) o).getUsername();
+                if (checkIfShouldExpire(si, userName)) {
+                    controlService.expireConnection(userName);
+                }
+            }
+        }
+    }
+
+    private boolean checkIfShouldExpire(SessionInformation si, String userName) {
+        return getTheDifferenceInMs(si) >= 600000 && UserState.CONNECTED.equals(controlService.getUserState(userName));
+    }
+
+    private long getTheDifferenceInMs(SessionInformation si) {
+        return new Date().getTime() - si.getLastRequest().getTime();
     }
 
     private String getLoggedInUserName() {

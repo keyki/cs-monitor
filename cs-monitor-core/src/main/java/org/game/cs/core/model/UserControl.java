@@ -19,11 +19,11 @@ public class UserControl {
         statusMap.put(user, state);
     }
 
-    public void removeStatus(String user) {
+    public void removeUser(String user) {
         statusMap.remove(user);
     }
-    
-    public UserState getUserState(String user){
+
+    public UserState getUserState(String user) {
         return statusMap.get(user);
     }
 }
