@@ -39,6 +39,12 @@ public class GameController {
         return "control";
     }
 
+    @CheckUserState
+    @RequestMapping("/changelevel")
+    public String showChangeLevelPage() {
+        return "changelevel";
+    }
+
     @RequestMapping(value = "/connect", method = RequestMethod.POST)
     public String connect(@RequestParam String ip, @RequestParam String port) throws NumberFormatException, RequestTimeoutException, IOException,
         InterruptedException {
