@@ -41,14 +41,19 @@ public class GameController {
 
     @CheckUserState
     @RequestMapping("/changelevel")
-    public String showChangeLevelPage() {
+    public String showChangeLevelPage(Model model) throws FailedLoginException, SocketTimeoutException {
+        model.addAttribute("maps", controlService.getAvailableMaps(getLoggedInUserName()));
         return "changelevel";
     }
 
     @RequestMapping(value = "/connect", method = RequestMethod.POST)
-    public String connect(@RequestParam String ip, @RequestParam String port) throws NumberFormatException, RequestTimeoutException, IOException,
-        InterruptedException {
-        controlService.connect(getLoggedInUserName(), ip, Integer.valueOf(port));
+    public String connect(@RequestParam String ip, @RequestParam String port, @RequestParam(required = false) String rcon)
+        throws NumberFormatException, RequestTimeoutException, IOException, InterruptedException {
+        if (rcon != null) {
+            controlService.connect(getLoggedInUserName(), ip, Integer.valueOf(port), rcon);
+        } else {
+            controlService.connect(getLoggedInUserName(), ip, Integer.valueOf(port));
+        }
         return "redirect:/admin/control";
     }
 

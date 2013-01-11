@@ -32,6 +32,13 @@ public class ServerControl {
         return sourceServer;
     }
 
+    public SourceServer connect(String user, InetSocketAddress address, String password) throws RequestTimeoutException, IOException,
+        InterruptedException {
+        SourceServer sourceServer = connect(user, address);
+        sourceServer.setRconPassword(password);
+        return sourceServer;
+    }
+
     public Map<ServerInfo, String> getBasicInformation(String user) throws RequestTimeoutException, IOException, InterruptedException {
         SourceServer server = serverMap.get(user);
         loadInformation(server);
@@ -62,4 +69,12 @@ public class ServerControl {
         return server.sendRcon(command);
     }
 
+    public String executeCommand(SourceServer server, String command) throws FailedLoginException, SocketTimeoutException {
+        return server.sendRcon(command);
+    }
+
+    public String getAvaliableMaps(String user) throws FailedLoginException, SocketTimeoutException {
+        SourceServer server = serverMap.get(user);
+        return executeCommand(server, "maps *");
+    }
 }

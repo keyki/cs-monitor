@@ -3,6 +3,9 @@ package org.game.cs.core.service;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.SocketTimeoutException;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import javax.security.auth.login.FailedLoginException;
@@ -26,8 +29,19 @@ public class ControlService {
     private UserControl userControl;
 
     public SourceServer connect(String user, String ip, int port) throws RequestTimeoutException, IOException, InterruptedException {
+        SourceServer server = serverControl.connect(user, new InetSocketAddress(ip, port));
         userControl.addStatus(user, UserState.CONNECTED);
-        return serverControl.connect(user, new InetSocketAddress(ip, port));
+        return server;
+    }
+
+    public SourceServer connect(String user, String ip, int port, String password) throws RequestTimeoutException, IOException, InterruptedException {
+        SourceServer server = serverControl.connect(user, new InetSocketAddress(ip, port), password);
+        userControl.addStatus(user, UserState.CONNECTED);
+        return server;
+    }
+
+    public void setUserState(String user, UserState state) {
+        userControl.addStatus(user, state);
     }
 
     public Map<ServerInfo, String> getBasicInformation(String user) throws RequestTimeoutException, IOException, InterruptedException {
@@ -50,6 +64,11 @@ public class ControlService {
     public void expireConnection(String user) {
         serverControl.removeServer(user);
         userControl.addStatus(user, UserState.IDLE);
+    }
+
+    public Collection<String> getAvailableMaps(String user) throws FailedLoginException, SocketTimeoutException {
+        List<String> mapList = Arrays.asList(serverControl.getAvaliableMaps(user));
+        return mapList;
     }
 
 }

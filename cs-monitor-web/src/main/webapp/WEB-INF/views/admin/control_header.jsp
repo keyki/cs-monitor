@@ -20,7 +20,8 @@
 					placeholder="<spring:message code="text.ip.or.host"/>" name="ip"
 					required /> <input type="text"
 					placeholder="<spring:message code="text.port"/>" name="port"
-					required value="27015" />
+					required value="27015" /> <input type="password"
+					placeholder="<spring:message code="text.rcon"/>" name="rcon" />
 				<button type="submit" class="btn">
 					<spring:message code="text.connect" />
 				</button>
