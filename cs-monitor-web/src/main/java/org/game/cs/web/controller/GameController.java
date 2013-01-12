@@ -12,6 +12,7 @@ import net.barkerjr.gameserver.GameServer.RequestTimeoutException;
 
 import org.game.cs.core.model.enums.UserState;
 import org.game.cs.core.service.ControlService;
+import org.game.cs.dal.service.ServerService;
 import org.game.cs.web.annotation.CheckUserState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -33,6 +34,8 @@ public class GameController {
 	private ControlService controlService;
 	@Autowired
 	private SessionRegistry sessionRegistry;
+	@Autowired
+	private ServerService serverService;
 
 	@CheckUserState
 	@RequestMapping("/control")
@@ -76,16 +79,19 @@ public class GameController {
 	}
 
 	@RequestMapping(value = "/connect", method = RequestMethod.POST)
-	public String connect(@RequestParam String ip, @RequestParam String port,
-			@RequestParam(required = false) String rcon)
-			throws NumberFormatException, RequestTimeoutException, IOException,
-			InterruptedException {
+	public String connect(@RequestParam String ip, @RequestParam int port,
+			@RequestParam(required = false) String rcon,
+			@RequestParam boolean register) throws NumberFormatException,
+			RequestTimeoutException, IOException, InterruptedException {
 		if (rcon != null) {
 			controlService.connect(getLoggedInUserName(), ip,
 					Integer.valueOf(port), rcon);
 		} else {
 			controlService.connect(getLoggedInUserName(), ip,
 					Integer.valueOf(port));
+		}
+		if (register) {
+			serverService.registerServer(getLoggedInUserName(), ip, port, rcon);
 		}
 		return "redirect:/admin/control";
 	}
