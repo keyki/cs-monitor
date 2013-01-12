@@ -44,7 +44,9 @@ public class GameController {
     @CheckUserState
     @RequestMapping(value = "/changelevel", method = RequestMethod.GET)
     public String showChangeLevelPage(Model model) throws FailedLoginException, SocketTimeoutException {
-        model.addAttribute("maps", constructMapString((List<String>) htmlEscape(controlService.getAvailableMaps(getLoggedInUserName()))));
+    	Collection<String> availableMaps = controlService.getAvailableMaps(getLoggedInUserName());
+        model.addAttribute("mapString", constructMapString((List<String>) htmlEscape(availableMaps)));
+        model.addAttribute("maps", availableMaps);
         return "changelevel";
     }
 
