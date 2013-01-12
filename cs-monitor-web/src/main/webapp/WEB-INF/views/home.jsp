@@ -3,12 +3,13 @@
 <c:url value="/resources/" var="resources" />
 
 <html>
+<link href="${resources}css/docs.css" rel="stylesheet">
 <link href="${resources}css/bootstrap.css" rel="stylesheet">
 <link href="${resources}css/bootstrap-responsive.css" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <style>
 body {
-	padding-top: 60px;
+	padding-top: 40px;
 	/* 60px to make the container go all the way to the bottom of the topbar */
 }
 </style>
@@ -23,7 +24,7 @@ body {
 				<a class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span>
-				</a> <a class="brand" href="#">CS-MONITOR</a>
+				</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<tiles:insertAttribute name="header" />
@@ -31,6 +32,11 @@ body {
 				</div>
 			</div>
 		</div>
+	</div>
+
+	<div class="jumbotron masthead"
+		style="background-image: url('${resources}img/maps/de_dust2.jpg');margin-bottom:20px">
+		<div class="container"><h2>CS-MONITOR</h2></div>
 	</div>
 
 	<div class="container">
