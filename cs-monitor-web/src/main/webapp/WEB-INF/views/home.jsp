@@ -34,8 +34,8 @@ body {
 		</div>
 	</div>
 
-	<div class="jumbotron masthead"
-		style="background-image: url('${resources}img/maps/de_dust2.jpg');margin-bottom:20px">
+	<div class="jumbotron masthead" id="cs_banner"
+		style="background-image: url('${resources}img/banner.jpg');margin-bottom:20px;background-size:cover">
 		<div class="container"><h2>CS-MONITOR</h2></div>
 	</div>
 
@@ -57,5 +57,6 @@ body {
 <script src="${resources}js/bootstrap-carousel.js"></script>
 <script src="${resources}js/bootstrap-typeahead.js"></script>
 
-<script src="${resources}js/control.js"></script>
+<script src="${resources}js/parallax.js"></script>
+<script src="${resources}js/home.js"></script>
 </html>
