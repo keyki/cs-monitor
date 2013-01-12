@@ -4,7 +4,6 @@
 <center>
 
 	<form class="form-inline" method="post" action="<c:url value='/admin/executerconcommand' />">
-		<input type="password" class="input-medium" name="rcon" placeholder="<spring:message code="text.rcon"/>" required>
         <input type="text" class="input-large" name="rcon_command" placeholder="<spring:message code="text.rcon.command"/>" required>
 		<button type="submit" class="btn"><spring:message code="text.execute"/></button>
 	</form>
