@@ -1,6 +1,5 @@
 package org.game.cs.dal.repository;
 
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 

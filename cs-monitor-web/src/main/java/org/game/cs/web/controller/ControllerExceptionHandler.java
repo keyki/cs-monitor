@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import net.barkerjr.gameserver.GameServer.RequestTimeoutException;
 
 import org.game.cs.common.exception.NotConnectedException;
+import org.game.cs.common.exception.ServerAlreadyRegisteredException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -41,6 +42,12 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(value = {FailedLoginException.class})
     public String handleExceptions5(Exception exception, HttpServletRequest request) {
         request.setAttribute("error", "Wrong rcon password");
+        return "default";
+    }
+    
+    @ExceptionHandler(value = {ServerAlreadyRegisteredException.class})
+    public String handleExceptions6(Exception exception, HttpServletRequest request) {
+        request.setAttribute("error", exception.getMessage());
         return "default";
     }
     

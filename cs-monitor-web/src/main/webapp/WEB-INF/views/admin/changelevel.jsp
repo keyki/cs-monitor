@@ -17,7 +17,7 @@
 		<!-- Carousel items -->
 		<div class="carousel-inner">
 			<c:forEach items="${maps}" var="map" varStatus="counter">
-				<div class="item ${counter.count == 0 ? 'active' : '' }">
+				<div class="item ${counter.count == 1 ? 'active' : '' }">
 					<img src="../resources/img/maps/${map}.jpg">
 					<div class="carousel-caption">
 						<form class="form-inline" method="post"
