@@ -55,7 +55,7 @@ public class SecurityConfig {
 
     @Bean(name = "logoutFilter")
     public LogoutFilter getLogoutFilter() {
-        return new LogoutFilter(getSimpleUrlLogoutSuccessHandler(), getCustomLogoutHandler(), getTokenBasedRememberMeServices());
+        return new LogoutFilter(getSimpleUrlLogoutSuccessHandler(), getTokenBasedRememberMeServices(), getCustomLogoutHandler());
     }
 
     @Bean(name = "customLogoutHandler")
