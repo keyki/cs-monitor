@@ -13,7 +13,9 @@
 			access="hasRole('ROLE_ADMIN')" />
 		<security:access-denied-handler
 			error-page="/denied" />
-		<security:intercept-url pattern="/" access="permitAll" />
+		<security:intercept-url pattern="/login" access="permitAll" />
+		<security:intercept-url pattern="/denied" access="permitAll" />
+			<security:intercept-url pattern="/*" access="isAuthenticated()" />
 		<security:intercept-url pattern="/resources/**"
 			access="permitAll" />
 		<security:custom-filter position="CONCURRENT_SESSION_FILTER"
