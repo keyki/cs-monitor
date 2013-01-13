@@ -30,24 +30,6 @@ body {
 				</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<security:authorize access="isAnonymous()">
-							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown"><spring:message code="text.login" /><b
-									class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<form action="<c:url value='/j_spring_security_check' />"
-										method="post" style="text-align: center;">
-										<input type="text"
-											placeholder="<spring:message code="text.username"/>"
-											name="j_username" required /> <input type="password"
-											placeholder="<spring:message code="text.password"/>"
-											name="j_password" required />
-										<button type="submit" class="btn">
-											<spring:message code="text.login" />
-										</button>
-									</form>
-								</ul></li>
-						</security:authorize>
 						<security:authorize access="isAuthenticated()">
 							<c:set var="username">
 								<security:authentication property="principal.username" />
