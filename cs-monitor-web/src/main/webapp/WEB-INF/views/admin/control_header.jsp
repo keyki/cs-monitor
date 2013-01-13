@@ -11,6 +11,7 @@
 		<ul class="dropdown-menu">
 			<li><a href='<c:url value='/admin/control' />'><spring:message
 						code="text.info" /></a></li>
+			<li class="divider"></li>
 			<li><a href='<c:url value='/admin/changelevel' />'><spring:message
 						code="text.changelevel" /></a></li>
 		</ul></li>
