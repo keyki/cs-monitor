@@ -49,7 +49,7 @@ body {
 											required value="27015" /> <input type="password"
 											placeholder="<spring:message code="text.rcon"/>" name="rcon" />
 										<label class="checkbox"
-											style="margin-left: 25%; margin-right: 25%"> <input
+											style="margin-left: 40%; margin-right: 40%"> <input
 											type="checkbox" name="register"> <spring:message
 												code="text.save" />
 										</label>
