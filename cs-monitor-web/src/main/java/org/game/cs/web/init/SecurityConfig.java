@@ -39,7 +39,6 @@ public class SecurityConfig {
     public ConcurrentSessionControlStrategy getConcurrentSessionControlStrategy() {
         ConcurrentSessionControlStrategy controlStrategy = new ConcurrentSessionControlStrategy(getSessionRegistryImpl());
         controlStrategy.setMaximumSessions(1);
-        controlStrategy.setExceptionIfMaximumExceeded(true);
         return controlStrategy;
     }
 
