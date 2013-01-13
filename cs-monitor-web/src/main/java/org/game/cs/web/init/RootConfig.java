@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @Import(value = {DaoConfig.class, SecurityConfig.class})
-@ComponentScan(basePackages = {"org.game.cs.core", "org.game.cs.dal", "org.game.cs.web.aop"})
+@ComponentScan(basePackages = {"org.game.cs.core", "org.game.cs.dal", "org.game.cs.web.aop", "org.game.cs.web.service"})
 public class RootConfig {
 
     @Bean(name = "messageSource")

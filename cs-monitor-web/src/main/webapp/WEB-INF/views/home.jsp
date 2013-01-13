@@ -51,7 +51,7 @@ body {
 										<label class="checkbox"
 											style="margin-left: 25%; margin-right: 25%"> <input
 											type="checkbox" name="register"> <spring:message
-												code="text.register" />
+												code="text.save" />
 										</label>
 										<button type="submit" class="btn">
 											<spring:message code="text.connect" />

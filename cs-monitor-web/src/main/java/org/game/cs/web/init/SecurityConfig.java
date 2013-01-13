@@ -1,15 +1,18 @@
 package org.game.cs.web.init;
 
 import org.game.cs.web.handler.CustomLogoutHandler;
+import org.game.cs.web.service.MyUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.security.authentication.RememberMeAuthenticationProvider;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
+import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 import org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy;
 import org.springframework.security.web.session.ConcurrentSessionFilter;
 
@@ -52,12 +55,27 @@ public class SecurityConfig {
 
     @Bean(name = "logoutFilter")
     public LogoutFilter getLogoutFilter() {
-        return new LogoutFilter(getSimpleUrlLogoutSuccessHandler(), getCustomLogoutHandler());
+        return new LogoutFilter(getSimpleUrlLogoutSuccessHandler(), getCustomLogoutHandler(), getTokenBasedRememberMeServices());
     }
 
-    @Bean(name = "securityContextLogoutHandler")
+    @Bean(name = "customLogoutHandler")
     public CustomLogoutHandler getCustomLogoutHandler() {
         return new CustomLogoutHandler();
+    }
+    
+    @Bean(name = "rememberMeService")
+    public TokenBasedRememberMeServices getTokenBasedRememberMeServices(){
+    	return new TokenBasedRememberMeServices("springRocks", getMyUserDetailsService());
+    }
+    
+    @Bean(name = "rememberMeAuthenticationProvider")
+    public RememberMeAuthenticationProvider getRememberMeAuthenticationProvider(){
+    	return new RememberMeAuthenticationProvider("springRocks");
+    }
+    
+    @Bean(name = "myUserDetailsService")
+    public MyUserDetailsService getMyUserDetailsService(){
+    	return new MyUserDetailsService();
     }
 
     @Bean(name = "simpleUrlLogoutSuccessHandler")
