@@ -19,8 +19,9 @@ public class ServerService {
 	private PasswordEncoder passwordEncoder;
 
 	public void registerServer(String user, String ip, int port, String rcon) {
-		serverRepository.persist(new Server(ip, port, passwordEncoder
-				.encodePassword(rcon, null), userService.findByName(user)));
+		if (serverRepository.findByUser(userService.findByName(user), ip) == null) {
+			serverRepository.persist(new Server(ip, port, passwordEncoder
+					.encodePassword(rcon, null), userService.findByName(user)));
+		}
 	}
-
 }

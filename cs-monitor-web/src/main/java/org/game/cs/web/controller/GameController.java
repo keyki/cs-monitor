@@ -81,7 +81,7 @@ public class GameController {
 	@RequestMapping(value = "/connect", method = RequestMethod.POST)
 	public String connect(@RequestParam String ip, @RequestParam int port,
 			@RequestParam(required = false) String rcon,
-			@RequestParam boolean register) throws NumberFormatException,
+			@RequestParam(required = false) boolean register) throws NumberFormatException,
 			RequestTimeoutException, IOException, InterruptedException {
 		if (rcon != null) {
 			controlService.connect(getLoggedInUserName(), ip,

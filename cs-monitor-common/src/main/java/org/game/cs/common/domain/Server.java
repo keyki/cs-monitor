@@ -33,6 +33,10 @@ public class Server {
 		this.password = password;
 		this.user = user;
 	}
+	
+	public Server(){
+		
+	}
 
 	public User getUser() {
 		return user;

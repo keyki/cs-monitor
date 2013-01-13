@@ -21,7 +21,11 @@
 					required /> <input type="text"
 					placeholder="<spring:message code="text.port"/>" name="port"
 					required value="27015" /> <input type="password"
-					placeholder="<spring:message code="text.rcon"/>" name="rcon" />
+					placeholder="<spring:message code="text.rcon"/>" name="rcon" /> <label
+					class="checkbox" style="margin-left: 25%; margin-right: 25%">
+					<input type="checkbox" name="register"> <spring:message
+						code="text.register" />
+				</label>
 				<button type="submit" class="btn">
 					<spring:message code="text.connect" />
 				</button>

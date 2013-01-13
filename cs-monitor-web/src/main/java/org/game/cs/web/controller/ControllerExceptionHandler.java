@@ -43,4 +43,5 @@ public class ControllerExceptionHandler {
         request.setAttribute("error", "Wrong rcon password");
         return "default";
     }
+    
 }
