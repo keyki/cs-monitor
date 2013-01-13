@@ -10,6 +10,11 @@
 		<put-attribute name="content" value="/WEB-INF/views/main.jsp" />
 	</definition>
 	
+	<definition name="login" extends="default">
+	   <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/login.jsp" />
+	</definition>
+	
 	<definition name="errors" extends="default">
 	   <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="content" value="/WEB-INF/views/errors.jsp" />

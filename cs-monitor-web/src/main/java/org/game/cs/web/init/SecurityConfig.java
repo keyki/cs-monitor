@@ -19,7 +19,7 @@ public class SecurityConfig {
 
     @Bean(name = "authenticationEntryPoint")
     public LoginUrlAuthenticationEntryPoint getLoginUrlAuthenticationEntryPoint() {
-        return new LoginUrlAuthenticationEntryPoint("/");
+        return new LoginUrlAuthenticationEntryPoint("/login");
     }
 
     @Bean(name = "customAuthenticationSuccessHandler")
@@ -63,7 +63,7 @@ public class SecurityConfig {
     @Bean(name = "simpleUrlLogoutSuccessHandler")
     public SimpleUrlLogoutSuccessHandler getSimpleUrlLogoutSuccessHandler() {
         SimpleUrlLogoutSuccessHandler handler = new SimpleUrlLogoutSuccessHandler();
-        handler.setDefaultTargetUrl("/");
+        handler.setDefaultTargetUrl("/login");
         return handler;
     }
 }
