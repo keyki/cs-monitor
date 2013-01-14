@@ -6,23 +6,31 @@
 	<form class="form-inline" method="post"
 		action="<c:url value='/admin/changelevel' />">
 		<input type="text" class="span3" style="margin: 0 auto;"
-			data-provide="typeahead" data-items="50" data-source="[${maps}]"
+			data-provide="typeahead" data-items="50" data-source="[${mapString}]"
 			placeholder="<spring:message code="text.maps" />" name="map" />
 		<button type="submit" class="btn">
 			<spring:message code="text.change" />
 		</button>
 	</form>
 
-	<div id="myCarousel" class="carousel slide">
+	<div id="myCarousel" class="carousel slide" style="width:800px">
 		<!-- Carousel items -->
 		<div class="carousel-inner">
-			<div class="active item">
-				<img src="../resources/img/de_dust2.jpg">
-				<div class="carousel-caption">
-					<h4>de_dust2</h4>
+			<c:forEach items="${maps}" var="map" varStatus="counter">
+				<div class="item ${counter.count == 1 ? 'active' : '' }">
+					<img src="../resources/img/maps/${map}.jpg">
+					<div class="carousel-caption">
+						<form class="form-inline" method="post"
+							action="<c:url value='/admin/changelevel' />">
+							<h4>${map}</h4>
+							<input type="hidden" name="map" value="${map}"/>
+							<button type="submit" class="btn">
+								<spring:message code="text.change" />
+							</button>
+						</form>
+					</div>
 				</div>
-			</div>
-			<div class="item">ITEM</div>
+			</c:forEach>
 		</div>
 		<!-- Carousel nav -->
 		<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>

@@ -9,12 +9,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
-public class CustomLogoutHandler extends SecurityContextLogoutHandler {
+public class CustomLogoutHandler extends SecurityContextLogoutHandler  {
 
     @Autowired
     private ControlService controlService;
-
-    @Override
+    
+	@Override
     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         controlService.removeServer(getLoggedInUserName());
         super.logout(request, response, authentication);
