@@ -3,6 +3,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/security/tags"
 	prefix="security"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:url value="/resources/" var="resources" />
 
 <html>
@@ -58,6 +59,23 @@ body {
 										</button>
 									</form>
 								</ul></li>
+							<c:if test="${fn:length(servers) > 0}">
+								<li class="dropdown"><a class="dropdown-toggle"
+									data-toggle="dropdown" href="#"> <spring:message
+											code="text.servers" /> <b class="caret"></b>
+								</a>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+										<c:forEach items="${servers}" var="server">
+											<li class="dropdown-submenu"><a tabindex="-1" href="#">${server.address}</a>
+												<ul class="dropdown-menu">
+													<li><a tabindex="-1" href="#"><spring:message
+																code="text.connect" /></a></li>
+													<li><a tabindex="-1" href="#"><spring:message
+																code="text.modify" /></a></li>
+												</ul></li>
+										</c:forEach>
+									</ul></li>
+							</c:if>
 						</security:authorize>
 						<tiles:insertAttribute name="header" />
 						<security:authorize access="isAuthenticated()">

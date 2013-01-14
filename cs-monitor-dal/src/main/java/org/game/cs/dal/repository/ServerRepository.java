@@ -1,5 +1,7 @@
 package org.game.cs.dal.repository;
 
+import java.util.Collection;
+
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
@@ -10,20 +12,26 @@ import org.springframework.stereotype.Component;
 @Component
 public class ServerRepository extends AbstractGenericRepository<Server> {
 
-	public ServerRepository() {
-		super(Server.class);
-	}
+    public ServerRepository() {
+        super(Server.class);
+    }
 
-	public Server findByUser(User user, String address) {
-		String queryString = "SELECT s FROM Server s WHERE s.address = '"
-				+ address + "' AND s.user = '" + user.getId() + "'";
-		Query query = entityManager.createQuery(queryString);
-		Server result = null;
-		try {
-			result = (Server) query.getSingleResult();
-		} catch (NoResultException exception) {
-		}
-		return result;
-	}
+    public Server findByUser(User user, String address) {
+        String queryString = "SELECT s FROM Server s WHERE s.address = '" + address + "' AND s.user = '" + user.getId() + "'";
+        Query query = entityManager.createQuery(queryString);
+        Server result = null;
+        try {
+            result = (Server) query.getSingleResult();
+        } catch (NoResultException exception) {
+        }
+        return result;
+    }
+
+    @SuppressWarnings("unchecked")
+    public Collection<Server> findAllByUser(User user) {
+        String queryString = "SELECT s FROM Server s WHERE s.user = '" + user.getId() + "'";
+        Query query = entityManager.createQuery(queryString);
+        return query.getResultList();
+    }
 
 }
