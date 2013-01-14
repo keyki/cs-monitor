@@ -32,7 +32,11 @@ public class ServerService {
     }
 
     private boolean isServerRegistered(String user, String ip) {
-        return serverRepository.findByUser(findUser(user), ip) != null;
+        return findByUser(user, ip) != null;
+    }
+
+    private Server findByUser(String user, String ip) {
+        return serverRepository.findByUser(findUser(user), ip);
     }
 
     private User findUser(String user) {
@@ -41,5 +45,9 @@ public class ServerService {
 
     private void saveServer(String user, String ip, int port, String rcon) {
         serverRepository.persist(new Server(ip, port, rcon, findUser(user)));
+    }
+
+    public void remove(String user, String address) {
+        serverRepository.remove(findByUser(user, address));
     }
 }

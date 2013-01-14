@@ -87,6 +87,12 @@ public class GameController {
         return "redirect:/admin/control";
     }
 
+    @RequestMapping(value = "/remove", method = RequestMethod.POST)
+    public String deleteServer(@RequestParam String ip) {
+        serverService.remove(getLoggedInUserName(), ip);
+        return "redirect:/";
+    }
+
     @CheckUserState
     @RequestMapping(value = "/executerconcommand", method = RequestMethod.POST)
     public String setRcon(@RequestParam String rcon_command) throws FailedLoginException, SocketTimeoutException {
