@@ -7,9 +7,11 @@ import org.game.cs.common.domain.Server;
 import org.game.cs.dal.service.ServerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+@Component
 @ControllerAdvice
 public class GlobalModelAttributes {
 

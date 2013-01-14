@@ -68,8 +68,15 @@ body {
 										<c:forEach items="${servers}" var="server">
 											<li class="dropdown-submenu"><a tabindex="-1" href="#">${server.address}</a>
 												<ul class="dropdown-menu">
-													<li><a tabindex="-1" href="#"><spring:message
-																code="text.connect" /></a></li>
+													<form action="<c:url value='/admin/connect'/>"
+														method="post" class="form-inline" style="margin-bottom:0px">
+														<li><a tabindex="-1" href="#"
+															onclick="$(this).closest('form').submit(); return false;"><spring:message
+																	code="text.connect" /></a></li> <input type="hidden" name="ip"
+															value="${server.address}"> <input type="hidden"
+															name="port" value="${server.port}"> <input
+															type="hidden" name="rcon" value="${server.password}">
+													</form>
 													<li><a tabindex="-1" href="#"><spring:message
 																code="text.modify" /></a></li>
 												</ul></li>

@@ -7,7 +7,6 @@ import org.game.cs.common.domain.User;
 import org.game.cs.common.exception.ServerAlreadyRegisteredException;
 import org.game.cs.dal.repository.ServerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,8 +18,6 @@ public class ServerService {
     private ServerRepository serverRepository;
     @Autowired
     private UserService userService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     public void registerServer(String user, String ip, int port, String rcon) {
         if (!isServerRegistered(user, ip)) {
@@ -43,6 +40,6 @@ public class ServerService {
     }
 
     private void saveServer(String user, String ip, int port, String rcon) {
-        serverRepository.persist(new Server(ip, port, passwordEncoder.encodePassword(rcon, null), findUser(user)));
+        serverRepository.persist(new Server(ip, port, rcon, findUser(user)));
     }
 }
