@@ -49,6 +49,13 @@ public class GameController {
     }
 
     @CheckUserState
+    @RequestMapping("/players")
+    public String showPlayersPage(Model model) {
+        model.addAttribute("players", controlService.getPlayers(getLoggedInUserName()));
+        return "players";
+    }
+
+    @CheckUserState
     @RequestMapping(value = "/changelevel", method = RequestMethod.GET)
     public String showChangeLevelPage(Model model) throws FailedLoginException, SocketTimeoutException {
         Collection<String> availableMaps = controlService.getAvailableMaps(getLoggedInUserName());

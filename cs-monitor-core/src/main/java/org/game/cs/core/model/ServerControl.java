@@ -3,6 +3,7 @@ package org.game.cs.core.model;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.SocketTimeoutException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -11,6 +12,7 @@ import javax.security.auth.login.FailedLoginException;
 
 import net.barkerjr.gameserver.GameServer.Request;
 import net.barkerjr.gameserver.GameServer.RequestTimeoutException;
+import net.barkerjr.gameserver.Player;
 import net.barkerjr.gameserver.valve.SourceServer;
 
 import org.game.cs.core.model.enums.RconCommand;
@@ -28,7 +30,7 @@ public class ServerControl {
 
     public SourceServer connect(String user, InetSocketAddress address) throws RequestTimeoutException, IOException, InterruptedException {
         SourceServer sourceServer = new SourceServer(address);
-        loadInformation(sourceServer);
+        load(sourceServer, Request.INFORMATION);
         serverMap.put(user, sourceServer);
         return sourceServer;
     }
@@ -41,8 +43,8 @@ public class ServerControl {
     }
 
     public Map<ServerInfo, String> getBasicInformation(String user) throws RequestTimeoutException, IOException, InterruptedException {
-        SourceServer server = serverMap.get(user);
-        loadInformation(server);
+        SourceServer server = getServer(user);
+        load(server, Request.INFORMATION);
         Map<ServerInfo, String> map = new HashMap<>();
         map.put(ServerInfo.SERVER_NAME, server.getName());
         map.put(ServerInfo.CURRENT_MAP, server.getMap());
@@ -60,13 +62,12 @@ public class ServerControl {
         serverMap.remove(user);
     }
 
-    private void loadInformation(SourceServer sourceServer) throws IOException, InterruptedException, RequestTimeoutException {
-        sourceServer.load(10000, Request.INFORMATION);
+    private void load(SourceServer sourceServer, Request... requests) throws IOException, InterruptedException, RequestTimeoutException {
+        sourceServer.load(10000, requests);
     }
 
     public String executeCommand(String user, String command) throws FailedLoginException, SocketTimeoutException {
-        SourceServer server = serverMap.get(user);
-        return executeCommand(server, command);
+        return executeCommand(getServer(user), command);
     }
 
     public String executeCommand(SourceServer server, String command) throws FailedLoginException, SocketTimeoutException {
@@ -74,13 +75,21 @@ public class ServerControl {
     }
 
     public String getAvaliableMaps(String user) throws FailedLoginException, SocketTimeoutException {
-        SourceServer server = serverMap.get(user);
-        return executeCommand(server, RconCommand.MAP_LIST.getValue());
+        return executeCommand(getServer(user), RconCommand.MAP_LIST.getValue());
     }
 
     public void changeMap(String user, String map) throws FailedLoginException, SocketTimeoutException {
-        SourceServer server = serverMap.get(user);
-        executeCommand(server, RconCommand.CHANGE_MAP.getValue() + map);
+        executeCommand(getServer(user), RconCommand.CHANGE_MAP.getValue() + map);
+    }
+
+    public Collection<Player> getPlayers(String user) throws RequestTimeoutException, IOException, InterruptedException {
+        SourceServer server = getServer(user);
+        load(server, Request.INFORMATION, Request.PLAYERS);
+        return server.getPlayers().getPlayers();
+    }
+    
+    private SourceServer getServer(String user){
+        return serverMap.get(user);
     }
 
 }

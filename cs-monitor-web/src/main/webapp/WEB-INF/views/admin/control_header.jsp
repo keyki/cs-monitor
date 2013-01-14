@@ -14,5 +14,7 @@
 			<li class="divider"></li>
 			<li><a href='<c:url value='/admin/changelevel' />'><spring:message
 						code="text.changelevel" /></a></li>
+			<li><a href='<c:url value='/admin/players' />'><spring:message
+						code="text.players" /></a></li>
 		</ul></li>
 </security:authorize>

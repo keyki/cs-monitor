@@ -11,8 +11,10 @@ import java.util.Map;
 import javax.security.auth.login.FailedLoginException;
 
 import net.barkerjr.gameserver.GameServer.RequestTimeoutException;
+import net.barkerjr.gameserver.Player;
 import net.barkerjr.gameserver.valve.SourceServer;
 
+import org.game.cs.common.exception.NoPlayersOnTheServer;
 import org.game.cs.core.model.ServerControl;
 import org.game.cs.core.model.UserControl;
 import org.game.cs.core.model.enums.ServerInfo;
@@ -78,6 +80,16 @@ public class ControlService {
 
     public void changeMap(String user, String map) throws FailedLoginException, SocketTimeoutException {
         serverControl.changeMap(user, map);
+    }
+
+    public Collection<Player> getPlayers(String user) {
+        Collection<Player> players = new ArrayList<>();
+        try {
+            players = serverControl.getPlayers(user);
+        } catch (RequestTimeoutException | IOException | InterruptedException e) {
+            throw new NoPlayersOnTheServer("There are no players on the server");
+        }
+        return players;
     }
 
 }

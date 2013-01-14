@@ -42,5 +42,10 @@
 			<version>1</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.game</groupId>
+			<artifactId>cs-monitor-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>

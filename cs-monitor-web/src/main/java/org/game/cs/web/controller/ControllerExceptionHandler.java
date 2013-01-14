@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.barkerjr.gameserver.GameServer.RequestTimeoutException;
 
+import org.game.cs.common.exception.NoPlayersOnTheServer;
 import org.game.cs.common.exception.NotConnectedException;
 import org.game.cs.common.exception.ServerAlreadyRegisteredException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,13 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(value = {ServerAlreadyRegisteredException.class})
     public String handleExceptions6(Exception exception, HttpServletRequest request) {
+        addErrorMessageToRequest(request, exception.getMessage());
+        addServersToReqest(request);
+        return "errors";
+    }
+    
+    @ExceptionHandler(value = {NoPlayersOnTheServer.class})
+    public String handleExceptions7(Exception exception, HttpServletRequest request) {
         addErrorMessageToRequest(request, exception.getMessage());
         addServersToReqest(request);
         return "errors";
