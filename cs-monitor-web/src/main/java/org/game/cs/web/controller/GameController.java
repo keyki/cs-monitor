@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.security.auth.login.FailedLoginException;
@@ -15,6 +16,7 @@ import org.game.cs.core.service.ControlService;
 import org.game.cs.dal.service.ServerService;
 import org.game.cs.web.annotation.CheckUserState;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.session.SessionInformation;
@@ -36,6 +38,8 @@ public class GameController {
     private SessionRegistry sessionRegistry;
     @Autowired
     private ServerService serverService;
+    @Autowired
+    private ResourceLoader resourceLoader;
 
     @CheckUserState
     @RequestMapping("/control")
@@ -49,8 +53,23 @@ public class GameController {
     public String showChangeLevelPage(Model model) throws FailedLoginException, SocketTimeoutException {
         Collection<String> availableMaps = controlService.getAvailableMaps(getLoggedInUserName());
         model.addAttribute("mapString", constructMapString((List<String>) htmlEscape(availableMaps)));
-        model.addAttribute("maps", availableMaps);
+        model.addAttribute("maps", availableMapsWithPreviewPicture(availableMaps));
         return "changelevel";
+    }
+
+    private Collection<String> availableMapsWithPreviewPicture(Collection<String> availableMaps) {
+        Iterator<String> iterator = availableMaps.iterator();
+        while (iterator.hasNext()) {
+            String map = iterator.next();
+            if (!isPreviewAvailable(map)) {
+                iterator.remove();
+            }
+        }
+        return availableMaps;
+    }
+
+    private boolean isPreviewAvailable(String map) {
+        return resourceLoader.getResource("resources/img/maps/" + map + ".jpg").exists();
     }
 
     @CheckUserState
