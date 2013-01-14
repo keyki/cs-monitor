@@ -21,7 +21,6 @@ public class MyUserDetailsService implements UserDetailsService, Serializable {
 
 	public UserDetails loadUserByUsername(String username) {
 		User user = userService.findByName(username);
-
 		Set<Role> roles = user.getRoles();
 		Collection<GrantedAuthority> authorities = new ArrayList<>();
 		for (final Role ur : roles) {
