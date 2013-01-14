@@ -13,12 +13,7 @@
 			access="hasRole('ROLE_ADMIN')" />
 		<security:access-denied-handler
 			error-page="/denied" />
-		<security:intercept-url pattern="/login"
-			access="permitAll" />
-		<security:intercept-url pattern="/denied"
-			access="permitAll" />
-		<security:intercept-url pattern="/*"
-			access="isAuthenticated()" />
+		<security:intercept-url pattern="/" access="permitAll" />
 		<security:intercept-url pattern="/resources/**"
 			access="permitAll" />
 		<security:custom-filter position="CONCURRENT_SESSION_FILTER"
@@ -27,31 +22,27 @@
 			ref="authenticationFilter" />
 		<security:custom-filter position="LOGOUT_FILTER"
 			ref="logoutFilter" />
-		<security:custom-filter position="REMEMBER_ME_FILTER" 
-			ref="rememberMeFilter" />
 	</security:http>
 
 	<bean id="authenticationFilter"
 		class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter"
 		p:sessionAuthenticationStrategy-ref="sas" p:authenticationManager-ref="authenticationManager"
 		p:authenticationFailureHandler-ref="customAuthenticationFailureHandler"
-		p:authenticationSuccessHandler-ref="customAuthenticationSuccessHandler"
-		p:rememberMeServices-ref="rememberMeService">
-	</bean>
-
-	<bean id="rememberMeFilter"
-		class="org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter">
-		<property name="rememberMeServices" ref="rememberMeService" />
-		<property name="authenticationManager" ref="authenticationManager" />
-	</bean>
+		p:authenticationSuccessHandler-ref="customAuthenticationSuccessHandler" />
 
 	<security:authentication-manager alias="authenticationManager">
-		<security:authentication-provider
-			user-service-ref="myUserDetailsService">
+		<security:authentication-provider>
 			<security:password-encoder ref="passwordEncoder" />
-		</security:authentication-provider>
-		<security:authentication-provider
-			ref="rememberMeAuthenticationProvider">
+			<security:jdbc-user-service
+				data-source-ref="dataSource"
+				users-by-username-query="
+				select username,password, enabled 
+				from user where username=?"
+				authorities-by-username-query="
+				SELECT u.username, r.name FROM user_role ur 
+                INNER JOIN role r ON r.id = ur.role_id
+				INNER JOIN user u ON u.id = ur.user_id
+				WHERE u.username = ?  " />
 		</security:authentication-provider>
 	</security:authentication-manager>
 

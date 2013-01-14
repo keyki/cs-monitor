@@ -22,16 +22,12 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    
     @Column(nullable = false, unique = true)
     private String username;
-    
     @Column(nullable = false)
     private String password;
-    
     @Column(nullable = false)
     private boolean enabled = true;
-    
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private Set<Role> roles = new HashSet<Role>();

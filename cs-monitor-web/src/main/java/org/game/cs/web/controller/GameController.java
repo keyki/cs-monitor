@@ -12,7 +12,6 @@ import net.barkerjr.gameserver.GameServer.RequestTimeoutException;
 
 import org.game.cs.core.model.enums.UserState;
 import org.game.cs.core.service.ControlService;
-import org.game.cs.dal.service.ServerService;
 import org.game.cs.web.annotation.CheckUserState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -30,123 +29,101 @@ import org.springframework.web.util.HtmlUtils;
 @RequestMapping("/admin")
 public class GameController {
 
-	@Autowired
-	private ControlService controlService;
-	@Autowired
-	private SessionRegistry sessionRegistry;
-	@Autowired
-	private ServerService serverService;
+    @Autowired
+    private ControlService controlService;
+    @Autowired
+    private SessionRegistry sessionRegistry;
 
-	@CheckUserState
-	@RequestMapping("/control")
-	public String showControlPage(Model model) throws RequestTimeoutException,
-			IOException, InterruptedException {
-		model.addAttribute("info",
-				controlService.getBasicInformation(getLoggedInUserName()));
-		return "control";
-	}
+    @CheckUserState
+    @RequestMapping("/control")
+    public String showControlPage(Model model) throws RequestTimeoutException, IOException, InterruptedException {
+        model.addAttribute("info", controlService.getBasicInformation(getLoggedInUserName()));
+        return "control";
+    }
 
-	@CheckUserState
-	@RequestMapping(value = "/changelevel", method = RequestMethod.GET)
-	public String showChangeLevelPage(Model model) throws FailedLoginException,
-			SocketTimeoutException {
-		Collection<String> availableMaps = controlService
-				.getAvailableMaps(getLoggedInUserName());
-		model.addAttribute("mapString",
-				constructMapString((List<String>) htmlEscape(availableMaps)));
-		model.addAttribute("maps", availableMaps);
-		return "changelevel";
-	}
+    @CheckUserState
+    @RequestMapping(value = "/changelevel", method = RequestMethod.GET)
+    public String showChangeLevelPage(Model model) throws FailedLoginException, SocketTimeoutException {
+        model.addAttribute("maps", constructMapString((List<String>) htmlEscape(controlService.getAvailableMaps(getLoggedInUserName()))));
+        return "changelevel";
+    }
 
-	@CheckUserState
-	@RequestMapping(value = "/changelevel", method = RequestMethod.POST)
-	public String changeLevel(@RequestParam String map)
-			throws FailedLoginException, SocketTimeoutException {
-		controlService.changeMap(getLoggedInUserName(), map);
-		return "redirect:/admin/changelevel";
-	}
+    @CheckUserState
+    @RequestMapping(value = "/changelevel", method = RequestMethod.POST)
+    public String changeLevel(@RequestParam String map) throws FailedLoginException, SocketTimeoutException {
+        controlService.changeMap(getLoggedInUserName(), map);
+        return "redirect:/admin/changelevel";
+    }
 
-	private String constructMapString(List<String> collection) {
-		StringBuilder stringBuilder = new StringBuilder();
-		for (int i = 0; i < collection.size(); i++) {
-			if (i == collection.size() - 1) {
-				stringBuilder.append("&quot;" + collection.get(i) + "&quot;");
-			} else {
-				stringBuilder.append("&quot;" + collection.get(i) + "&quot;,");
-			}
-		}
-		return stringBuilder.toString();
-	}
+    private String constructMapString(List<String> collection) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < collection.size(); i++) {
+            if (i == collection.size() - 1) {
+                stringBuilder.append("&quot;" + collection.get(i) + "&quot;");
+            } else {
+                stringBuilder.append("&quot;" + collection.get(i) + "&quot;,");
+            }
+        }
+        return stringBuilder.toString();
+    }
 
-	@RequestMapping(value = "/connect", method = RequestMethod.POST)
-	public String connect(@RequestParam String ip, @RequestParam int port,
-			@RequestParam(required = false) String rcon,
-			@RequestParam(required = false) boolean register) throws NumberFormatException,
-			RequestTimeoutException, IOException, InterruptedException {
-		if (rcon != null) {
-			controlService.connect(getLoggedInUserName(), ip,
-					Integer.valueOf(port), rcon);
-		} else {
-			controlService.connect(getLoggedInUserName(), ip,
-					Integer.valueOf(port));
-		}
-		if (register) {
-			serverService.registerServer(getLoggedInUserName(), ip, port, rcon);
-		}
-		return "redirect:/admin/control";
-	}
+    @RequestMapping(value = "/connect", method = RequestMethod.POST)
+    public String connect(@RequestParam String ip, @RequestParam String port, @RequestParam(required = false) String rcon)
+        throws NumberFormatException, RequestTimeoutException, IOException, InterruptedException {
+        if (rcon != null) {
+            controlService.connect(getLoggedInUserName(), ip, Integer.valueOf(port), rcon);
+        } else {
+            controlService.connect(getLoggedInUserName(), ip, Integer.valueOf(port));
+        }
+        return "redirect:/admin/control";
+    }
 
-	@CheckUserState
-	@RequestMapping(value = "/executerconcommand", method = RequestMethod.POST)
-	public String setRcon(@RequestParam String rcon_command)
-			throws FailedLoginException, SocketTimeoutException {
-		controlService.executeCommand(getLoggedInUserName(), rcon_command);
-		return "redirect:/admin/control";
-	}
+    @CheckUserState
+    @RequestMapping(value = "/executerconcommand", method = RequestMethod.POST)
+    public String setRcon(@RequestParam String rcon, @RequestParam String rcon_command) throws FailedLoginException, SocketTimeoutException {
+        controlService.executeCommand(getLoggedInUserName(), rcon, rcon_command);
+        return "redirect:/admin/control";
+    }
 
-	/**
-	 * expires the connection to the server if the last action performed more
-	 * than 10 minutes ago checks it every minute
-	 */
-	@Scheduled(fixedRate = 60000)
-	public void clear() {
-		List<Object> allPrincipals = sessionRegistry.getAllPrincipals();
-		for (Object o : allPrincipals) {
-			List<SessionInformation> allSessions = sessionRegistry
-					.getAllSessions(o, false);
-			for (SessionInformation si : allSessions) {
-				String userName = ((org.springframework.security.core.userdetails.User) o)
-						.getUsername();
-				if (checkIfShouldExpire(si, userName)) {
-					controlService.expireConnection(userName);
-				}
-			}
-		}
-	}
+    /**
+     * expires the connection to the server if the last action performed more than 10 minutes ago
+     * checks it every minute
+    */
+    @Scheduled(fixedRate = 60000)
+    public void clear() {
+        List<Object> allPrincipals = sessionRegistry.getAllPrincipals();
+        for (Object o : allPrincipals) {
+            List<SessionInformation> allSessions = sessionRegistry.getAllSessions(o, false);
+            for (SessionInformation si : allSessions) {
+                String userName = ((org.springframework.security.core.userdetails.User) o).getUsername();
+                if (checkIfShouldExpire(si, userName)) {
+                    controlService.expireConnection(userName);
+                }
+            }
+        }
+    }
 
-	private boolean checkIfShouldExpire(SessionInformation si, String userName) {
-		return getTheDifferenceInMs(si) >= 600000
-				&& UserState.CONNECTED.equals(controlService
-						.getUserState(userName));
-	}
+    private boolean checkIfShouldExpire(SessionInformation si, String userName) {
+        return getTheDifferenceInMs(si) >= 600000 && UserState.CONNECTED.equals(controlService.getUserState(userName));
+    }
 
-	private long getTheDifferenceInMs(SessionInformation si) {
-		return new Date().getTime() - si.getLastRequest().getTime();
-	}
+    private long getTheDifferenceInMs(SessionInformation si) {
+        return new Date().getTime() - si.getLastRequest().getTime();
+    }
 
-	private String getLoggedInUserName() {
-		return SecurityContextHolder.getContext().getAuthentication().getName();
-	}
+    private String getLoggedInUserName() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
 
-	private Collection<String> htmlEscape(Collection<String> collection) {
-		for (String s : collection) {
-			s = htmlEscape(s);
-		}
-		return collection;
-	}
+    private Collection<String> htmlEscape(Collection<String> collection) {
+        for (String s : collection) {
+            s = htmlEscape(s);
+        }
+        return collection;
+    }
 
-	private String htmlEscape(String s) {
-		return HtmlUtils.htmlEscape(s);
-	}
+    private String htmlEscape(String s) {
+        return HtmlUtils.htmlEscape(s);
+    }
 
 }

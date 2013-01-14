@@ -57,8 +57,8 @@ public class ControlService {
         return userControl.getUserState(user);
     }
 
-    public String executeCommand(String user, String command) throws FailedLoginException, SocketTimeoutException {
-        return serverControl.executeCommand(user, command);
+    public String executeCommand(String user, String password, String command) throws FailedLoginException, SocketTimeoutException {
+        return serverControl.executeCommand(user, password, command);
     }
 
     public void expireConnection(String user) {

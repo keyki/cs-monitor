@@ -64,9 +64,10 @@ public class ServerControl {
         sourceServer.load(10000, Request.INFORMATION);
     }
 
-    public String executeCommand(String user, String command) throws FailedLoginException, SocketTimeoutException {
+    public String executeCommand(String user, String password, String command) throws FailedLoginException, SocketTimeoutException {
         SourceServer server = serverMap.get(user);
-        return executeCommand(server, command);
+        server.setRconPassword(password);
+        return server.sendRcon(command);
     }
 
     public String executeCommand(SourceServer server, String command) throws FailedLoginException, SocketTimeoutException {

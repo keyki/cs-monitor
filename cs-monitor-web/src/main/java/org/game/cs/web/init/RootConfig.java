@@ -7,12 +7,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableTransactionManagement
 @Import(value = {DaoConfig.class, SecurityConfig.class})
-@ComponentScan(basePackages = {"org.game.cs.core", "org.game.cs.dal", "org.game.cs.web.aop", "org.game.cs.web.service"})
+@ComponentScan(basePackages = {"org.game.cs.core", "org.game.cs.dal", "org.game.cs.web.aop"})
 public class RootConfig {
 
     @Bean(name = "messageSource")

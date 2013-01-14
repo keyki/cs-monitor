@@ -22,10 +22,8 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    
     @Column(nullable = false, unique = true)
     private String name;
-    
     @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Set<User> users = new HashSet<User>();
 

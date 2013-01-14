@@ -15,11 +15,6 @@ public class HomeController {
     public String showHomePage() {
         return "default";
     }
-    
-    @RequestMapping("/login")
-    public String showLoginPage() {
-        return "login";
-    }
 
     @RequestMapping("/denied")
     public String showDeniedPage() {
