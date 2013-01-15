@@ -4,7 +4,9 @@ public enum RconCommand {
 
     CHANGE_MAP("changelevel "),
 
-    MAP_LIST("maps *");
+    MAP_LIST("maps *"),
+
+    KICK("kickid ");
 
     private String value;
 

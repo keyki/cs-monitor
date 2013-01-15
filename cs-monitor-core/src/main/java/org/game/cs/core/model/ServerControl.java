@@ -36,7 +36,7 @@ public class ServerControl {
     }
 
     public Map<ServerInfo, String> getBasicInformation(String user) throws SteamCondenserException, TimeoutException {
-        SourceServer server = getServer(user);
+        SourceServer server = getServerByUser(user);
         update(server);
         Map<ServerInfo, String> map = new HashMap<>();
         HashMap<String, Object> serverInfo = server.getServerInfo();
@@ -62,7 +62,7 @@ public class ServerControl {
     }
 
     public String executeCommand(String user, String command) throws TimeoutException, SteamCondenserException {
-        return executeCommand(getServer(user), command);
+        return executeCommand(getServerByUser(user), command);
     }
 
     public String executeCommand(SourceServer server, String command) throws TimeoutException, SteamCondenserException {
@@ -70,21 +70,25 @@ public class ServerControl {
     }
 
     public String getAvaliableMaps(String user) throws TimeoutException, SteamCondenserException {
-        return executeCommand(getServer(user), RconCommand.MAP_LIST.getValue());
+        return executeCommand(getServerByUser(user), RconCommand.MAP_LIST.getValue());
     }
 
     public void changeMap(String user, String map) throws TimeoutException, SteamCondenserException {
-        executeCommand(getServer(user), RconCommand.CHANGE_MAP.getValue() + map);
+        executeCommand(getServerByUser(user), RconCommand.CHANGE_MAP.getValue() + map);
     }
 
     public Collection<SteamPlayer> getPlayers(String user) throws SteamCondenserException, TimeoutException {
-        SourceServer server = getServer(user);
+        SourceServer server = getServerByUser(user);
         update(server);
         return server.getPlayers().values();
     }
 
-    private SourceServer getServer(String user) {
+    private SourceServer getServerByUser(String user) {
         return serverMap.get(user);
+    }
+
+    public void kickPlayer(String user, int id) throws TimeoutException, SteamCondenserException {
+        executeCommand(getServerByUser(user), RconCommand.KICK.getValue() + id);
     }
 
 }

@@ -19,6 +19,7 @@ import org.springframework.security.core.session.SessionInformation;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,6 +50,13 @@ public class GameController {
     public String showPlayersPage(Model model) throws SteamCondenserException, TimeoutException {
         model.addAttribute("players", controlService.getPlayers(getLoggedInUserName()));
         return "players";
+    }
+    
+    @CheckUserState
+    @RequestMapping("/players/kick/{id}" )
+    public String kickPlayer(@PathVariable int id) throws TimeoutException, SteamCondenserException{
+        controlService.kickPlayer(getLoggedInUserName(), id);
+        return "redirect:/admin/players";
     }
 
     @CheckUserState

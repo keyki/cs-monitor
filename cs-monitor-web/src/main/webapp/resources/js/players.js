@@ -1,3 +1,3 @@
 function player_kick(id){
-	alert(id);
+	$.get(location.href + "/kick/" + id );
 }

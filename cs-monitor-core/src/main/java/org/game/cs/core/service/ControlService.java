@@ -93,4 +93,8 @@ public class ControlService {
         return players;
     }
 
+    public void kickPlayer(String user, int id) throws TimeoutException, SteamCondenserException {
+        serverControl.kickPlayer(user, id);
+    }
+
 }
