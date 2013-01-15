@@ -11,7 +11,7 @@ import org.game.cs.common.domain.PlayerDto;
 import org.game.cs.core.condenser.steam.SteamPlayer;
 import org.game.cs.core.condenser.steam.exceptions.SteamCondenserException;
 import org.game.cs.core.condenser.steam.servers.SourceServer;
-import org.game.cs.core.model.ServerControl;
+import org.game.cs.core.model.SourceServerOperations;
 import org.game.cs.core.model.UserControl;
 import org.game.cs.core.model.enums.ServerInfo;
 import org.game.cs.core.model.enums.UserState;
@@ -19,10 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ControlService {
+public class SourceServerService {
 
     @Autowired
-    private ServerControl serverControl;
+    private SourceServerOperations serverControl;
     @Autowired
     private UserControl userControl;
 

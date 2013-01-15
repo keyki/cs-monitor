@@ -15,11 +15,11 @@ import org.game.cs.core.model.enums.ServerInfo;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ServerControl {
+public class SourceServerOperations {
 
     private Map<String, SourceServer> serverMap;
 
-    public ServerControl() {
+    public SourceServerOperations() {
         serverMap = new ConcurrentHashMap<>();
     }
 

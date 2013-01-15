@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.game.cs.core.model.enums.UserState;
-import org.game.cs.core.service.ControlService;
+import org.game.cs.core.service.SourceServerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.session.SessionInformation;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Controller;
 public class ScheduleController {
 
     @Autowired
-    private ControlService controlService;
+    private SourceServerService sourceServerService;
     @Autowired
     private SessionRegistry sessionRegistry;
 
@@ -31,14 +31,14 @@ public class ScheduleController {
             for (SessionInformation si : allSessions) {
                 String userName = ((org.springframework.security.core.userdetails.User) o).getUsername();
                 if (checkIfShouldExpire(si, userName)) {
-                    controlService.expireConnection(userName);
+                    sourceServerService.expireConnection(userName);
                 }
             }
         }
     }
 
     private boolean checkIfShouldExpire(SessionInformation si, String userName) {
-        return getTheDifferenceInMs(si) >= 600000 && UserState.CONNECTED.equals(controlService.getUserState(userName));
+        return getTheDifferenceInMs(si) >= 600000 && UserState.CONNECTED.equals(sourceServerService.getUserState(userName));
     }
 
     private long getTheDifferenceInMs(SessionInformation si) {

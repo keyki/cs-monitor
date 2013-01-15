@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 import org.game.cs.core.condenser.steam.exceptions.SteamCondenserException;
-import org.game.cs.core.service.ControlService;
+import org.game.cs.core.service.SourceServerService;
 import org.game.cs.dal.service.ServerService;
 import org.game.cs.web.annotation.CheckUserState;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ import org.springframework.web.util.HtmlUtils;
 public class GameController {
 
     @Autowired
-    private ControlService controlService;
+    private SourceServerService sourceServerService;
     @Autowired
     private ServerService serverService;
     @Autowired
@@ -33,21 +33,21 @@ public class GameController {
     @CheckUserState
     @RequestMapping("/control")
     public String showControlPage(Model model) throws SteamCondenserException, TimeoutException {
-        model.addAttribute("info", controlService.getBasicInformation(getLoggedInUserName()));
+        model.addAttribute("info", sourceServerService.getBasicInformation(getLoggedInUserName()));
         return "control";
     }
 
     @CheckUserState
     @RequestMapping("/players")
     public String showPlayersPage(Model model) throws SteamCondenserException, TimeoutException {
-        model.addAttribute("players", controlService.getPlayers(getLoggedInUserName()));
+        model.addAttribute("players", sourceServerService.getPlayers(getLoggedInUserName()));
         return "players";
     }
 
     @CheckUserState
     @RequestMapping(value = "/changelevel", method = RequestMethod.GET)
     public String showChangeLevelPage(Model model) throws TimeoutException, SteamCondenserException {
-        Collection<String> availableMaps = controlService.getAvailableMaps(getLoggedInUserName());
+        Collection<String> availableMaps = sourceServerService.getAvailableMaps(getLoggedInUserName());
         model.addAttribute("mapString", constructMapString((List<String>) htmlEscape(availableMaps)));
         model.addAttribute("maps", availableMapsWithPreviewPicture(availableMaps));
         return "changelevel";
@@ -84,9 +84,9 @@ public class GameController {
     public String connect(@RequestParam String ip, @RequestParam int port, @RequestParam(required = false) String rcon,
             @RequestParam(required = false) boolean register) throws SteamCondenserException, TimeoutException {
         if (rcon != null) {
-            controlService.connect(getLoggedInUserName(), ip, Integer.valueOf(port), rcon);
+            sourceServerService.connect(getLoggedInUserName(), ip, Integer.valueOf(port), rcon);
         } else {
-            controlService.connect(getLoggedInUserName(), ip, Integer.valueOf(port));
+            sourceServerService.connect(getLoggedInUserName(), ip, Integer.valueOf(port));
         }
         if (register) {
             serverService.registerServer(getLoggedInUserName(), ip, port, rcon);
