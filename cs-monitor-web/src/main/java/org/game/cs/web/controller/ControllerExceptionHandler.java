@@ -21,7 +21,7 @@ public class ControllerExceptionHandler {
     
     @ExceptionHandler(value = {SteamCondenserException.class})
     public String handleExceptions1(Exception exception, HttpServletRequest request) throws IOException {
-        addErrorMessageToRequest(request, "Lost connection to the server, please connect again.");
+        addErrorMessageToRequest(request, exception.getMessage() + "\nPlease connect again.");
         addServersToReqest(request);
         exception.printStackTrace();
         return "errors";
