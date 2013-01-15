@@ -34,7 +34,7 @@
 								<span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu">
-								<li><a href="#"><spring:message code="text.rcon.ban" /></a></li>
+								<li><a href="#" onclick="player_ban(${player.userid})"><spring:message code="text.rcon.ban"/></a></li>
 							</ul>
 						</div>
 					</td>

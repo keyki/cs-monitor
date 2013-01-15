@@ -1,25 +1,19 @@
 package org.game.cs.web.controller;
 
 import java.util.Collection;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 import org.game.cs.core.condenser.steam.exceptions.SteamCondenserException;
-import org.game.cs.core.model.enums.UserState;
 import org.game.cs.core.service.ControlService;
 import org.game.cs.dal.service.ServerService;
 import org.game.cs.web.annotation.CheckUserState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.session.SessionInformation;
-import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,8 +25,6 @@ public class GameController {
 
     @Autowired
     private ControlService controlService;
-    @Autowired
-    private SessionRegistry sessionRegistry;
     @Autowired
     private ServerService serverService;
     @Autowired
@@ -50,13 +42,6 @@ public class GameController {
     public String showPlayersPage(Model model) throws SteamCondenserException, TimeoutException {
         model.addAttribute("players", controlService.getPlayers(getLoggedInUserName()));
         return "players";
-    }
-    
-    @CheckUserState
-    @RequestMapping("/players/kick/{id}" )
-    public String kickPlayer(@PathVariable int id) throws TimeoutException, SteamCondenserException{
-        controlService.kickPlayer(getLoggedInUserName(), id);
-        return "redirect:/admin/players";
     }
 
     @CheckUserState
@@ -81,13 +66,6 @@ public class GameController {
 
     private boolean isPreviewAvailable(String map) {
         return resourceLoader.getResource("resources/img/maps/" + map + ".jpg").exists();
-    }
-
-    @CheckUserState
-    @RequestMapping(value = "/changelevel", method = RequestMethod.POST)
-    public String changeLevel(@RequestParam String map) throws TimeoutException, SteamCondenserException{
-        controlService.changeMap(getLoggedInUserName(), map);
-        return "redirect:/admin/changelevel";
     }
 
     private String constructMapString(List<String> collection) {
@@ -120,39 +98,6 @@ public class GameController {
     public String deleteServer(@RequestParam String ip) {
         serverService.remove(getLoggedInUserName(), ip);
         return "redirect:/";
-    }
-
-    @CheckUserState
-    @RequestMapping(value = "/executerconcommand", method = RequestMethod.POST)
-    public String setRcon(@RequestParam String rcon_command) throws TimeoutException, SteamCondenserException {
-        controlService.executeCommand(getLoggedInUserName(), rcon_command);
-        return "redirect:/admin/control";
-    }
-
-    /**
-     * expires the connection to the server if the last action performed more
-     * than 10 minutes ago checks it every minute
-     */
-    @Scheduled(fixedRate = 60000)
-    public void clear() {
-        List<Object> allPrincipals = sessionRegistry.getAllPrincipals();
-        for (Object o : allPrincipals) {
-            List<SessionInformation> allSessions = sessionRegistry.getAllSessions(o, false);
-            for (SessionInformation si : allSessions) {
-                String userName = ((org.springframework.security.core.userdetails.User) o).getUsername();
-                if (checkIfShouldExpire(si, userName)) {
-                    controlService.expireConnection(userName);
-                }
-            }
-        }
-    }
-
-    private boolean checkIfShouldExpire(SessionInformation si, String userName) {
-        return getTheDifferenceInMs(si) >= 600000 && UserState.CONNECTED.equals(controlService.getUserState(userName));
-    }
-
-    private long getTheDifferenceInMs(SessionInformation si) {
-        return new Date().getTime() - si.getLastRequest().getTime();
     }
 
     private String getLoggedInUserName() {

@@ -6,7 +6,9 @@ public enum RconCommand {
 
     MAP_LIST("maps *"),
 
-    KICK("kickid ");
+    KICK("kickid "),
+    
+    BAN("banid ");
 
     private String value;
 

@@ -91,4 +91,8 @@ public class ServerControl {
         executeCommand(getServerByUser(user), RconCommand.KICK.getValue() + id);
     }
 
+    public void banPlayer(String user, int id) throws TimeoutException, SteamCondenserException {
+        executeCommand(getServerByUser(user), RconCommand.BAN.getValue() + id);
+    }
+
 }

@@ -80,7 +80,7 @@ public class ControlService {
 
     public Collection<PlayerDto> getPlayers(String user) throws SteamCondenserException, TimeoutException {
         Collection<PlayerDto> players = new ArrayList<>();
-        for(SteamPlayer player : serverControl.getPlayers(user)){
+        for (SteamPlayer player : serverControl.getPlayers(user)) {
             PlayerDto playerDto = new PlayerDto();
             playerDto.setKills(player.getScore());
             playerDto.setName(player.getName());
@@ -95,6 +95,10 @@ public class ControlService {
 
     public void kickPlayer(String user, int id) throws TimeoutException, SteamCondenserException {
         serverControl.kickPlayer(user, id);
+    }
+
+    public void banPlayer(String user, int id) throws TimeoutException, SteamCondenserException {
+        serverControl.banPlayer(user, id);
     }
 
 }
