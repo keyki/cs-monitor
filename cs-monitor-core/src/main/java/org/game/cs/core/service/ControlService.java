@@ -84,7 +84,7 @@ public class ControlService {
             PlayerDto playerDto = new PlayerDto();
             playerDto.setKills(player.getScore());
             playerDto.setName(player.getName());
-            playerDto.setUserid(player.getId());
+            playerDto.setUserid(player.getRealId());
             playerDto.setSteamid(player.getSteamId());
             playerDto.setPing(player.getPing());
             playerDto.setAddress(player.getIpAddress());
