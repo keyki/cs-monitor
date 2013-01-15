@@ -1,15 +1,14 @@
 package org.game.cs.web.controller;
 
-import java.net.SocketTimeoutException;
+import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
-import javax.security.auth.login.FailedLoginException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import net.barkerjr.gameserver.GameServer.RequestTimeoutException;
-
-import org.game.cs.common.exception.NoPlayersOnTheServer;
 import org.game.cs.common.exception.NotConnectedException;
 import org.game.cs.common.exception.ServerAlreadyRegisteredException;
+import org.game.cs.core.condenser.steam.exceptions.SteamCondenserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,11 +18,12 @@ public class ControllerExceptionHandler {
 
     @Autowired
     private GlobalModelAttributes modelAttributes;
-
-    @ExceptionHandler(value = {RequestTimeoutException.class, InterruptedException.class, SocketTimeoutException.class})
-    public String handleExceptions1(Exception exception, HttpServletRequest request) {
-        addErrorMessageToRequest(request, "Could not connect to the server");
+    
+    @ExceptionHandler(value = {SteamCondenserException.class})
+    public String handleExceptions1(Exception exception, HttpServletRequest request) throws IOException {
+        addErrorMessageToRequest(request, "Lost connection to the server, please connect again.");
         addServersToReqest(request);
+        exception.printStackTrace();
         return "errors";
     }
 
@@ -47,12 +47,13 @@ public class ControllerExceptionHandler {
         addServersToReqest(request);
         return "errors";
     }
-
-    @ExceptionHandler(value = {FailedLoginException.class})
-    public String handleExceptions5(Exception exception, HttpServletRequest request) {
-        addErrorMessageToRequest(request, "Wrong rcon password");
+    
+    @ExceptionHandler(value = {TimeoutException.class})
+    public void handleExceptions5(Exception exception, HttpServletResponse response, HttpServletRequest request) throws IOException {
+        addErrorMessageToRequest(request, exception.getMessage());
         addServersToReqest(request);
-        return "errors";
+        exception.printStackTrace();
+        response.sendRedirect(request.getContextPath() + "/admin/control");
     }
 
     @ExceptionHandler(value = {ServerAlreadyRegisteredException.class})
@@ -62,13 +63,6 @@ public class ControllerExceptionHandler {
         return "errors";
     }
     
-    @ExceptionHandler(value = {NoPlayersOnTheServer.class})
-    public String handleExceptions7(Exception exception, HttpServletRequest request) {
-        addErrorMessageToRequest(request, exception.getMessage());
-        addServersToReqest(request);
-        return "errors";
-    }
-
     private void addErrorMessageToRequest(HttpServletRequest request, String message) {
         request.setAttribute("error", message);
     }

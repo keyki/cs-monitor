@@ -1,20 +1,15 @@
 package org.game.cs.core.service;
 
-import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeoutException;
 
-import javax.security.auth.login.FailedLoginException;
-
-import net.barkerjr.gameserver.GameServer.RequestTimeoutException;
-import net.barkerjr.gameserver.Player;
-import net.barkerjr.gameserver.valve.SourceServer;
-
-import org.game.cs.common.exception.NoPlayersOnTheServer;
+import org.game.cs.common.domain.PlayerDto;
+import org.game.cs.core.condenser.steam.exceptions.SteamCondenserException;
+import org.game.cs.core.condenser.steam.servers.SourceServer;
 import org.game.cs.core.model.ServerControl;
 import org.game.cs.core.model.UserControl;
 import org.game.cs.core.model.enums.ServerInfo;
@@ -30,13 +25,13 @@ public class ControlService {
     @Autowired
     private UserControl userControl;
 
-    public SourceServer connect(String user, String ip, int port) throws RequestTimeoutException, IOException, InterruptedException {
+    public SourceServer connect(String user, String ip, int port) throws SteamCondenserException {
         SourceServer server = serverControl.connect(user, new InetSocketAddress(ip, port));
         userControl.addStatus(user, UserState.CONNECTED);
         return server;
     }
 
-    public SourceServer connect(String user, String ip, int port, String password) throws RequestTimeoutException, IOException, InterruptedException {
+    public SourceServer connect(String user, String ip, int port, String password) throws SteamCondenserException, TimeoutException {
         SourceServer server = serverControl.connect(user, new InetSocketAddress(ip, port), password);
         userControl.addStatus(user, UserState.CONNECTED);
         return server;
@@ -46,7 +41,7 @@ public class ControlService {
         userControl.addStatus(user, state);
     }
 
-    public Map<ServerInfo, String> getBasicInformation(String user) throws RequestTimeoutException, IOException, InterruptedException {
+    public Map<ServerInfo, String> getBasicInformation(String user) throws SteamCondenserException, TimeoutException {
         return serverControl.getBasicInformation(user);
     }
 
@@ -59,7 +54,7 @@ public class ControlService {
         return userControl.getUserState(user);
     }
 
-    public String executeCommand(String user, String command) throws FailedLoginException, SocketTimeoutException {
+    public String executeCommand(String user, String command) throws TimeoutException, SteamCondenserException {
         return serverControl.executeCommand(user, command);
     }
 
@@ -68,7 +63,7 @@ public class ControlService {
         userControl.addStatus(user, UserState.IDLE);
     }
 
-    public Collection<String> getAvailableMaps(String user) throws FailedLoginException, SocketTimeoutException {
+    public Collection<String> getAvailableMaps(String user) throws TimeoutException, SteamCondenserException {
         List<String> list = new ArrayList<>();
         for (String s : serverControl.getAvaliableMaps(user).split(" ")) {
             if (s.contains("_")) {
@@ -78,17 +73,13 @@ public class ControlService {
         return list;
     }
 
-    public void changeMap(String user, String map) throws FailedLoginException, SocketTimeoutException {
+    public void changeMap(String user, String map) throws TimeoutException, SteamCondenserException {
         serverControl.changeMap(user, map);
     }
 
-    public Collection<Player> getPlayers(String user) {
-        Collection<Player> players = new ArrayList<>();
-        try {
-            players = serverControl.getPlayers(user);
-        } catch (RequestTimeoutException | IOException | InterruptedException e) {
-            throw new NoPlayersOnTheServer("There are no players on the server");
-        }
+    public Collection<PlayerDto> getPlayers(String user) {
+        Collection<PlayerDto> players = new ArrayList<>();
+//        PlayerDto playerDto = new PlayerDto();
         return players;
     }
 

@@ -17,11 +17,6 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>net.sourceforge.rconed</groupId>
-			<artifactId>rconed</artifactId>
-			<version>2.4.0</version>
-		</dependency>
-		<dependency>
 			<groupId>jdom</groupId>
 			<artifactId>jdom</artifactId>
 			<version>1.0</version>
@@ -37,15 +32,33 @@
 			<version>1.8.3</version>
 		</dependency>
 		<dependency>
-			<groupId>cs</groupId>
-			<artifactId>gameserver</artifactId>
-			<version>1</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.game</groupId>
 			<artifactId>cs-monitor-common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>cs</groupId> -->
+		<!-- <artifactId>gameserver</artifactId> -->
+		<!-- <version>1</version> -->
+		<!-- </dependency> -->
+		<dependency>
+			<groupId>net.sourceforge.rconed</groupId>
+			<artifactId>rconed</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-compress</artifactId>
+			<version>1.4.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+
 	</dependencies>
 </project>

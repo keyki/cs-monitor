@@ -1,20 +1,15 @@
 package org.game.cs.core.model;
 
-import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.SocketTimeoutException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeoutException;
 
-import javax.security.auth.login.FailedLoginException;
-
-import net.barkerjr.gameserver.GameServer.Request;
-import net.barkerjr.gameserver.GameServer.RequestTimeoutException;
-import net.barkerjr.gameserver.Player;
-import net.barkerjr.gameserver.valve.SourceServer;
-
+import org.game.cs.core.condenser.steam.SteamPlayer;
+import org.game.cs.core.condenser.steam.exceptions.SteamCondenserException;
+import org.game.cs.core.condenser.steam.servers.SourceServer;
 import org.game.cs.core.model.enums.RconCommand;
 import org.game.cs.core.model.enums.ServerInfo;
 import org.springframework.stereotype.Component;
@@ -28,33 +23,32 @@ public class ServerControl {
         serverMap = new ConcurrentHashMap<>();
     }
 
-    public SourceServer connect(String user, InetSocketAddress address) throws RequestTimeoutException, IOException, InterruptedException {
-        SourceServer sourceServer = new SourceServer(address);
-        load(sourceServer, Request.INFORMATION);
+    public SourceServer connect(String user, InetSocketAddress address) throws SteamCondenserException {
+        SourceServer sourceServer = new SourceServer(address.getAddress(), address.getPort());
         serverMap.put(user, sourceServer);
         return sourceServer;
     }
 
-    public SourceServer connect(String user, InetSocketAddress address, String password) throws RequestTimeoutException, IOException,
-        InterruptedException {
+    public SourceServer connect(String user, InetSocketAddress address, String password) throws SteamCondenserException, TimeoutException {
         SourceServer sourceServer = connect(user, address);
-        sourceServer.setRconPassword(password);
+        sourceServer.rconAuth(password);
         return sourceServer;
     }
 
-    public Map<ServerInfo, String> getBasicInformation(String user) throws RequestTimeoutException, IOException, InterruptedException {
+    public Map<ServerInfo, String> getBasicInformation(String user) throws SteamCondenserException, TimeoutException {
         SourceServer server = getServer(user);
-        load(server, Request.INFORMATION);
+        update(server);
         Map<ServerInfo, String> map = new HashMap<>();
-        map.put(ServerInfo.SERVER_NAME, server.getName());
-        map.put(ServerInfo.CURRENT_MAP, server.getMap());
-        map.put(ServerInfo.BOT_COUNT, String.valueOf(server.getBotCount()));
-        map.put(ServerInfo.DEDICATED, server.getDedicated().toString());
-        map.put(ServerInfo.MAX_PLAYERS, String.valueOf(server.getMaximumPlayers()));
-        map.put(ServerInfo.NUMBER_OF_PLAYERS, String.valueOf(server.getNumberOfPlayers()));
-        map.put(ServerInfo.OS, server.getOperatingSystem().toString());
-        map.put(ServerInfo.PASSWORD_REQUIRED, String.valueOf(server.isPasswordRequired()));
-        map.put(ServerInfo.VAC_SECURE, String.valueOf(server.isVacSecure()));
+        HashMap<String, Object> serverInfo = server.getServerInfo();
+        map.put(ServerInfo.SERVER_NAME, server.getHostNames().get(0));
+        map.put(ServerInfo.CURRENT_MAP, String.valueOf(serverInfo.get("mapName")));
+        map.put(ServerInfo.BOT_COUNT, String.valueOf(serverInfo.get("numberOfBots")));
+        map.put(ServerInfo.DEDICATED, String.valueOf(serverInfo.get("dedicated")));
+        map.put(ServerInfo.MAX_PLAYERS, String.valueOf(serverInfo.get("maxPlayers")));
+        map.put(ServerInfo.NUMBER_OF_PLAYERS, String.valueOf(serverInfo.get("numberOfPlayers")));
+        map.put(ServerInfo.OS, String.valueOf(serverInfo.get("operatingSystem")));
+        map.put(ServerInfo.PASSWORD_REQUIRED, String.valueOf(serverInfo.get("passwordProtected")));
+        map.put(ServerInfo.VAC_SECURE, String.valueOf(serverInfo.get("secure")));
         return map;
     }
 
@@ -62,33 +56,34 @@ public class ServerControl {
         serverMap.remove(user);
     }
 
-    private void load(SourceServer sourceServer, Request... requests) throws IOException, InterruptedException, RequestTimeoutException {
-        sourceServer.load(10000, requests);
+    private void update(SourceServer server) throws SteamCondenserException, TimeoutException {
+        server.updateServerInfo();
+        server.updatePlayers(server.getRcon_password());
     }
 
-    public String executeCommand(String user, String command) throws FailedLoginException, SocketTimeoutException {
+    public String executeCommand(String user, String command) throws TimeoutException, SteamCondenserException {
         return executeCommand(getServer(user), command);
     }
 
-    public String executeCommand(SourceServer server, String command) throws FailedLoginException, SocketTimeoutException {
-        return server.sendRcon(command);
+    public String executeCommand(SourceServer server, String command) throws TimeoutException, SteamCondenserException {
+        String response = server.rconExec(command);
+        return response;
     }
 
-    public String getAvaliableMaps(String user) throws FailedLoginException, SocketTimeoutException {
+    public String getAvaliableMaps(String user) throws TimeoutException, SteamCondenserException {
         return executeCommand(getServer(user), RconCommand.MAP_LIST.getValue());
     }
 
-    public void changeMap(String user, String map) throws FailedLoginException, SocketTimeoutException {
+    public void changeMap(String user, String map) throws TimeoutException, SteamCondenserException {
         executeCommand(getServer(user), RconCommand.CHANGE_MAP.getValue() + map);
     }
 
-    public Collection<Player> getPlayers(String user) throws RequestTimeoutException, IOException, InterruptedException {
+    public Collection<SteamPlayer> getPlayers(String user) throws SteamCondenserException, TimeoutException {
         SourceServer server = getServer(user);
-        load(server, Request.INFORMATION, Request.PLAYERS);
-        return server.getPlayers().getPlayers();
+        return server.getPlayers().values();
     }
-    
-    private SourceServer getServer(String user){
+
+    private SourceServer getServer(String user) {
         return serverMap.get(user);
     }
 

@@ -1,16 +1,12 @@
 package org.game.cs.web.controller;
 
-import java.io.IOException;
-import java.net.SocketTimeoutException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
-import javax.security.auth.login.FailedLoginException;
-
-import net.barkerjr.gameserver.GameServer.RequestTimeoutException;
-
+import org.game.cs.core.condenser.steam.exceptions.SteamCondenserException;
 import org.game.cs.core.model.enums.UserState;
 import org.game.cs.core.service.ControlService;
 import org.game.cs.dal.service.ServerService;
@@ -43,7 +39,7 @@ public class GameController {
 
     @CheckUserState
     @RequestMapping("/control")
-    public String showControlPage(Model model) throws RequestTimeoutException, IOException, InterruptedException {
+    public String showControlPage(Model model) throws SteamCondenserException, TimeoutException {
         model.addAttribute("info", controlService.getBasicInformation(getLoggedInUserName()));
         return "control";
     }
@@ -57,7 +53,7 @@ public class GameController {
 
     @CheckUserState
     @RequestMapping(value = "/changelevel", method = RequestMethod.GET)
-    public String showChangeLevelPage(Model model) throws FailedLoginException, SocketTimeoutException {
+    public String showChangeLevelPage(Model model) throws TimeoutException, SteamCondenserException {
         Collection<String> availableMaps = controlService.getAvailableMaps(getLoggedInUserName());
         model.addAttribute("mapString", constructMapString((List<String>) htmlEscape(availableMaps)));
         model.addAttribute("maps", availableMapsWithPreviewPicture(availableMaps));
@@ -81,7 +77,7 @@ public class GameController {
 
     @CheckUserState
     @RequestMapping(value = "/changelevel", method = RequestMethod.POST)
-    public String changeLevel(@RequestParam String map) throws FailedLoginException, SocketTimeoutException {
+    public String changeLevel(@RequestParam String map) throws TimeoutException, SteamCondenserException{
         controlService.changeMap(getLoggedInUserName(), map);
         return "redirect:/admin/changelevel";
     }
@@ -100,8 +96,7 @@ public class GameController {
 
     @RequestMapping(value = "/connect", method = RequestMethod.POST)
     public String connect(@RequestParam String ip, @RequestParam int port, @RequestParam(required = false) String rcon,
-            @RequestParam(required = false) boolean register) throws NumberFormatException, RequestTimeoutException, IOException,
-        InterruptedException {
+            @RequestParam(required = false) boolean register) throws SteamCondenserException, TimeoutException {
         if (rcon != null) {
             controlService.connect(getLoggedInUserName(), ip, Integer.valueOf(port), rcon);
         } else {
@@ -121,7 +116,7 @@ public class GameController {
 
     @CheckUserState
     @RequestMapping(value = "/executerconcommand", method = RequestMethod.POST)
-    public String setRcon(@RequestParam String rcon_command) throws FailedLoginException, SocketTimeoutException {
+    public String setRcon(@RequestParam String rcon_command) throws TimeoutException, SteamCondenserException {
         controlService.executeCommand(getLoggedInUserName(), rcon_command);
         return "redirect:/admin/control";
     }
