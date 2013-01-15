@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
 import org.game.cs.common.domain.PlayerDto;
+import org.game.cs.core.condenser.steam.SteamPlayer;
 import org.game.cs.core.condenser.steam.exceptions.SteamCondenserException;
 import org.game.cs.core.condenser.steam.servers.SourceServer;
 import org.game.cs.core.model.ServerControl;
@@ -77,9 +78,18 @@ public class ControlService {
         serverControl.changeMap(user, map);
     }
 
-    public Collection<PlayerDto> getPlayers(String user) {
+    public Collection<PlayerDto> getPlayers(String user) throws SteamCondenserException, TimeoutException {
         Collection<PlayerDto> players = new ArrayList<>();
-//        PlayerDto playerDto = new PlayerDto();
+        for(SteamPlayer player : serverControl.getPlayers(user)){
+            PlayerDto playerDto = new PlayerDto();
+            playerDto.setKills(player.getScore());
+            playerDto.setName(player.getName());
+            playerDto.setUserid(player.getId());
+            playerDto.setSteamid(player.getSteamId());
+            playerDto.setPing(player.getPing());
+            playerDto.setAddress(player.getIpAddress());
+            players.add(playerDto);
+        }
         return players;
     }
 

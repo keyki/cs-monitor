@@ -66,8 +66,7 @@ public class ServerControl {
     }
 
     public String executeCommand(SourceServer server, String command) throws TimeoutException, SteamCondenserException {
-        String response = server.rconExec(command);
-        return response;
+        return server.rconExec(command);
     }
 
     public String getAvaliableMaps(String user) throws TimeoutException, SteamCondenserException {
@@ -80,6 +79,7 @@ public class ServerControl {
 
     public Collection<SteamPlayer> getPlayers(String user) throws SteamCondenserException, TimeoutException {
         SourceServer server = getServer(user);
+        update(server);
         return server.getPlayers().values();
     }
 

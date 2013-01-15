@@ -20,6 +20,10 @@
 				<tr>
 					<td>${player.kills}</td>
 					<td>${player.name}</td>
+					<td>${player.userid}</td>
+					<td>${player.steamid}</td>
+					<td>${player.ping}</td>
+					<td>${player.address}</td>
 					<td></td>
 				</tr>
 			</c:forEach>

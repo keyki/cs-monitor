@@ -46,7 +46,7 @@ public class GameController {
 
     @CheckUserState
     @RequestMapping("/players")
-    public String showPlayersPage(Model model) {
+    public String showPlayersPage(Model model) throws SteamCondenserException, TimeoutException {
         model.addAttribute("players", controlService.getPlayers(getLoggedInUserName()));
         return "players";
     }
