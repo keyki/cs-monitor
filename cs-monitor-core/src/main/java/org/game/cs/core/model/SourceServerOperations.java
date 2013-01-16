@@ -65,7 +65,7 @@ public class SourceServerOperations {
         return executeCommand(getServerByUser(user), command);
     }
 
-    public String executeCommand(SourceServer server, String command) throws TimeoutException, SteamCondenserException {
+    private String executeCommand(SourceServer server, String command) throws TimeoutException, SteamCondenserException {
         return server.rconExec(command);
     }
 
@@ -88,11 +88,19 @@ public class SourceServerOperations {
     }
 
     public void kickPlayer(String user, int id) throws TimeoutException, SteamCondenserException {
-        executeCommand(getServerByUser(user), RconCommand.KICK.getValue() + id);
+        executeCommand(user, RconCommand.KICK.getValue() + id);
     }
 
     public void banPlayer(String user, int id) throws TimeoutException, SteamCondenserException {
-        executeCommand(getServerByUser(user), RconCommand.BAN.getValue() + id);
+        executeCommand(user, RconCommand.BAN.getValue() + id);
+    }
+
+    public void addBot(String user, String team) throws TimeoutException, SteamCondenserException {
+        executeCommand(user, RconCommand.BOT_ADD.getValue() + team);
+    }
+    
+    public void setBotDifficutly(String user, int level) throws TimeoutException, SteamCondenserException{
+        executeCommand(user, RconCommand.BOT_DIFFICULTY.getValue() + level);
     }
 
 }

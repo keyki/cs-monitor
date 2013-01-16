@@ -6,6 +6,51 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
+				<th><spring:message code="text.bots" /></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><select id="bot_add_ct">
+						<option value="ct">
+							<spring:message code="text.bot.addct" />
+						</option>
+						<option value="0">
+							<spring:message code="text.bot.difficulty.0" />
+						</option>
+						<option value="1">
+							<spring:message code="text.bot.difficulty.1" />
+						</option>
+						<option value="2">
+							<spring:message code="text.bot.difficulty.2" />
+						</option>
+						<option value="3">
+							<spring:message code="text.bot.difficulty.3" />
+						</option>
+				</select> <select id="bot_add_t">
+						<option value="t">
+							<spring:message code="text.bot.addt" />
+						</option>
+						<option value="0">
+							<spring:message code="text.bot.difficulty.0" />
+						</option>
+						<option value="1">
+							<spring:message code="text.bot.difficulty.1" />
+						</option>
+						<option value="2">
+							<spring:message code="text.bot.difficulty.2" />
+						</option>
+						<option value="3">
+							<spring:message code="text.bot.difficulty.3" />
+						</option>
+				</select>
+			</tr>
+		</tbody>
+	</table>
+
+	<table class="table table-bordered">
+		<thead>
+			<tr>
 				<th><spring:message code="text.player.kills" /></th>
 				<th><spring:message code="text.player.name" /></th>
 				<th><spring:message code="text.player.userid" /></th>
@@ -34,7 +79,8 @@
 								<span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu">
-								<li><a href="#" onclick="player_ban(${player.userid})"><spring:message code="text.rcon.ban"/></a></li>
+								<li><a href="#" onclick="player_ban(${player.userid})"><spring:message
+											code="text.rcon.ban" /></a></li>
 							</ul>
 						</div>
 					</td>

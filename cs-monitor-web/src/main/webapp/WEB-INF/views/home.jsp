@@ -7,6 +7,7 @@
 <c:url value="/resources/" var="resources" />
 
 <html>
+<link href="${resources}css/jquery.selectBoxIt.css" rel="stylesheet">
 <link href="${resources}css/docs.css" rel="stylesheet">
 <link href="${resources}css/bootstrap.css" rel="stylesheet">
 <link href="${resources}css/bootstrap-responsive.css" rel="stylesheet">
@@ -126,6 +127,9 @@ body {
 <script src="${resources}js/bootstrap-carousel.js"></script>
 <script src="${resources}js/bootstrap-typeahead.js"></script>
 
+
+<script src="${resources}js/jquery-ui-1.9.2.custom.js"></script>
+<script src="${resources}js/jquery.selectboxit.js"></script>
 <script src="${resources}js/hover.js"></script>
 <script src="${resources}js/parallax.js"></script>
 <script src="${resources}js/home.js"></script>

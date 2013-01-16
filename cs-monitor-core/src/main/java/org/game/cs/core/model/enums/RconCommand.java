@@ -8,7 +8,11 @@ public enum RconCommand {
 
     KICK("kickid "),
     
-    BAN("banid ");
+    BAN("banid "),
+    
+    BOT_ADD("bot_add_"),
+    
+    BOT_DIFFICULTY("bot_difficulty ");
 
     private String value;
 

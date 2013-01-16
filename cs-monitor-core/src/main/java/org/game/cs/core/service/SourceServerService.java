@@ -22,18 +22,18 @@ import org.springframework.stereotype.Service;
 public class SourceServerService {
 
     @Autowired
-    private SourceServerOperations serverControl;
+    private SourceServerOperations sourceServerOperations;
     @Autowired
     private UserControl userControl;
 
     public SourceServer connect(String user, String ip, int port) throws SteamCondenserException {
-        SourceServer server = serverControl.connect(user, new InetSocketAddress(ip, port));
+        SourceServer server = sourceServerOperations.connect(user, new InetSocketAddress(ip, port));
         userControl.addStatus(user, UserState.CONNECTED);
         return server;
     }
 
     public SourceServer connect(String user, String ip, int port, String password) throws SteamCondenserException, TimeoutException {
-        SourceServer server = serverControl.connect(user, new InetSocketAddress(ip, port), password);
+        SourceServer server = sourceServerOperations.connect(user, new InetSocketAddress(ip, port), password);
         userControl.addStatus(user, UserState.CONNECTED);
         return server;
     }
@@ -43,11 +43,11 @@ public class SourceServerService {
     }
 
     public Map<ServerInfo, String> getBasicInformation(String user) throws SteamCondenserException, TimeoutException {
-        return serverControl.getBasicInformation(user);
+        return sourceServerOperations.getBasicInformation(user);
     }
 
     public void removeServer(String user) {
-        serverControl.removeServer(user);
+        sourceServerOperations.removeServer(user);
         userControl.removeUser(user);
     }
 
@@ -56,17 +56,17 @@ public class SourceServerService {
     }
 
     public String executeCommand(String user, String command) throws TimeoutException, SteamCondenserException {
-        return serverControl.executeCommand(user, command);
+        return sourceServerOperations.executeCommand(user, command);
     }
 
     public void expireConnection(String user) {
-        serverControl.removeServer(user);
+        sourceServerOperations.removeServer(user);
         userControl.addStatus(user, UserState.IDLE);
     }
 
     public Collection<String> getAvailableMaps(String user) throws TimeoutException, SteamCondenserException {
         List<String> list = new ArrayList<>();
-        for (String s : serverControl.getAvaliableMaps(user).split(" ")) {
+        for (String s : sourceServerOperations.getAvaliableMaps(user).split(" ")) {
             if (s.contains("_")) {
                 list.add(s.substring(0, s.lastIndexOf('.')));
             }
@@ -75,12 +75,12 @@ public class SourceServerService {
     }
 
     public void changeMap(String user, String map) throws TimeoutException, SteamCondenserException {
-        serverControl.changeMap(user, map);
+        sourceServerOperations.changeMap(user, map);
     }
 
     public Collection<PlayerDto> getPlayers(String user) throws SteamCondenserException, TimeoutException {
         Collection<PlayerDto> players = new ArrayList<>();
-        for (SteamPlayer player : serverControl.getPlayers(user)) {
+        for (SteamPlayer player : sourceServerOperations.getPlayers(user)) {
             PlayerDto playerDto = new PlayerDto();
             playerDto.setKills(player.getScore());
             playerDto.setName(player.getName());
@@ -94,11 +94,16 @@ public class SourceServerService {
     }
 
     public void kickPlayer(String user, int id) throws TimeoutException, SteamCondenserException {
-        serverControl.kickPlayer(user, id);
+        sourceServerOperations.kickPlayer(user, id);
     }
 
     public void banPlayer(String user, int id) throws TimeoutException, SteamCondenserException {
-        serverControl.banPlayer(user, id);
+        sourceServerOperations.banPlayer(user, id);
+    }
+
+    public void addBot(String user, String team, int difficulty) throws TimeoutException, SteamCondenserException {
+        sourceServerOperations.setBotDifficutly(user, difficulty);
+        sourceServerOperations.addBot(user, team);
     }
 
 }
