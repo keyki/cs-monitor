@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.io.FileSystemResourceLoader;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @Import(value = {DaoConfig.class, SecurityConfig.class})
+@ImportResource(value = "WEB-INF/spring/dwr.xml")
 @ComponentScan(basePackages = {"org.game.cs.core", "org.game.cs.dal", "org.game.cs.web.aop", "org.game.cs.web.service"})
 public class RootConfig {
 

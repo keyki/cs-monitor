@@ -36,6 +36,12 @@ public class GameController {
         model.addAttribute("info", sourceServerService.getBasicInformation(getLoggedInUserName()));
         return "control";
     }
+    
+    @CheckUserState
+    @RequestMapping("/live/chat")
+    public String showLiveChatPage(Model model) throws SteamCondenserException, TimeoutException {
+        return "chat";
+    }
 
     @CheckUserState
     @RequestMapping("/players")
