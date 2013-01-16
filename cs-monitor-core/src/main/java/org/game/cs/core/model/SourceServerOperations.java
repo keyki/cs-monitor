@@ -40,7 +40,7 @@ public class SourceServerOperations {
         update(server);
         Map<ServerInfo, String> map = new HashMap<>();
         HashMap<String, Object> serverInfo = server.getServerInfo();
-        map.put(ServerInfo.SERVER_NAME, server.getHostNames().get(0));
+        map.put(ServerInfo.SERVER_NAME, String.valueOf(serverInfo.get("serverName")));
         map.put(ServerInfo.CURRENT_MAP, String.valueOf(serverInfo.get("mapName")));
         map.put(ServerInfo.BOT_COUNT, String.valueOf(serverInfo.get("numberOfBots")));
         map.put(ServerInfo.DEDICATED, String.valueOf(serverInfo.get("dedicated")));
