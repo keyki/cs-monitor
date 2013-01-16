@@ -126,6 +126,7 @@ body {
 <script src="${resources}js/bootstrap-carousel.js"></script>
 <script src="${resources}js/bootstrap-typeahead.js"></script>
 
+<script src="${resources}js/hover.js"></script>
 <script src="${resources}js/parallax.js"></script>
 <script src="${resources}js/home.js"></script>
 </html>
