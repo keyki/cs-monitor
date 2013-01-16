@@ -127,10 +127,10 @@ body {
 <script src="${resources}js/bootstrap-carousel.js"></script>
 <script src="${resources}js/bootstrap-typeahead.js"></script>
 
+
 <script src="${resources}js/jquery-ui-1.9.2.custom.js"></script>
 <script src="${resources}js/jquery.selectboxit.js"></script>
 <script src="${resources}js/hover.js"></script>
 <script src="${resources}js/parallax.js"></script>
 <script src="${resources}js/home.js"></script>
-
 </html>
