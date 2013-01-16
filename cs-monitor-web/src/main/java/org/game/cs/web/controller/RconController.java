@@ -57,6 +57,13 @@ public class RconController {
         return "redirect:/admin/players";
     }
 
+    @CheckUserState
+    @RequestMapping("/players/bot/kickall")
+    public String kickAllBot() throws TimeoutException, SteamCondenserException {
+        sourceServerService.kickAllBot(getLoggedInUserName());
+        return "redirect:/admin/players";
+    }
+
     private String getLoggedInUserName() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }

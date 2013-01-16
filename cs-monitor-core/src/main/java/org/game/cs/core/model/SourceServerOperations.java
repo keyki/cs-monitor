@@ -98,9 +98,13 @@ public class SourceServerOperations {
     public void addBot(String user, String team) throws TimeoutException, SteamCondenserException {
         executeCommand(user, RconCommand.BOT_ADD.getValue() + team);
     }
-    
-    public void setBotDifficutly(String user, int level) throws TimeoutException, SteamCondenserException{
+
+    public void setBotDifficutly(String user, int level) throws TimeoutException, SteamCondenserException {
         executeCommand(user, RconCommand.BOT_DIFFICULTY.getValue() + level);
+    }
+
+    public void kickAllBot(String user) throws TimeoutException, SteamCondenserException {
+        executeCommand(user, RconCommand.BOT_KICK_ALL.getValue());
     }
 
 }

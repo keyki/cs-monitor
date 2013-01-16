@@ -39,3 +39,7 @@ function player_kick(id) {
 function player_ban(id) {
 	$.get(location.href + "/ban/" + id);
 }
+
+function bot_kick_all(){
+	$.post(location.href + "/bot/kickall");
+}

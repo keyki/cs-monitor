@@ -23,7 +23,7 @@
   height: 30px; /* Height of the select box */
   cursor: pointer;
   padding: 0;
-  display: block;
+  display: inline-block;
   border-radius: 6px;
   margin: 0;
 }

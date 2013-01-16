@@ -106,4 +106,8 @@ public class SourceServerService {
         sourceServerOperations.addBot(user, team);
     }
 
+    public void kickAllBot(String user) throws TimeoutException, SteamCondenserException {
+        sourceServerOperations.kickAllBot(user);
+    }
+
 }

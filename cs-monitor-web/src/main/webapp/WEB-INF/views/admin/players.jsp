@@ -3,7 +3,7 @@
 
 <center>
 
-	<table class="table table-bordered">
+	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>
 				<th><spring:message code="text.bots" /></th>
@@ -11,7 +11,9 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td><select id="bot_add_ct">
+				<td><button class="btn btn-inverse" onclick="bot_kick_all()">
+						<spring:message code="text.bot.kickall" />
+					</button> <select id="bot_add_ct">
 						<option value="ct">
 							<spring:message code="text.bot.addct" />
 						</option>
@@ -48,7 +50,7 @@
 		</tbody>
 	</table>
 
-	<table class="table table-bordered">
+	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>
 				<th><spring:message code="text.player.kills" /></th>

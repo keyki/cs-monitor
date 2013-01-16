@@ -12,7 +12,9 @@ public enum RconCommand {
     
     BOT_ADD("bot_add_"),
     
-    BOT_DIFFICULTY("bot_difficulty ");
+    BOT_DIFFICULTY("bot_difficulty "),
+    
+    BOT_KICK_ALL("bot_kick all");
 
     private String value;
 
