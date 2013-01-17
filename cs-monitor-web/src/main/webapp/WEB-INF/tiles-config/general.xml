@@ -40,4 +40,9 @@
         <put-attribute name="content" value="/WEB-INF/views/admin/players.jsp" />
     </definition>
     
+    <definition name="chat" extends="default">
+       <put-attribute name="header" value="/WEB-INF/views/admin/control_header.jsp" />
+        <put-attribute name="content" value="/WEB-INF/views/admin/livechat.jsp" />
+    </definition>
+    
 </tiles-definitions>

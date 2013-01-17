@@ -16,5 +16,7 @@
 						code="text.changelevel" /></a></li>
 			<li><a href='<c:url value='/admin/players' />'><spring:message
 						code="text.players" /></a></li>
+			<li><a href='<c:url value='/admin/live/chat' />'><spring:message
+						code="text.live.chat" /></a></li>
 		</ul></li>
 </security:authorize>
