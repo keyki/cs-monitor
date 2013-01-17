@@ -6,6 +6,7 @@ function() {
 		position : 'left',
 		height : '200px',
 		width : '500px',
+		start : 'bottom',
 		railVisible : true,
 		alwaysVisible : true
 	});
@@ -25,6 +26,7 @@ function connect(address) {
 
 	socket.onmessage = function(event) {
 		$("#chat_box").append(event.data).append("<br/>");
+		$("#chat_box").slimScroll({ scrollTo: '200px' });
 		console.log(event.data);
 	};
 
