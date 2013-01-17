@@ -14,7 +14,11 @@ public enum RconCommand {
     
     BOT_DIFFICULTY("bot_difficulty "),
     
-    BOT_KICK_ALL("bot_kick all");
+    BOT_KICK_ALL("bot_kick all"),
+    
+    LOGADDRESS_LIST("logaddress_list"),
+    
+    LOGADDRESS_ADD("logaddress_add ");
 
     private String value;
 

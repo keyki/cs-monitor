@@ -107,4 +107,12 @@ public class SourceServerOperations {
         executeCommand(user, RconCommand.BOT_KICK_ALL.getValue());
     }
 
+    public String getLogAddressList(String user) throws TimeoutException, SteamCondenserException {
+        return executeCommand(user, RconCommand.LOGADDRESS_LIST.getValue());
+    }
+
+    public void addLogAddress(String user, String logAddress) throws TimeoutException, SteamCondenserException {
+        executeCommand(user, RconCommand.LOGADDRESS_ADD.getValue() + logAddress);
+    }
+
 }

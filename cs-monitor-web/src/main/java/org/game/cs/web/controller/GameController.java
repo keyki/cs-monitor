@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.game.cs.core.condenser.steam.exceptions.SteamCondenserException;
 import org.game.cs.core.service.SourceServerService;
 import org.game.cs.dal.service.ServerService;
@@ -29,6 +31,7 @@ public class GameController {
     private ServerService serverService;
     @Autowired
     private ResourceLoader resourceLoader;
+    private int logPort = 5556;
 
     @CheckUserState
     @RequestMapping("/control")
@@ -39,8 +42,17 @@ public class GameController {
 
     @CheckUserState
     @RequestMapping("/live/chat")
-    public String showLiveChatPage(Model model) throws SteamCondenserException, TimeoutException {
+    public String showLiveChatPage(Model model, HttpServletRequest request) throws SteamCondenserException, TimeoutException {
+        sourceServerService.addLogAddress(getLoggedInUserName(), getLogAddress(request));
         return "chat";
+    }
+
+    private String getLogAddress(HttpServletRequest request) {
+        String string = request.getRequestURL().toString().split("/")[2];
+        if (string.contains(":")) {
+            string = string.substring(0, string.indexOf(":"));
+        }
+        return string + ":" + logPort;
     }
 
     @CheckUserState

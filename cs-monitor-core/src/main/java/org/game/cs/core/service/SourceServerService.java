@@ -110,4 +110,8 @@ public class SourceServerService {
         sourceServerOperations.kickAllBot(user);
     }
 
+    public void addLogAddress(String user, String logAddress) throws TimeoutException, SteamCondenserException {
+        sourceServerOperations.addLogAddress(user, logAddress);
+    }
+
 }
