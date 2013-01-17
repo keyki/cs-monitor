@@ -1,24 +1,13 @@
-live chat
+<h1>Live chat</h1>
 
-<div id="test"></div>
-<script>
-	var url;
-	if (location.host.indexOf(":") != -1) {
-		url = location.host.substr(0, location.host.indexOf(":"));
-	} else {
-		url = location.host;
-	}
-	var socket = new WebSocket("ws://" + url + ":5555/websocket/");
+<center>
 
-	socket.onmessage = function(event) {
-		$("#test").append(event.data).append("<br/>");
-	}
+	<button class="btn" onclick="connect(${address})">Connect</button>
 
-	socket.onopen = function() {
-		console.log("open");
-	}
+	<hr/>
 
-	socket.onclose = function() {
-		console.log("closed");
-	}
-</script>
+	<div id="chat_box"></div>
+	
+</center>
+
+<script src="../../resources/js/livechat.js"></script>
