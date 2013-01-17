@@ -8,6 +8,7 @@
 package org.game.cs.core.condenser.steam.servers;
 
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.TimeoutException;
@@ -40,6 +41,15 @@ public class SourceServer extends GameServer {
 
     protected RCONSocket rconSocket;
     private String rcon_password;
+    private InetSocketAddress inetSocketAddress;
+
+    public InetSocketAddress getInetSocketAddress() {
+        return inetSocketAddress;
+    }
+
+    public void setInetSocketAddress(InetSocketAddress inetSocketAddress) {
+        this.inetSocketAddress = inetSocketAddress;
+    }
 
     public String getRcon_password() {
         return rcon_password;
@@ -71,6 +81,16 @@ public class SourceServer extends GameServer {
      */
     public SourceServer(String address) throws SteamCondenserException {
         super(address, 27015);
+    }
+
+    /**
+     * @author Krisztian_Horvath   
+     * @param inetSocketAddress
+     * @throws SteamCondenserException
+     */
+    public SourceServer(InetSocketAddress inetSocketAddress) throws SteamCondenserException {
+        super(inetSocketAddress.getAddress(), inetSocketAddress.getPort());
+        this.inetSocketAddress = inetSocketAddress;
     }
 
     /**
@@ -179,24 +199,24 @@ public class SourceServer extends GameServer {
 
         ArrayList<String> response = new ArrayList<String>();
         System.out.println("Executing rcon command: " + command);
-//        if (!command.startsWith("changelevel")) {
-            do {
-                try {
-                    responsePacket = this.rconSocket.getReply();
-                    if (responsePacket instanceof RCONAuthResponse) {
-                        this.rconAuthenticated = false;
-                        throw new RCONNoAuthException();
-                    }
-                } catch (RCONBanException e) {
-                    if (this.rconAuthenticated) {
-                        this.rconAuthenticated = false;
-                        throw new RCONNoAuthException();
-                    }
-                    throw e;
+        //        if (!command.startsWith("changelevel")) {
+        do {
+            try {
+                responsePacket = this.rconSocket.getReply();
+                if (responsePacket instanceof RCONAuthResponse) {
+                    this.rconAuthenticated = false;
+                    throw new RCONNoAuthException();
                 }
-                response.add(((RCONExecResponsePacket) responsePacket).getResponse());
-            } while (response.size() < 3 || ((RCONExecResponsePacket) responsePacket).getResponse().length() > 0);
-//        }
+            } catch (RCONBanException e) {
+                if (this.rconAuthenticated) {
+                    this.rconAuthenticated = false;
+                    throw new RCONNoAuthException();
+                }
+                throw e;
+            }
+            response.add(((RCONExecResponsePacket) responsePacket).getResponse());
+        } while (response.size() < 3 || ((RCONExecResponsePacket) responsePacket).getResponse().length() > 0);
+        //        }
         return StringUtils.join(response.toArray()).trim();
     }
 

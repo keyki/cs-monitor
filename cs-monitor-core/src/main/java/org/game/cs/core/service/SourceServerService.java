@@ -113,5 +113,9 @@ public class SourceServerService {
     public void addLogAddress(String user, String logAddress) throws TimeoutException, SteamCondenserException {
         sourceServerOperations.addLogAddress(user, logAddress);
     }
+    
+    public InetSocketAddress getServerAddress(String user) {
+        return sourceServerOperations.getServerAddress(user);
+    }
 
 }

@@ -24,7 +24,7 @@ public class SourceServerOperations {
     }
 
     public SourceServer connect(String user, InetSocketAddress address) throws SteamCondenserException {
-        SourceServer sourceServer = new SourceServer(address.getAddress(), address.getPort());
+        SourceServer sourceServer = new SourceServer(address);
         serverMap.put(user, sourceServer);
         return sourceServer;
     }
@@ -113,6 +113,10 @@ public class SourceServerOperations {
 
     public void addLogAddress(String user, String logAddress) throws TimeoutException, SteamCondenserException {
         executeCommand(user, RconCommand.LOGADDRESS_ADD.getValue() + logAddress);
+    }
+
+    public InetSocketAddress getServerAddress(String user) {
+        return getServerByUser(user).getInetSocketAddress();
     }
 
 }

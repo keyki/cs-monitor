@@ -44,6 +44,7 @@ public class GameController {
     @RequestMapping("/live/chat")
     public String showLiveChatPage(Model model, HttpServletRequest request) throws SteamCondenserException, TimeoutException {
         sourceServerService.addLogAddress(getLoggedInUserName(), getLogAddress(request));
+        model.addAttribute("serverAddress", sourceServerService.getServerAddress(getLoggedInUserName()));
         return "chat";
     }
 
