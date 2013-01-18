@@ -1,4 +1,4 @@
-<input type="hidden" id="serverAddressHolder" value="${serverAddress.address.hostAddress}:${serverAddress.port}">
+<input type="hidden" id="serverAddressHolder" value="${serverAddress.address.hostAddress}">
 
 <center>
 
