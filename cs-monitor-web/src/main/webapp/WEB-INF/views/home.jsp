@@ -14,8 +14,9 @@
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <style>
 body {
-	padding-top: 40px;
-	/* 60px to make the container go all the way to the bottom of the topbar */
+	background-image: url('${resources}img/background1.jpg');
+	background-size: cover;
+	padding-top: 100px;
 }
 </style>
 <head>
@@ -99,13 +100,6 @@ body {
 					</ul>
 				</div>
 			</div>
-		</div>
-	</div>
-
-	<div class="jumbotron masthead" id="cs_banner"
-		style="background-image: url('${resources}img/banner.jpg');margin-bottom:20px;background-size:cover">
-		<div class="container">
-			<h2>CS-MONITOR</h2>
 		</div>
 	</div>
 

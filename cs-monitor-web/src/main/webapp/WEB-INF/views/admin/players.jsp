@@ -3,7 +3,7 @@
 
 <center>
 
-	<table class="table table-bordered table-hover">
+	<table class="table">
 		<thead>
 			<tr>
 				<th><spring:message code="text.bots" /></th>
@@ -50,7 +50,7 @@
 		</tbody>
 	</table>
 
-	<table class="table table-bordered table-hover">
+	<table class="table">
 		<thead>
 			<tr>
 				<th><spring:message code="text.player.kills" /></th>

@@ -1,9 +1,9 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
-<center>
+<div class="center">
 
-	<div class="tabbable" style="width: 50%">
+	<div class="tabbable" style="width: 150%">
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#tab1" data-toggle="tab"> <spring:message
 						code="text.login" />
@@ -42,4 +42,4 @@
 		</div>
 	</div>
 
-</center>
+</div>
