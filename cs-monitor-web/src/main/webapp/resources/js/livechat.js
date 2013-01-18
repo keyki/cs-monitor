@@ -11,8 +11,7 @@ function () {
         alwaysVisible: true
     });
 
-//    connect($("#serverAddressHolder").val());
-    connect("127.0.0.1:27015");
+    connect($("#serverAddressHolder").val());
 
     function connect(address) {
 
