@@ -24,16 +24,16 @@ body {
 </head>
 <body>
 
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="btn btn-navbar" data-toggle="collapse"
-					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span>
-				</a>
-				<div class="nav-collapse collapse">
-					<ul class="nav">
-						<security:authorize access="isAuthenticated()">
+	<security:authorize access="isAuthenticated()">
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="btn btn-navbar" data-toggle="collapse"
+						data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span>
+					</a>
+					<div class="nav-collapse collapse">
+						<ul class="nav">
 							<c:set var="username">
 								<security:authentication property="principal.username" />
 							</c:set>
@@ -90,18 +90,16 @@ body {
 										</c:forEach>
 									</ul></li>
 							</c:if>
-						</security:authorize>
-						<tiles:insertAttribute name="header" />
-						<security:authorize access="isAuthenticated()">
+							<tiles:insertAttribute name="header" />
 							<li style="padding-right: 50px"><a
 								href='<c:url value="/j_spring_security_logout"/>'><spring:message
 										code="text.logout" /></a></li>
-						</security:authorize>
-					</ul>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</security:authorize>
 
 	<div class="container">
 		<tiles:insertAttribute name="content" />
