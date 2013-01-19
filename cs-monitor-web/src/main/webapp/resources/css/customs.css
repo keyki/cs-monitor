@@ -1,0 +1,22 @@
+.transparent {
+	width: 100%;
+
+	padding-top: 10px;
+	border-radius: 0px 0px 10px 10px;
+	-moz-border-radius: 0px 0px 10px 10px; /* Old Firefox */
+	background-color: rgb(211, 211, 211);
+	background-color: rgba(211, 211, 211, 0.3);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+	/* For IE 8*/
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+	-webkit-box-shadow: 0 1px 0 rgba(0,0,0,.1);
+	box-shadow: 0 1px 0 rgba(0,0,0,.1);
+}
+
+.nav-tabs {
+	margin-bottom: 0px !important;
+}
+
+.logindiv {
+	top: 20% !important;
+}
