@@ -9,7 +9,10 @@
 <html>
 <link href="${resources}css/jquery.selectBoxIt.css" rel="stylesheet">
 <link href="${resources}css/docs.css" rel="stylesheet">
+
 <link href="${resources}css/customs.css" rel="stylesheet">
+
+<link href="${resources}css/darkstrap.css" rel="stylesheet">
 <link href="${resources}css/bootstrap.css" rel="stylesheet">
 <link href="${resources}css/bootstrap-responsive.css" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
@@ -38,8 +41,9 @@ body {
 							<c:set var="username">
 								<security:authentication property="principal.username" />
 							</c:set>
-							<li><a href='#'><spring:message code="text.loggedin" />
-									${username}</a></li>
+							<li><a href='#' ><spring:message code="text.loggedin" />
+									${username}
+								</a></li>
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown"><spring:message code="text.connect" /><b
 									class="caret"></b></a>
@@ -109,9 +113,9 @@ body {
 									</ul></li>
 							</c:if>
 							<tiles:insertAttribute name="header" />
-							<li style="padding-right: 50px"><a
+							<li style="padding-right: 50px"><a 
 								href='<c:url value="/j_spring_security_logout"/>'><spring:message
-										code="text.logout" /></a></li>
+										code="text.logout" /><i class="icon-remove" style="margin-left: 5px;margin-top: 3px;"></i></a></li>
 						</ul>
 					</div>
 				</div>
