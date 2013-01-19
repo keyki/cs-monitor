@@ -44,23 +44,37 @@ body {
 								data-toggle="dropdown"><spring:message code="text.connect" /><b
 									class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<form action="<c:url value='/admin/connect' />" method="post"
-										style="text-align: center;">
-										<input type="text"
-											placeholder="<spring:message code="text.ip.or.host"/>"
-											name="ip" required /> <input type="text"
-											placeholder="<spring:message code="text.port"/>" name="port"
-											required value="27015" /> <input type="password"
-											placeholder="<spring:message code="text.rcon"/>" name="rcon" />
-										<label class="checkbox"
-											style="margin-left: 40%; margin-right: 40%"> <input
-											type="checkbox" name="register"> <spring:message
-												code="text.save" />
-										</label>
-										<button type="submit" class="btn">
-											<spring:message code="text.connect" />
-										</button>
-									</form>
+								<li>
+										<form action="<c:url value='/admin/connect' />" method="post"  style="text-align: center;margin: 20 20 20px;">
+											<fieldset>
+												<div class="control-group">
+													
+														<input type="text" placeholder="<spring:message code="text.ip.or.host"/>" name="ip" required />
+													
+												</div>
+												<div class="control-group">
+													
+														<input type="text" placeholder="<spring:message code="text.port"/>" name="port"	required value="27015" />
+													
+												</div> 
+												<div class="control-group">
+													
+														<input type="password"	placeholder="<spring:message code="text.rcon"/>" name="rcon" />
+													
+												</div>
+												<div class="control-group">
+													
+														<label class="checkbox"	style="margin-left: 40%; margin-right: 40%"> 
+															<input	type="checkbox" name="register"> <spring:message	code="text.save" />
+														</label>
+														<button type="submit" class="btn">
+															<spring:message code="text.connect" />
+														</button>
+													
+												</div>
+											</fieldset>
+										</form>
+									</li>
 								</ul></li>
 							<c:if test="${fn:length(servers) > 0}">
 								<li class="dropdown"><a class="dropdown-toggle"
@@ -69,33 +83,24 @@ body {
 								</a>
 									<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 										<c:forEach items="${servers}" var="server">
-											<li class="dropdown-submenu"><a tabindex="-1" href="#">${server.address}</a>
+											<li class="dropdown-submenu">
+												<a tabindex="-1" href="#">${server.address}</a>
 												<ul class="dropdown-menu">
 													<li>
-														<form action="<c:url value='/admin/connect'/>" 	method="post" style="margin-bottom: 0px;padding: 5px;">
-															<ul>
-																<li>
-																	<a tabindex="-1" href="#"
-																		onclick="$(this).closest('form').submit(); return false;">
-																		<spring:message
-																				code="text.connect" />
-																	</a>
-																</li> 
-															</ul>
+														<form action="<c:url value='/admin/connect'/>" 	method="post" style="margin-bottom: 0px;">
+															<a tabindex="-1"  class="menulinks" href="#" onclick="$(this).closest('form').submit(); return false;">
+																<spring:message code="text.connect" />
+															</a>
 															<input type="hidden" name="ip" value="${server.address}"> 
 															<input type="hidden" name="port" value="${server.port}"> 
-															<input 	type="hidden" name="rcon" value="${server.password}">
+															<input type="hidden" name="rcon" value="${server.password}">
 														</form>
 													</li>
 													<li>
 														<form action="<c:url value='/admin/remove'/>" method="post" style="margin-bottom: 0px">
-															<ul>
-																<li>
-																	<a tabindex="-1" href="#" 	onclick="$(this).closest('form').submit(); return false;">
-																		<spring:message	code="text.remove" />
-																	</a>
-																</li> 
-															</ul>
+															<a class="menulinks" tabindex="-1" href="#" 	onclick="$(this).closest('form').submit(); return false;">
+																<spring:message	code="text.remove" />
+															</a>
 															<input type="hidden" name="ip" 	value="${server.address}">
 														</form>
 													</li>
