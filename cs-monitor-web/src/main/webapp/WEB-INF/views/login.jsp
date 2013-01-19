@@ -1,7 +1,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
-<div class="center">
+<div class="center logindiv">
 
 	<div class="tabbable" style="width: 150%">
 		<ul class="nav nav-tabs">
@@ -11,7 +11,7 @@
 			<li><a href="#tab2" data-toggle="tab"> <spring:message
 						code="text.register" /></a></li>
 		</ul>
-		<div class="tab-content">
+		<div class="tab-content transparent">
 			<div class="tab-pane active" id="tab1" style="width:50%;margin-right:25%">
 				<form class="form-horizontal" action="<c:url value='/j_spring_security_check' />" method="post">
 					<div class="control-group">
