@@ -56,10 +56,37 @@ input:focus {
 	color: white !important;
 }
 
+.nav-tabs > .active > a
+{
+	background-color: rgb(211, 211, 211);
+	background-color: rgba(211, 211, 211, 0.4) !important;
+	ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+	-webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+	box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+	border: 1px;
+	border-color: rgba(211, 211, 211, 0.4) !important;
+}
+
+.menulinks:hover{
+	color: #000000 !important;
+	background-color: #e9e9e9 !important;
+	background-image: -moz-linear-gradient(top, #eeeeee, #e1e1e1) !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#eeeeee),
+		to(#e1e1e1) ) !important;
+	background-image: -webkit-linear-gradient(top, #eeeeee, #e1e1e1)
+		!important;
+	background-image: -o-linear-gradient(top, #eeeeee, #e1e1e1) !important;
+	background-image: linear-gradient(to bottom, #eeeeee, #e1e1e1)
+		!important;
+	background-repeat: repeat-x !important;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffeeeeee',
+		endColorstr='#ffe1e1e1', GradientType=0 ) !important;
+}
 
 .menulinks:active,.menulinks:visited,.menulinks:link,.dropdown-menu:hover>li>form>a:hover
-	{
+{
 	text-decoration: none !important;
+	
 }
 
 .nav-tabs {
@@ -72,6 +99,11 @@ input:focus {
 	width: 50%;
 	text-align: center;
 }
+
+
+.dropdown-menu > li > a:hover > [class^="icon-"]{
+ 	background-image: url("../img/glyphicons-halflings.png") !important;
+ }
 
 .dropdown-menu li>a:hover,.dropdown-menu li>a:focus,.dropdown-submenu:hover>a
 	{

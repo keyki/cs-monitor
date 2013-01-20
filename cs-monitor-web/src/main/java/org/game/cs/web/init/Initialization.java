@@ -29,6 +29,7 @@ public class Initialization extends AbstractAnnotationConfigDispatcherServletIni
         super.registerContextLoaderListener(servletContext);
         servletContext.addListener(new HttpSessionEventPublisher());
         DelegatingFilterProxy delegatingFilterProxy = new DelegatingFilterProxy();
+        
         Dynamic filter = servletContext.addFilter("springSecurityFilterChain", delegatingFilterProxy);
         filter.addMappingForUrlPatterns(null, true, "/*");
     }
