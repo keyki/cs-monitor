@@ -5,11 +5,9 @@
 
 <center>
 
-	<h1>Live chat</h1>
-	<hr />
-
+	<legend><h2 style="padding-top: 0px !important; margin-top: 0px !important;">Live chat</h2></legend>
 	<div id="chat_box"></div>
-	<div class="form-inline">
+	<div class="form-inline" style="text-align: center;">
 		<input type="text" id="chat_message">
 		<button class="btn btn-inverse" id="chat_message_send">
 			<spring:message code="text.send" />

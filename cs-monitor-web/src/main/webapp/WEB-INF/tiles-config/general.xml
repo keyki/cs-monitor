@@ -5,9 +5,15 @@
 
 <tiles-definitions>
 
-	<definition name="default" template="/WEB-INF/views/home.jsp">
-	   <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
+	<definition name="logindefault" template="/WEB-INF/views/loginhome.jsp">
+	    <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="content" value="/WEB-INF/views/main.jsp" />
+	</definition>
+	
+	<definition name="default" template="/WEB-INF/views/home.jsp">
+	    <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/main.jsp" />
+		<put-attribute name="connectionform" value="/WEB-INF/views/connectionform.jsp" />
 	</definition>
 	
 	<definition name="default_error" template="/WEB-INF/views/errors/home.jsp">
@@ -15,22 +21,21 @@
 		<put-attribute name="content" value="/WEB-INF/views/main.jsp" />
 	</definition>
 	
-	<definition name="login" extends="default">
+	<definition name="login" extends="logindefault">
 	   <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="content" value="/WEB-INF/views/login.jsp" />
 	</definition>
 	
-	<definition name="errors" extends="default">
+	<definition name="errors" extends="logindefault">
 	   <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="content" value="/WEB-INF/views/errors.jsp" />
 	</definition>
 	
 	<definition name="404page" extends="default_error">
-	  
 		<put-attribute name="content" value="/WEB-INF/views/404.jsp" />
 	</definition>
 	
-	<definition name="denied" extends="default">
+	<definition name="denied" extends="logindefault">
        <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
         <put-attribute name="content" value="/WEB-INF/views/denied.jsp" />
     </definition>

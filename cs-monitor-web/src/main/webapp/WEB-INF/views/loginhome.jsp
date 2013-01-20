@@ -146,14 +146,7 @@ body {
 	</security:authorize>
 
 	<div class="container">
-		<div class="row">
-		<div class="span3 bs-docs-sidebar" style="margin-left: 10px !important;">
-			<tiles:insertAttribute name="connectionform" />
-		</div>
-		<div class="span8 offset1">
-			<tiles:insertAttribute name="content" />
-		</div>
-		</div>
+		<tiles:insertAttribute name="content" />
 	</div>
 
 </body>
@@ -169,6 +162,7 @@ body {
 <script src="${resources}js/bootstrap-collapse.js"></script>
 <script src="${resources}js/bootstrap-carousel.js"></script>
 <script src="${resources}js/bootstrap-typeahead.js"></script>
+
 <script src="${resources}js/jquery-ui-1.9.2.custom.js"></script>
 <script src="${resources}js/jquery.slimscroll.js"></script>
 <script src="${resources}js/jquery.selectboxit.js"></script>

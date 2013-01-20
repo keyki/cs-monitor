@@ -13,7 +13,7 @@
 		</button>
 	</form>
 
-	<div id="myCarousel" class="carousel slide" style="width:800px">
+	<div id="myCarousel" class="carousel slide" style="width:600px">
 		<!-- Carousel items -->
 		<div class="carousel-inner">
 			<c:forEach items="${maps}" var="map" varStatus="counter">
