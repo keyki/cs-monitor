@@ -5,12 +5,15 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <security:http pattern="/favicon.ico" security="none" />
+    
 	<security:http auto-config="false" use-expressions="true"
 		entry-point-ref="authenticationEntryPoint">
 		<security:intercept-url pattern="/admin**"
 			access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/admin/**"
 			access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/favicon.ico" access="permitAll"  />
 		<security:access-denied-handler
 			error-page="/denied" />
 		<security:intercept-url pattern="/login"
@@ -31,6 +34,8 @@
 			ref="rememberMeFilter" />
 	</security:http>
 
+	
+	
 	<bean id="authenticationFilter"
 		class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter"
 		p:sessionAuthenticationStrategy-ref="sas" p:authenticationManager-ref="authenticationManager"
