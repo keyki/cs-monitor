@@ -11,6 +11,25 @@ function () {
         alwaysVisible: true
     });
 
+    $('#chat_message').keypress(function (e) {
+        if (e.which == 13) {
+            jQuery('#chat_message_send').focus().click();
+            return false;
+        }
+    });
+
+    $("#chat_message_send").live("click", function () {
+        send($("#chat_message").val());
+    });
+
+    function send(chat_message) {
+        $.post(location.href + "/send", {
+            message: chat_message
+        });
+        $("#chat_message").val("");
+        $("#chat_message").focus();
+    }
+
     connect($("#serverAddressHolder").val());
 
     function connect(address) {

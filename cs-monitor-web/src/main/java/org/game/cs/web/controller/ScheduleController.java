@@ -12,7 +12,7 @@ import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class ScheduleController extends AbstractController{
+public class ScheduleController{
 
     @Autowired
     private SourceServerService sourceServerService;

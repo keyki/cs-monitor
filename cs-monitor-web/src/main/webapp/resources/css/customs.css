@@ -60,7 +60,10 @@ body {
 }
 
 .logindiv {
-	top: 20% !important;
+	margin-left: 25%;
+	margin-top: 10%;
+	width: 50%;
+	text-align: center;
 }
 
 .dropdown-menu li>a:hover,.dropdown-menu li>a:focus,.dropdown-submenu:hover>a

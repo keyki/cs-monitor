@@ -118,4 +118,8 @@ public class SourceServerService {
         return sourceServerOperations.getServerAddress(user);
     }
 
+	public void sendChatMessage(String user, String message) throws TimeoutException, SteamCondenserException {
+		sourceServerOperations.sendChatMessage(user, message);
+	}
+
 }

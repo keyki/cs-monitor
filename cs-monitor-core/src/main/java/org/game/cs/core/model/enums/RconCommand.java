@@ -18,7 +18,9 @@ public enum RconCommand {
     
     LOGADDRESS_LIST("logaddress_list"),
     
-    LOGADDRESS_ADD("logaddress_add ");
+    LOGADDRESS_ADD("logaddress_add "),
+    
+    SAY("say ");
 
     private String value;
 
