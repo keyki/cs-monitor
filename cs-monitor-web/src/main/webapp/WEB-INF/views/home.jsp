@@ -28,52 +28,9 @@
 </c:choose>
 <style>
 body {
-	background-image: ${background
-}
-;
-background-size
-
-
-
-
-:cover
-
-
- 
-
-
-!
-important
-
-
-
-
-;
-padding-top
-
-
-
-
-:
-
-
-
-
-100
-px
-
-
- 
-
-
-!
-important
-
-
-
-
-;
-}
+	background-image: ${background};
+	background-size:cover !important;
+	padding-top:100px !important;}
 </style>
 
 <head>
