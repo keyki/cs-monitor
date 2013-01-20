@@ -5,11 +5,11 @@
 
 	<div class="tabbable" style="width: 150%">
 		<ul class="nav nav-tabs">
-			<li class="active"><a href="#tab1" data-toggle="tab"> <spring:message
-						code="text.login" />
+			<li class="active"><a href="#tab1" data-toggle="tab"> <b><spring:message
+						code="text.login" /></b>
 			</a></li>
-			<li><a href="#tab2" data-toggle="tab"> <spring:message
-						code="text.register" /></a></li>
+			<li><a href="#tab2" data-toggle="tab"> <b><spring:message
+						code="text.register" /></b></a></li>
 		</ul>
 		<div class="tab-content transparent">
 			<div class="tab-pane active" id="tab1" style="width:50%;margin-right:25%">
