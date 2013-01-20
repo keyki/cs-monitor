@@ -2,4 +2,18 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	version="3.0" />
+	version="3.0" >
+    
+    
+    <error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		 <location>/errors/404.html</location>
+	</error-page>
+
+	<error-page>
+		<error-code>404</error-code>
+	 	<location>/errors/404.html</location>
+	</error-page>
+    
+    
+</web-app>
