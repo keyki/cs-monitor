@@ -17,48 +17,48 @@
 		1px 7px 0px inset;
 	box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px
 		7px 0px inset;
-	background: rgba(32,32,32,0.8) !important;
+	background: rgba(32, 32, 32, 0.8) !important;
 	background-color: rgba(0, 0, 0, 0.3);
 	border: 1px solid rgba(0, 0, 0, 0.05);
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	color: #333333;
-	
 }
 </style>
-
-<form action="<c:url value='/admin/connect' />" method="post"
-	class="form-horizontal connection">
-	<legend>Connection</legend>
-	<div class="control-group">
-
-
-		<input type="text"
-			placeholder="<spring:message code="text.ip.or.host"/>" name="ip"
-			required />
-	</div>
-	<div class="control-group">
-
-		<input type="text" placeholder="<spring:message code="text.port"/>"
-			name="port" required value="27015" />
-	</div>
-
-	<div class="control-group">
-
-		<input type="password"
-			placeholder="<spring:message code="text.rcon"/>" name="rcon" />
-	</div>
+<security:authorize access="isAuthenticated()">
+	<form action="<c:url value='/admin/connect' />" method="post"
+		class="form-horizontal connection">
+		<legend>Connection</legend>
+		<div class="control-group">
 
 
-	<div class="control-group">
+			<input type="text"
+				placeholder="<spring:message code="text.ip.or.host"/>" name="ip"
+				required />
+		</div>
+		<div class="control-group">
 
-		<label class="checkbox"> <input type="checkbox"
-			name="register"> <spring:message code="text.save" />
-		</label>
+			<input type="text" placeholder="<spring:message code="text.port"/>"
+				name="port" required value="27015" />
+		</div>
 
-		<button type="submit" class="btn">
-			<spring:message code="text.connect" />
-		</button>
+		<div class="control-group">
 
-	</div>
-</form>
+			<input type="password"
+				placeholder="<spring:message code="text.rcon"/>" name="rcon" />
+		</div>
+
+
+		<div class="control-group">
+
+			<label class="checkbox"> <input type="checkbox"
+				name="register"> <spring:message code="text.save" />
+			</label>
+
+			<button type="submit" class="btn">
+				<spring:message code="text.connect" />
+			</button>
+
+		</div>
+	</form>
+</security:authorize>
