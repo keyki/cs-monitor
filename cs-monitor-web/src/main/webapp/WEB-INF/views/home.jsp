@@ -10,8 +10,6 @@
 <link href="${resources}css/jquery.selectBoxIt.css" rel="stylesheet">
 <%-- <link href="${resources}css/docs.css" rel="stylesheet"> --%>
 
-
-
 <link href="${resources}css/darkstrap.css" rel="stylesheet">
 <link href="${resources}css/customs.css" rel="stylesheet">
 <link href="${resources}css/bootstrap.css" rel="stylesheet">
@@ -23,9 +21,8 @@ body {
 	background-size: cover !important;
 	padding-top: 100px !important;
 }
-
-
 </style>
+
 <head>
 <title>Home</title>
 </head>

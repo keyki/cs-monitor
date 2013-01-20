@@ -17,10 +17,6 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/denied"
 			access="permitAll" />
-		<security:intercept-url pattern="/404page"
-			access="isAuthenticated()" />
-		<security:intercept-url pattern="/errors/404"
-			access="isAuthenticated()" />
 		<security:intercept-url pattern="/*"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/resources/**"

@@ -6,7 +6,6 @@ import java.util.Collection;
 import org.game.cs.common.domain.Server;
 import org.game.cs.dal.service.ServerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ControllerAdvice;
