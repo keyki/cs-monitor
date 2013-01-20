@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/admin")
-public class RconController {
+public class RconController extends AbstractController{
 
     @Autowired
     private SourceServerService sourceServerService;

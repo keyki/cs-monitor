@@ -12,9 +12,10 @@ import org.game.cs.core.condenser.steam.exceptions.SteamCondenserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMethodException;
 
 @ControllerAdvice
-public class ControllerExceptionHandler {
+public class ControllerExceptionHandler extends AbstractController{
 
     @Autowired
     private GlobalModelAttributes modelAttributes;
@@ -47,6 +48,9 @@ public class ControllerExceptionHandler {
         addServersToReqest(request);
         return "errors";
     }
+    
+  
+    
     
     @ExceptionHandler(value = {TimeoutException.class})
     public void handleExceptions5(Exception exception, HttpServletResponse response, HttpServletRequest request) throws IOException {

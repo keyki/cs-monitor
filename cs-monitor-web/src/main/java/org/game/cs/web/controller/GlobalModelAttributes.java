@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Component
 @ControllerAdvice
-public class GlobalModelAttributes {
+public class GlobalModelAttributes extends AbstractController{
 
     @Autowired
     private ServerService serverService;

@@ -23,7 +23,7 @@ import org.springframework.web.util.HtmlUtils;
 
 @Controller
 @RequestMapping("/admin")
-public class GameController {
+public class GameController extends AbstractController{
 
     @Autowired
     private SourceServerService sourceServerService;
