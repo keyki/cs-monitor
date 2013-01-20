@@ -19,9 +19,9 @@
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <style>
 body {
-	background-image: url('${resources}img/background1.jpg');
-	background-size: cover;
-	padding-top: 100px;
+	background-image: url('${resources}img/background1.jpg') !important;
+	background-size: cover !important;
+	padding-top: 100px !important;
 }
 
 

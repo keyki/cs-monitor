@@ -20,11 +20,7 @@ public class ControllerExceptionHandler {
 
     @Autowired
     private GlobalModelAttributes modelAttributes;
-    
-    
-    
-  
-    
+        
     @ExceptionHandler(value = { NoSuchRequestHandlingMethodException.class })
 	public String noSuchRequestHandlingMethodException(Exception exception,
 			HttpServletResponse response, HttpServletRequest request)

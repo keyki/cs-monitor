@@ -43,12 +43,6 @@ input:focus {
 	color: white !important;
 }
 
-body {
-	background-image: url('/cs-monitor-web/resources/img/background1.jpg')
-		!important;
-	background-size: cover !important;
-	padding-top: 100px !important;
-}
 
 .menulinks:active,.menulinks:visited,.menulinks:link,.dropdown-menu:hover>li>form>a:hover
 	{
