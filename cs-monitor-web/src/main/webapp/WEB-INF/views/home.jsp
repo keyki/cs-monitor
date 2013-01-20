@@ -8,11 +8,12 @@
 
 <html>
 <link href="${resources}css/jquery.selectBoxIt.css" rel="stylesheet">
-<link href="${resources}css/docs.css" rel="stylesheet">
+<%-- <link href="${resources}css/docs.css" rel="stylesheet"> --%>
 
-<link href="${resources}css/customs.css" rel="stylesheet">
+
 
 <link href="${resources}css/darkstrap.css" rel="stylesheet">
+<link href="${resources}css/customs.css" rel="stylesheet">
 <link href="${resources}css/bootstrap.css" rel="stylesheet">
 <link href="${resources}css/bootstrap-responsive.css" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
@@ -22,12 +23,14 @@ body {
 	background-size: cover;
 	padding-top: 100px;
 }
+
+
 </style>
 <head>
 <title>Home</title>
 </head>
 <body>
-
+	
 	<security:authorize access="isAuthenticated()">
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
@@ -47,9 +50,9 @@ body {
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown"><spring:message code="text.connect" /><b
 									class="caret"></b></a>
-								<ul class="dropdown-menu">
-								<li>
-										<form action="<c:url value='/admin/connect' />" method="post"  style="text-align: center;margin: 20 20 20px;">
+								<ul class="dropdown-menu transparent-background">
+								<li >
+										<form action="<c:url value='/admin/connect' />"  method="post"  style="text-align: center;margin: 20 20 20px;">
 											<fieldset>
 												<div class="control-group">
 													
@@ -126,7 +129,7 @@ body {
 	<div class="container">
 		<tiles:insertAttribute name="content" />
 	</div>
-
+	
 </body>
 <script src="${resources}js/bootstrap-transition.js"></script>
 <script src="${resources}js/bootstrap-alert.js"></script>
