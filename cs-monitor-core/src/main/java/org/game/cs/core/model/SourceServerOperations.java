@@ -119,4 +119,8 @@ public class SourceServerOperations {
         return getServerByUser(user).getInetSocketAddress();
     }
 
+	public void sendChatMessage(String user, String message) throws TimeoutException, SteamCondenserException {
+		executeCommand(user, RconCommand.SAY.getValue() + message);
+	}
+
 }
