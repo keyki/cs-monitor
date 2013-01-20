@@ -20,6 +20,11 @@
 		<put-attribute name="content" value="/WEB-INF/views/errors.jsp" />
 	</definition>
 	
+	<definition name="404page" extends="default">
+	   <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/404.jsp" />
+	</definition>
+	
 	<definition name="denied" extends="default">
        <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
         <put-attribute name="content" value="/WEB-INF/views/denied.jsp" />
