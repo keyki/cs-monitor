@@ -9,14 +9,31 @@
 				code="text.commands" /> <b class="caret"></b>
 	</a>
 		<ul class="dropdown-menu">
-			<li><a href='<c:url value='/admin/control' />'><spring:message
-						code="text.info" /></a></li>
+			<li>
+				<a href='<c:url value='/admin/control' />'>
+					<i class="icon-info-sign"> </i>
+					<spring:message	code="text.info" />
+				</a>
+			</li>
 			<li class="divider"></li>
-			<li><a href='<c:url value='/admin/changelevel' />'><spring:message
-						code="text.changelevel" /></a></li>
-			<li><a href='<c:url value='/admin/players' />'><spring:message
-						code="text.players" /></a></li>
-			<li><a href='<c:url value='/admin/live/chat' />'><spring:message
-						code="text.live.chat" /></a></li>
+			<li>
+				<a href='<c:url value='/admin/changelevel' />'>
+					<i class="icon-map-marker"> </i>
+					<spring:message	code="text.changelevel" />
+				</a>
+			</li>
+			<li>
+				<a href='<c:url value='/admin/players' />'>
+					<i class="icon-user"> </i>
+					<spring:message	code="text.players" />
+				</a>
+			</li>
+			<li>
+				
+				<a href='<c:url value='/admin/live/chat' />'>
+					<i class="icon-comment"> </i>
+					<spring:message	code="text.live.chat" />
+				</a>
+			</li>
 		</ul></li>
 </security:authorize>
