@@ -31,5 +31,12 @@ public class HomeController {
         userService.createMasterUsers();
         return "redirect:/";
     }
+    
+    @RequestMapping(value="/errors/404")
+    public String handle404() {
+    	System.out.println("pina");
+        return "404page";
+    }
+    
 
 }

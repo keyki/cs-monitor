@@ -12,6 +12,7 @@ import org.game.cs.core.condenser.steam.exceptions.SteamCondenserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMethodException;
 
 @ControllerAdvice
@@ -19,6 +20,10 @@ public class ControllerExceptionHandler {
 
     @Autowired
     private GlobalModelAttributes modelAttributes;
+    
+    
+    
+  
     
     @ExceptionHandler(value = { NoSuchRequestHandlingMethodException.class })
 	public String noSuchRequestHandlingMethodException(Exception exception,
