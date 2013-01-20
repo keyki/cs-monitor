@@ -5,7 +5,7 @@
 	prefix="security"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:url value="/resources/" var="resources" />
-
+<c:url value="/" var="app" />
 <html>
 <link href="${resources}css/jquery.selectBoxIt.css" rel="stylesheet">
 <%-- <link href="${resources}css/docs.css" rel="stylesheet"> --%>
@@ -39,6 +39,7 @@ body {
 
 </style>
 <head>
+<link rel="SHORTCUT ICON" href="${app}favicon.ico" />
 <title>404</title>
 </head>
 <body>
