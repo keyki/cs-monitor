@@ -15,9 +15,18 @@
 <link href="${resources}css/bootstrap.css" rel="stylesheet">
 <link href="${resources}css/bootstrap-responsive.css" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+
+<c:choose>
+	<c:when test="${empty error}">
+		<c:set value="url('${resources}img/background1.jpg') !important;" var="background"/>
+	</c:when>
+	<c:otherwise>
+		<c:set value="url('${resources}img/errorbackground.jpg') !important;" var="background" />
+	</c:otherwise>
+</c:choose>
 <style>
 body {
-	background-image: url('${resources}img/background1.jpg') !important;
+	background-image: ${background}
 	background-size: cover !important;
 	padding-top: 100px !important;
 }
