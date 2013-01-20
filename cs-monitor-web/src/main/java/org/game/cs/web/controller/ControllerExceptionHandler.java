@@ -21,14 +21,7 @@ public class ControllerExceptionHandler {
     @Autowired
     private GlobalModelAttributes modelAttributes;
         
-    @ExceptionHandler(value = { NoSuchRequestHandlingMethodException.class })
-	public String noSuchRequestHandlingMethodException(Exception exception,
-			HttpServletResponse response, HttpServletRequest request)
-			throws IOException {
-
-		exception.printStackTrace();
-		return "404page";
-	}
+   
     
     @ExceptionHandler(value = {SteamCondenserException.class})
     public String handleExceptions1(Exception exception, HttpServletRequest request) throws IOException {
