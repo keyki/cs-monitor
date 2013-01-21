@@ -12,17 +12,20 @@
 			<spring:message code="text.change" />
 		</button>
 	</form>
-	
-	<hr/>
-	
-	<form method="post" action="<c:url value="/admin/changelevel/upload"/>"
-        enctype="multipart/form-data">
-        <input type="file" name="file" /> <input class="btn" type="submit" />
-    </form>
-    
-    <hr/>
 
-	<div id="myCarousel" class="carousel slide" style="width:600px">
+	<hr />
+
+	<form method="post" action="<c:url value="/admin/changelevel/upload"/>"
+		enctype="multipart/form-data">
+		<input type="file" name="file" />
+		<button type="submit" class="btn">
+			<spring:message code="text.upload" />
+		</button>
+	</form>
+
+	<hr />
+
+	<div id="myCarousel" class="carousel slide" style="width: 600px">
 		<!-- Carousel items -->
 		<div class="carousel-inner">
 			<c:forEach items="${maps}" var="map" varStatus="counter">
@@ -32,7 +35,7 @@
 						<form class="form-inline" method="post"
 							action="<c:url value='/admin/changelevel' />">
 							<h4>${map}</h4>
-							<input type="hidden" name="map" value="${map}"/>
+							<input type="hidden" name="map" value="${map}" />
 							<button type="submit" class="btn">
 								<spring:message code="text.change" />
 							</button>
@@ -45,5 +48,5 @@
 		<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
 		<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 	</div>
-	
+
 </center>
