@@ -13,20 +13,6 @@
 		</button>
 	</form>
 
-	<hr />
-
-	<form method="post" action="<c:url value="/admin/changelevel/upload"/>"
-		enctype="multipart/form-data">
-		<input type="text" name="directory"
-			placeholder="<spring:message code="text.map.directory"/>" /> <input
-			type="file" name="file" />
-		<button type="submit" class="btn">
-			<spring:message code="text.upload" />
-		</button>
-	</form>
-
-	<hr />
-
 	<div id="myCarousel" class="carousel slide" style="width: 600px">
 		<!-- Carousel items -->
 		<div class="carousel-inner">

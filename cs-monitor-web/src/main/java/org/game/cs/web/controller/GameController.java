@@ -79,23 +79,6 @@ public class GameController {
         return "changelevel";
     }
 
-    @CheckUserState
-    @RequestMapping(value = "/changelevel/upload", method = RequestMethod.POST)
-    public Callable<String> uploadMap(@RequestParam(value = "file") MultipartFile file, @RequestParam String directory) throws TimeoutException,
-        SteamCondenserException, IOException {
-        if (!file.isEmpty()) {
-            Path target = Paths.get(directory + file.getOriginalFilename());
-            Path outFile = Files.createFile(target);
-            FileCopyUtils.copy(file.getBytes(), outFile.toFile());
-        }
-        return new Callable<String>() {
-            @Override
-            public String call() throws Exception {
-                return "redirect:/admin/changelevel";
-            }
-        };
-    }
-
     private Collection<String> availableMapsWithPreviewPicture(Collection<String> availableMaps) {
         Iterator<String> iterator = availableMaps.iterator();
         while (iterator.hasNext()) {

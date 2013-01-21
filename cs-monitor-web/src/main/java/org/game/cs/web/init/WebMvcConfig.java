@@ -42,10 +42,4 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         return urlBasedViewResolver;
     }
 
-    @Bean(name = "multipartResolver")
-    public MultipartResolver getCommonsMultipartResolver() {
-        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        return multipartResolver;
-    }
-
 }
