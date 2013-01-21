@@ -16,68 +16,59 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
-	@Autowired
-	private GlobalModelAttributes modelAttributes;
+    @Autowired
+    private GlobalModelAttributes modelAttributes;
 
-	@ExceptionHandler(value = { SteamCondenserException.class })
-	public String handleExceptions1(Exception exception,
-			HttpServletRequest request) throws IOException {
-		addErrorMessageToRequest(request, exception.getMessage()
-				+ "\nPlease connect again.");
-		addServersToReqest(request);
-		exception.printStackTrace();
-		return "errors";
-	}
+    @ExceptionHandler(value = {SteamCondenserException.class})
+    public String handleExceptions1(Exception exception, HttpServletRequest request) throws IOException {
+        addErrorMessageToRequest(request, exception.getMessage() + "\nPlease connect again.");
+        addServersToReqest(request);
+        exception.printStackTrace();
+        return "errors";
+    }
 
-	@ExceptionHandler(value = { NumberFormatException.class })
-	public String handleExceptions2(Exception exception,
-			HttpServletRequest request) {
-		addErrorMessageToRequest(request, "Wrong format");
-		addServersToReqest(request);
-		return "errors";
-	}
+    @ExceptionHandler(value = {NumberFormatException.class})
+    public String handleExceptions2(Exception exception, HttpServletRequest request) {
+        addErrorMessageToRequest(request, exception.getMessage());
+        addServersToReqest(request);
+        return "errors";
+    }
 
-	@ExceptionHandler(value = { IllegalArgumentException.class })
-	public String handleExceptions3(Exception exception,
-			HttpServletRequest request) {
-		addErrorMessageToRequest(request, exception.getMessage());
-		addServersToReqest(request);
-		return "errors";
-	}
+    @ExceptionHandler(value = {IllegalArgumentException.class})
+    public String handleExceptions3(Exception exception, HttpServletRequest request) {
+        addErrorMessageToRequest(request, exception.getMessage());
+        addServersToReqest(request);
+        return "errors";
+    }
 
-	@ExceptionHandler(value = { NotConnectedException.class })
-	public String handleExceptions4(Exception exception,
-			HttpServletRequest request) {
-		addErrorMessageToRequest(request, exception.getMessage());
-		addServersToReqest(request);
-		return "errors";
-	}
+    @ExceptionHandler(value = {NotConnectedException.class})
+    public String handleExceptions4(Exception exception, HttpServletRequest request) {
+        addErrorMessageToRequest(request, exception.getMessage());
+        addServersToReqest(request);
+        return "errors";
+    }
 
-	@ExceptionHandler(value = { TimeoutException.class })
-	public void handleExceptions5(Exception exception,
-			HttpServletResponse response, HttpServletRequest request)
-			throws IOException {
-		addErrorMessageToRequest(request, exception.getMessage());
-		addServersToReqest(request);
-		exception.printStackTrace();
-		response.sendRedirect(request.getContextPath() + "/admin/control");
-	}
+    @ExceptionHandler(value = {TimeoutException.class})
+    public void handleExceptions5(Exception exception, HttpServletResponse response, HttpServletRequest request) throws IOException {
+        addErrorMessageToRequest(request, exception.getMessage());
+        addServersToReqest(request);
+        exception.printStackTrace();
+        response.sendRedirect(request.getContextPath() + "/admin/control");
+    }
 
-	@ExceptionHandler(value = { ServerAlreadyRegisteredException.class })
-	public String handleExceptions6(Exception exception,
-			HttpServletRequest request) {
-		addErrorMessageToRequest(request, exception.getMessage());
-		addServersToReqest(request);
-		return "errors";
-	}
+    @ExceptionHandler(value = {ServerAlreadyRegisteredException.class})
+    public String handleExceptions6(Exception exception, HttpServletRequest request) {
+        addErrorMessageToRequest(request, exception.getMessage());
+        addServersToReqest(request);
+        return "errors";
+    }
 
-	private void addErrorMessageToRequest(HttpServletRequest request,
-			String message) {
-		request.setAttribute("error", message);
-	}
+    private void addErrorMessageToRequest(HttpServletRequest request, String message) {
+        request.setAttribute("error", message);
+    }
 
-	private void addServersToReqest(HttpServletRequest request) {
-		request.setAttribute("servers", modelAttributes.getServers());
-	}
+    private void addServersToReqest(HttpServletRequest request) {
+        request.setAttribute("servers", modelAttributes.getServers());
+    }
 
 }

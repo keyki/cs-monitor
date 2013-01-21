@@ -1,8 +1,13 @@
 package org.game.cs.web.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.TimeoutException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +21,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -75,11 +81,19 @@ public class GameController {
 
     @CheckUserState
     @RequestMapping(value = "/changelevel/upload", method = RequestMethod.POST)
-    public String uploadMap(@RequestParam(value = "file") MultipartFile file) throws TimeoutException, SteamCondenserException {
+    public Callable<String> uploadMap(@RequestParam(value = "file") MultipartFile file, @RequestParam String directory) throws TimeoutException,
+        SteamCondenserException, IOException {
         if (!file.isEmpty()) {
-            System.out.println(file.getOriginalFilename());
+            Path target = Paths.get(directory + file.getOriginalFilename());
+            Path outFile = Files.createFile(target);
+            FileCopyUtils.copy(file.getBytes(), outFile.toFile());
         }
-        return "redirect:/admin/changelevel";
+        return new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                return "redirect:/admin/changelevel";
+            }
+        };
     }
 
     private Collection<String> availableMapsWithPreviewPicture(Collection<String> availableMaps) {
