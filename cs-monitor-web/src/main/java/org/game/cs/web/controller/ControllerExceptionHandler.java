@@ -40,7 +40,7 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(value = { IllegalArgumentException.class })
 	public String handleExceptions3(Exception exception,
 			HttpServletRequest request) {
-		addErrorMessageToRequest(request, "Wrong address");
+		addErrorMessageToRequest(request, exception.getMessage());
 		addServersToReqest(request);
 		return "errors";
 	}

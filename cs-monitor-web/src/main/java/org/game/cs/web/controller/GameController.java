@@ -19,6 +19,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.HtmlUtils;
 
 @Controller
@@ -70,6 +72,15 @@ public class GameController {
         model.addAttribute("mapString", constructMapString((List<String>) htmlEscape(availableMaps)));
         model.addAttribute("maps", availableMapsWithPreviewPicture(availableMaps));
         return "changelevel";
+    }
+
+    @CheckUserState
+    @RequestMapping(value = "/changelevel/upload", method = RequestMethod.POST)
+    @ResponseBody
+    public void uploadMap(@RequestParam(value = "file") MultipartFile file) throws TimeoutException, SteamCondenserException {
+        if (!file.isEmpty()) {
+            System.out.println(file.getOriginalFilename());
+        }
     }
 
     private Collection<String> availableMapsWithPreviewPicture(Collection<String> availableMaps) {

@@ -12,6 +12,15 @@
 			<spring:message code="text.change" />
 		</button>
 	</form>
+	
+	<hr/>
+	
+	<form method="post" action="<c:url value="/admin/changelevel/upload"/>"
+        enctype="multipart/form-data">
+        <input type="file" name="file" /> <input class="btn" type="submit" />
+    </form>
+    
+    <hr/>
 
 	<div id="myCarousel" class="carousel slide" style="width:600px">
 		<!-- Carousel items -->
