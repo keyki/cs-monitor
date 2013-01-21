@@ -55,7 +55,7 @@ body {
 							<c:set var="username">
 								<security:authentication property="principal.username" />
 							</c:set>
-							<li><a href='#'><spring:message code="text.loggedin" />${username} </a></li>
+							<li><a href='#'><spring:message code="text.loggedin" /> ${username} </a></li>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle"	data-toggle="dropdown"><spring:message code="text.connect" /><b class="caret"></b></a>
 								<ul class="dropdown-menu transparent-background-to-connection">
