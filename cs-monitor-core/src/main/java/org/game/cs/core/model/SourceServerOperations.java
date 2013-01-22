@@ -35,6 +35,11 @@ public class SourceServerOperations {
         return sourceServer;
     }
 
+    public void reconnect(String user) throws SteamCondenserException, TimeoutException {
+        SourceServer serverByUser = getServerByUser(user);
+        connect(user, serverByUser.getInetSocketAddress(), serverByUser.getRcon_password());
+    }
+
     public Map<ServerInfo, String> getBasicInformation(String user) throws SteamCondenserException, TimeoutException {
         SourceServer server = getServerByUser(user);
         update(server);
@@ -119,8 +124,8 @@ public class SourceServerOperations {
         return getServerByUser(user).getInetSocketAddress();
     }
 
-	public void sendChatMessage(String user, String message) throws TimeoutException, SteamCondenserException {
-		executeCommand(user, RconCommand.SAY.getValue() + message);
-	}
+    public void sendChatMessage(String user, String message) throws TimeoutException, SteamCondenserException {
+        executeCommand(user, RconCommand.SAY.getValue() + message);
+    }
 
 }

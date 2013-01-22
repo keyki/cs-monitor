@@ -20,8 +20,8 @@ public class ControllerExceptionHandler {
     private GlobalModelAttributes modelAttributes;
 
     @ExceptionHandler(value = {SteamCondenserException.class})
-    public String handleExceptions1(Exception exception, HttpServletRequest request) throws IOException {
-        addErrorMessageToRequest(request, exception.getMessage() + "\nPlease connect again.");
+    public String handleSteamCondenserException(Exception exception, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        addErrorMessageToRequest(request, exception.getMessage() + " Please connect again.");
         addServersToReqest(request);
         exception.printStackTrace();
         return "errors";
