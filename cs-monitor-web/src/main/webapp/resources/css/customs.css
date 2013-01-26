@@ -1,3 +1,17 @@
+.brand {
+	padding-right: 0 !important;
+	padding-left: 0 !important;
+	margin-left: 20px !important;
+	float: right !important;
+	font-weight: bold !important;
+	color: #000 !important;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, .1), 0 0 30px
+		rgba(255, 255, 255, .125) !important;
+	-webkit-transition: all .2s linear !important;
+	-moz-transition: all .2s linear !important;
+	transition: all .2s linear !important;
+}
+
 .transparent {
 	width: 100%;
 	padding-top: 10px;
@@ -14,27 +28,28 @@
 	box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
 }
 
-.transparent-background{
+.transparent-background {
 	background-color: rgb(211, 211, 211) !important;
 	background-color: rgba(211, 211, 211, 0.6) !important;
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,
 		endColorstr=#99000000 ) !important;
 	/* For IE 8*/
 	-ms-filter:
-		"progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)" !important;
+		"progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)"
+		!important;
 	-webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, .1) !important;
 	box-shadow: 0 1px 0 rgba(0, 0, 0, .1) !important;
 }
 
-
-.transparent-background-to-connection{
+.transparent-background-to-connection {
 	background-color: rgb(119, 119, 119) !important;
 	background-color: rgba(119, 119, 119, 0.95) !important;
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,
 		endColorstr=#99000000 ) !important;
 	/* For IE 8*/
 	-ms-filter:
-		"progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)" !important;
+		"progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)"
+		!important;
 	-webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, .1) !important;
 	box-shadow: 0 1px 0 rgba(0, 0, 0, .1) !important;
 }
@@ -47,8 +62,8 @@ input:focus {
 		rgba(82, 168, 236, 0.6) !important;
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px
 		rgba(82, 168, 236, 0.6) !important;
-	outline: 0 !important; 
-	outline: thin dotted \9 !important;
+	outline: 0 !important;
+	outline: thin dotted \9  !important;
 	/* IE6-8 */
 }
 
@@ -56,18 +71,18 @@ input:focus {
 	color: white !important;
 }
 
-.nav-tabs > .active > a
-{
+.nav-tabs>.active>a {
 	background-color: rgb(211, 211, 211);
 	background-color: rgba(211, 211, 211, 0.4) !important;
-	ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+	ms-filter:
+		"progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
 	-webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
 	box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
 	border: 1px;
 	border-color: rgba(211, 211, 211, 0.4) !important;
 }
 
-.menulinks:hover{
+.menulinks:hover {
 	color: #000000 !important;
 	background-color: #e9e9e9 !important;
 	background-image: -moz-linear-gradient(top, #eeeeee, #e1e1e1) !important;
@@ -84,9 +99,8 @@ input:focus {
 }
 
 .menulinks:active,.menulinks:visited,.menulinks:link,.dropdown-menu:hover>li>form>a:hover
-{
+	{
 	text-decoration: none !important;
-	
 }
 
 .nav-tabs {
@@ -100,10 +114,9 @@ input:focus {
 	text-align: center;
 }
 
-
-.dropdown-menu > li > a:hover > [class^="icon-"]{
- 	background-image: url("../img/glyphicons-halflings.png") !important;
- }
+.dropdown-menu>li>a:hover>[class^="icon-"] {
+	background-image: url("../img/glyphicons-halflings.png") !important;
+}
 
 .dropdown-menu li>a:hover,.dropdown-menu li>a:focus,.dropdown-submenu:hover>a
 	{
