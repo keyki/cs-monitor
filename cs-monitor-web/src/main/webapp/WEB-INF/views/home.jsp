@@ -27,12 +27,12 @@
 	</c:otherwise>
 </c:choose>
 <style>
-body {
+body 
+{
 	background-image: ${background};
 	background-size:cover !important;
 	padding-top:100px !important;
-	}
- 
+}
 </style>
 
 <head>
@@ -40,6 +40,7 @@ body {
 <title>Home</title>
 </head>
 <body data-spy="scroll" data-target=".bs-docs-sidebar" id="homebody" data-twttr-rendered="true">
+	
 	<tiles:insertAttribute name="menu" />
 	<div class="container">
 		<div class="row">
