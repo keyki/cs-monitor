@@ -12,6 +12,11 @@
 	transition: all .2s linear !important;
 }
 
+.nav .dropdown-toggle .caret {
+	border-top-color: #999999 !important;
+	border-bottom-color: #999999 !important;
+}
+
 .transparent {
 	width: 100%;
 	padding-top: 10px;
@@ -134,4 +139,8 @@ input:focus {
 	background-repeat: repeat-x !important;
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffeeeeee',
 		endColorstr='#ffe1e1e1', GradientType=0 ) !important;
+}
+
+.brand>[class^="icon-"]:hover, .brand>[class^="icon-"]:focus{
+	background-image: url("../img/glyphicons-halflings-white.png") !important;
 }
