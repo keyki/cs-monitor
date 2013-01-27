@@ -23,8 +23,66 @@
 						<c:set var="username">
 							<security:authentication property="principal.username" />
 						</c:set>
-						<li><a href='#'><spring:message code="text.loggedin" />${username}
-						</a></li>
+						<li class="drop down">
+							<a href='#'  class="dropdown-toggle" data-toggle="dropdown">
+								<spring:message code="text.loggedin" />${username}
+								<b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a	href='<c:url value="/j_spring_security_logout"/>'>
+										<i class="icon-remove" ></i>
+										<spring:message code="text.logout" />
+									</a>
+								</li>
+							</ul>
+						</li>
+						<c:if test="${fn:length(servers) > 0}">
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#"> 
+									<spring:message code="text.servers" /> 
+									<b class="caret"></b>
+								</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+									<c:forEach items="${servers}" var="server">
+										<li class="dropdown-submenu">
+											<a tabindex="-1" href="#">${server.address}</a>
+											<ul class="dropdown-menu">
+												<li>
+													<form action="<c:url value='/admin/connect'/>" method="post" style="margin-bottom: 0px;">
+														<a tabindex="-1" class="menulinks" href="#" onclick="$(this).closest('form').submit(); return false;">
+															<i class="icon-play"></i> 
+															<spring:message code="text.connect" />
+														</a> 
+														<input type="hidden" name="ip" value="${server.address}">
+														<input type="hidden" name="port" value="${server.port}">
+														<input type="hidden" name="rcon" value="${server.password}">
+													</form>
+												</li>
+												<li>
+													<form action="<c:url value='/admin/remove'/>" method="post"	style="margin-bottom: 0px">
+														<a class="menulinks" tabindex="-1" href="#" 	onclick="$(this).closest('form').submit(); return false;">
+															<i class="icon-remove"></i> 
+															<spring:message code="text.remove" />
+														</a> 
+														<input type="hidden" name="ip" value="${server.address}">
+													</form>
+												</li>
+											</ul>
+										</li>
+									</c:forEach>
+								</ul></li>
+						</c:if >
+						<tiles:insertAttribute name="header" />
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</security:authorize>
+
+
+
 <!-- 						<li class="dropdown"><a href="#" class="dropdown-toggle" -->
 <%-- 							data-toggle="dropdown"><spring:message code="text.connect" /><b --%>
 <!-- 								class="caret"></b></a> -->
@@ -73,51 +131,3 @@
 <!-- 								</li> -->
 <!-- 							</ul> -->
 <!-- 						</li> -->
-						<c:if test="${fn:length(servers) > 0}">
-							<li class="dropdown"><a class="dropdown-toggle"
-								data-toggle="dropdown" href="#"> <spring:message
-										code="text.servers" /> <b class="caret"></b>
-							</a>
-								<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-									<c:forEach items="${servers}" var="server">
-										<li class="dropdown-submenu"><a tabindex="-1" href="#">${server.address}</a>
-											<ul class="dropdown-menu">
-												<li>
-													<form action="<c:url value='/admin/connect'/>"
-														method="post" style="margin-bottom: 0px;">
-
-														<a tabindex="-1" class="menulinks" href="#"
-															onclick="$(this).closest('form').submit(); return false;">
-															<i class="icon-play"></i> <spring:message
-																code="text.connect" />
-														</a> <input type="hidden" name="ip" value="${server.address}">
-														<input type="hidden" name="port" value="${server.port}">
-														<input type="hidden" name="rcon"
-															value="${server.password}">
-													</form>
-												</li>
-												<li>
-													<form action="<c:url value='/admin/remove'/>" method="post"
-														style="margin-bottom: 0px">
-														<a class="menulinks" tabindex="-1" href="#"
-															onclick="$(this).closest('form').submit(); return false;">
-															<i class="icon-remove"></i> <spring:message
-																code="text.remove" />
-														</a> <input type="hidden" name="ip" value="${server.address}">
-													</form>
-												</li>
-											</ul></li>
-									</c:forEach>
-								</ul></li>
-						</c:if >
-						<tiles:insertAttribute name="header" />
-						<li style="padding-right: 50px"><a
-							href='<c:url value="/j_spring_security_logout"/>'><spring:message
-									code="text.logout" /><i class="icon-remove"
-								style="margin-left: 5px; margin-top: 3px;"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-</security:authorize>
