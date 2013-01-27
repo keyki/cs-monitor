@@ -28,14 +28,12 @@
 	</c:otherwise>
 </c:choose>
 <style>
-body {
+body 
+{
 	background-image: ${background};
 	background-size:cover !important;
 	padding-top:100px !important;
-	}
-	
-
- 
+} 
 </style>
 
 <head>
