@@ -28,7 +28,8 @@
 					</div>
 					<div class="control-group">
 						<div class="controls">
-							<label class="checkbox"> <input type="checkbox" name="_spring_security_remember_me">
+							<label class="checkbox"> 
+								<input type="checkbox" name="_spring_security_remember_me">
 								<spring:message code="text.rememberme" />
 							</label>
 							<button type="submit" class="btn"><spring:message code="text.login"/></button>
