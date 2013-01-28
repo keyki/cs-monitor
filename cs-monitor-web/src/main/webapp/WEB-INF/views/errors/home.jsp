@@ -44,7 +44,6 @@ body {
 </head>
 <body>
 	<tiles:insertAttribute name="content" />
-	
 </body>
 <script src="${resources}js/bootstrap-transition.js"></script>
 <script src="${resources}js/bootstrap-alert.js"></script>
