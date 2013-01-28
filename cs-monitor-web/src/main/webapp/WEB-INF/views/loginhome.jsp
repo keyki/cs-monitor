@@ -41,13 +41,10 @@ body
 <title>Home</title>
 </head>
 <body data-spy="scroll" data-target=".bs-docs-sidebar" id="homebody" data-twttr-rendered="true">
-
 	<tiles:insertAttribute name="menu" />
-
 	<div class="container" >
 		<tiles:insertAttribute name="content" />
 	</div>
-	
 </body>
 <script src="${resources}js/bootstrap-transition.js"></script>
 <script src="${resources}js/bootstrap-alert.js"></script>
