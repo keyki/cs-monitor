@@ -20,7 +20,6 @@
 		<put-attribute name="header" />
 		<put-attribute name="content" value="/WEB-INF/views/main.jsp" />
 		<put-attribute name="menu" value="menu" />
-<!-- 		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp" /> -->
 	</definition>
 
 	<definition name="default" template="/WEB-INF/views/home.jsp">
@@ -28,6 +27,11 @@
 		<put-attribute name="connectionform" value="/WEB-INF/views/connectionform.jsp" />
 		<put-attribute name="menu" value="menu" />
 	</definition>
+	
+	<definition name="access_denied" template="/WEB-INF/views/errors/accessdenied.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/denied.jsp" />
+	</definition>
+	
 
 	<definition name="default_error" template="/WEB-INF/views/errors/home.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/main.jsp" />
@@ -43,18 +47,14 @@
 		<put-attribute name="content" value="/WEB-INF/views/errors.jsp" />
 	</definition>
 
-	<definition name="denied" extends="logindefault">
+	<definition name="denied" extends="access_denied">
 		<put-attribute name="content" value="/WEB-INF/views/denied.jsp" />
 	</definition>
-
-
 
 	<!-- ERROR PAGE -->
 	<definition name="404page" extends="default_error">
 		<put-attribute name="content" value="/WEB-INF/views/404.jsp" />
 	</definition>
-
-
 
 	<!-- ADMIN VIEWS -->
 	<definition name="control" extends="default">
