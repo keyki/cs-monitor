@@ -5,7 +5,6 @@
 	prefix="security"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-
 <div id="access-denied">
 	<h1 style="padding-top: 30px;">
 		<a href="<c:url value='/'/>">Access denied</a>
