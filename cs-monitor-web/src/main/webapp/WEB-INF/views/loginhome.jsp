@@ -8,14 +8,7 @@
 <c:url value="/" var="app" />
 
 <html>
-<link href="${resources}css/jquery.selectBoxIt.css" rel="stylesheet">
-<link href="${resources}css/docs.css" rel="stylesheet">
-
-<link href="${resources}css/darkstrap.css" rel="stylesheet">
-<link href="${resources}css/customs.css" rel="stylesheet">
-<link href="${resources}css/bootstrap.css" rel="stylesheet">
-<link href="${resources}css/bootstrap-responsive.css" rel="stylesheet">
-<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<tiles:insertAttribute name="before" />
 
 <c:choose>
 	<c:when test="${empty error}">
@@ -46,23 +39,5 @@ body
 		<tiles:insertAttribute name="content" />
 	</div>
 </body>
-<script src="${resources}js/bootstrap-transition.js"></script>
-<script src="${resources}js/bootstrap-alert.js"></script>
-<script src="${resources}js/bootstrap-modal.js"></script>
-<script src="${resources}js/bootstrap-dropdown.js"></script>
-<script src="${resources}js/bootstrap-scrollspy.js"></script>
-<script src="${resources}js/bootstrap-tab.js"></script>
-<script src="${resources}js/bootstrap-tooltip.js"></script>
-<script src="${resources}js/bootstrap-popover.js"></script>
-<script src="${resources}js/bootstrap-button.js"></script>
-<script src="${resources}js/bootstrap-collapse.js"></script>
-<script src="${resources}js/bootstrap-carousel.js"></script>
-<script src="${resources}js/bootstrap-typeahead.js"></script>
-
-<script src="${resources}js/jquery-ui-1.9.2.custom.js"></script>
-<script src="${resources}js/jquery.slimscroll.js"></script>
-<script src="${resources}js/jquery.selectboxit.js"></script>
-<script src="${resources}js/hover.js"></script>
-<script src="${resources}js/parallax.js"></script>
-<script src="${resources}js/home.js"></script>
+<tiles:insertAttribute name="after" />
 </html>
