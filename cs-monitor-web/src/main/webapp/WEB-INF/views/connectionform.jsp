@@ -11,7 +11,7 @@
 	<form action="<c:url value='/admin/connect' />" method="post"
 		class="form-horizontal connection">
 		<div class="modal-header">
-			<h3>Connection</h3>
+			<h3><spring:message code="text.connection.header"/></h3>
 		</div>
 		<div class="modal-body">
 			<div class="control-group">
