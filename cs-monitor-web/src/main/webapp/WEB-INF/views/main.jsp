@@ -11,7 +11,7 @@
 <security:authorize access="isAuthenticated()">
 	<c:if test="${fn:length(servers) > 0}">
 		<div class="well">
-			<table class="table" style="margin-bottom: 0px;">
+			<table class="table table-hover" id="connection-table" style="margin-bottom: 0px;">
             	<thead>
               		<tr>
                  		<th>Name</th>
@@ -28,16 +28,16 @@
               			<td>
 	              			<form action="<c:url value='/admin/connect'/>" method="post" class="btn"  onclick="$(this).closest('form').submit(); return false;">
 								<i class="icon-play"></i> 
-								<spring:message code="text.connect" />
+<%-- 								<spring:message code="text.connect" /> --%>
 								<input type="hidden" name="ip" value="${server.address}">
 								<input type="hidden" name="port" value="${server.port}">
 								<input type="hidden" name="rcon" value="${server.password}">
 							</form>
               			</td>
               			<td>
-              				<form action="<c:url value='/admin/remove'/>" method="post"	class="btn" onclick="$(this).closest('form').submit(); return false;">
+              				<form action="<c:url value='/admin/remove'/>" method="post"	class="btn btn-danger" onclick="$(this).closest('form').submit(); return false;">
 								<i class="icon-remove"></i> 
-								<spring:message code="text.remove" />
+<%-- 								<spring:message code="text.remove" /> --%>
 								<input type="hidden" name="ip" value="${server.address}">
 							</form>
               			</td>
