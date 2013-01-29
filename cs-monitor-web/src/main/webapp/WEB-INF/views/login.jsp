@@ -12,28 +12,33 @@
 						code="text.register" /></b></a></li>
 		</ul>
 		<div class="tab-content transparent">
-			<div class="tab-pane active" id="tab1" style="width:50%;margin-right:25%">
-				<form class="form-horizontal" action="<c:url value='/j_spring_security_check' />" method="post">
-					<div class="control-group">
-						<label class="control-label" for="j_username"><spring:message code="text.username"/></label>
-						<div class="controls">
-							<input type="text" name="j_username" required>
+			<div class="tab-pane active" id="tab1" >
+				<form class="form-horizontal" action="<c:url value='/j_spring_security_check' />" method="post" id="login-form">
+						<div class="control-group">
+							<label class="control-label" for="j_username"><spring:message code="text.username"/></label>
+							<div class="controls">
+								<input type="text" name="j_username" required>
+							</div>
 						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label" for="j_password"><spring:message code="text.password"/></label>
-						<div class="controls">
-							<input type="password" name="j_password" required>
+						<div class="control-group">
+							<label class="control-label" for="j_password"><spring:message code="text.password"/></label>
+							<div class="controls">
+								<input type="password" name="j_password" required>
+							</div>
 						</div>
-					</div>
-					<div class="control-group">
-						<div class="controls">
-							<label class="checkbox"> 
-								<input type="checkbox" name="_spring_security_remember_me">
-								<spring:message code="text.rememberme" />
-							</label>
-							<button type="submit" class="btn"><spring:message code="text.login"/></button>
+						<div class="control-group">
+							<div class="controls">
+								<label class="checkbox"> 
+									<input type="checkbox" name="_spring_security_remember_me">
+									<spring:message code="text.rememberme" />
+								</label>
+								
+							</div>
 						</div>
+					
+					<div class="modal-footer">
+						<button type="submit" class="btn"><spring:message code="text.login"/></button>
+						
 					</div>
 				</form>
 			</div>
