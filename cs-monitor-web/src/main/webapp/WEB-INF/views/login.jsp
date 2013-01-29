@@ -43,7 +43,7 @@
 				</form>
 			</div>
 			<div class="tab-pane" id="tab2">
-				<p>Currently not available.</p>
+				<p><spring:message code="text.not.available"/></p>
 			</div>
 		</div>
 	</div>
