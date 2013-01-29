@@ -24,8 +24,8 @@
 							<security:authentication property="principal.username" />
 						</c:set>
 						<li class="drop down">
-							<a href='#'  class="dropdown-toggle" data-toggle="dropdown">
-								<spring:message code="text.loggedin" />${username}
+							<a href='#'  class="dropdown-toggle userlink" data-toggle="dropdown">
+								<i class="icon-user"></i><spring:message code="text.loggedin" />${username}
 								<b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
