@@ -7,6 +7,6 @@
 
 <div id="access-denied">
 	<h1 style="padding-top: 30px;">
-		<a href="<c:url value='/'/>">Access denied</a>
+		<a href="<c:url value='/'/>"><spring:message code="text.access.denied"/></a>
 	</h1>
 </div>
