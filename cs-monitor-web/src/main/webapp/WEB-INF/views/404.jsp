@@ -3,7 +3,7 @@
 <c:url value="/resources/" var="resources" />
 
 <style>
-<!--
+
 .first {
 	z-index: 109;
 	top: 0px;
@@ -37,7 +37,7 @@ img {
 	letter-spacing: -1px;
 	letter-spacing: -1px !important;
 }
--->
+
 </style>
 
 <img src="${resources}img/shatter1.png" class="first">
