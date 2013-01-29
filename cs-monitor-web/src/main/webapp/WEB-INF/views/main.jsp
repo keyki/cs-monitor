@@ -37,7 +37,6 @@
               			<td>
               				<form action="<c:url value='/admin/remove'/>" method="post"	class="btn btn-danger" onclick="$(this).closest('form').submit(); return false;">
 								<i class="icon-remove"></i> 
-<%-- 								<spring:message code="text.remove" /> --%>
 								<input type="hidden" name="ip" value="${server.address}">
 							</form>
               			</td>
