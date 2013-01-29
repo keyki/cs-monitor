@@ -1,8 +1,12 @@
-.well{
-	-moz-box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset !important;
-	-webkit-box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset !important;
-	-o-box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset !important;
-	box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset !important;
+.well {
+	-moz-box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0
+		1px 7px 0px inset !important;
+	-webkit-box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8)
+		0 1px 7px 0px inset !important;
+	-o-box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0
+		1px 7px 0px inset !important;
+	box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px
+		7px 0px inset !important;
 	background: #202020 !important;
 	background-color: rgba(0, 0, 0, 0.3) !important;
 	border: 1px solid rgba(0, 0, 0, 0.05) !important;
@@ -46,21 +50,6 @@
 	-moz-border-radius: 4px;
 	color: #333333;
 	border-radius: 0px 0px 6px 6px !important;
-
-	/* 	width: 100%; */
-	/* 	padding-top: 10px; */
-	/* 	border-radius: 0px 0px 10px 10px; */
-	/* 	-moz-border-radius: 0px 0px 10px 10px; Old Firefox */
-	/* 	background-color: rgb(211, 211, 211); */
-	/* 	background-color: rgba(211, 211, 211, 0.4); */
-	/* 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, */
-	/* 		endColorstr=#99000000 ); */
-	/* 	/* For IE 8*/
-	*/
-	/* 	-ms-filter: */
-	/* 		"progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)"; */
-	/* 	-webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, .1); */
-	/* 	box-shadow: 0 1px 0 rgba(0, 0, 0, .1); */
 }
 
 .transparent-background {
@@ -102,19 +91,8 @@ input:focus {
 	/* IE6-8 */
 }
 
-.nav-tabs>li>a,.nav-tabs>li>a:hover,.nav-tabs>li>a:focus {
-	color: white !important;
-}
-
-.nav-tabs>.active>a {
-	background-color: rgb(211, 211, 211);
-	background-color: rgba(211, 211, 211, 0.4) !important;
-	ms-filter:
-		"progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
-	-webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
-	box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
-	border: 1px;
-	border-color: rgba(211, 211, 211, 0.4) !important;
+.nav-tabs>li>a , .nav-tabs>li>a:hover{
+	color: #fff !important;
 }
 
 .menulinks:hover {
@@ -133,8 +111,7 @@ input:focus {
 		endColorstr='#ffe1e1e1', GradientType=0 ) !important;
 }
 
-.menulinks:active,.menulinks:visited,.menulinks:link,.dropdown-menu:hover>li>form>a:hover
-	{
+.menulinks:active,.menulinks:visited,.menulinks:link,.dropdown-menu:hover>li>form>a:hover{
 	text-decoration: none !important;
 }
 
@@ -153,8 +130,7 @@ input:focus {
 	background-image: url("../img/glyphicons-halflings.png") !important;
 }
 
-.dropdown-menu li>a:hover,.dropdown-menu li>a:focus,.dropdown-submenu:hover>a
-	{
+.dropdown-menu li>a:hover,.dropdown-menu li>a:focus,.dropdown-submenu:hover>a{
 	text-decoration: none !important;
 	color: #000000 !important;
 	background-color: #e9e9e9 !important;
@@ -237,4 +213,9 @@ input:focus {
 	-moz-border-radius: 4px;
 	color: #333333;
 	border-radius: 6px 6px 6px 6px !important;
+}
+
+/* TABLE */
+#connection-table>tbody>tr:hover td {
+	background-color: rgba(75, 73, 73, 0.81) !important;
 }
