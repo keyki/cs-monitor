@@ -29,15 +29,11 @@ img {
 }
 
 .gratz {
-	font: 52px/1.964 'Century Gothic', 'Lucida Sans Unicode',
-		'Lucida Grande', 'Lucida Sans', Verdana, Arial, Helvetica, sans-serif;
 	letter-spacing: -1px;
 	font-weight: bold !important;
 }
 
 .broke {
-	font: 32px/1.964 'Century Gothic', 'Lucida Sans Unicode',
-		'Lucida Grande', 'Lucida Sans', Verdana, Arial, Helvetica, sans-serif;
 	letter-spacing: -1px;
 	letter-spacing: -1px !important;
 }
@@ -45,10 +41,16 @@ img {
 </style>
 
 <img src="${resources}img/shatter1.png" class="first">
-<div class="error_text">
-	<strong class="gratz"><b><spring:message
-				code="404.page.error.grat" /></b></strong> <strong class="broke"> <spring:message
-			code="404.page.error.broke" />
-	</strong>
+<div id="access-denied" class="error_text" >
+	<h1>
+		<a href="<c:url value='/'/>">
+			<spring:message code="404.page.error.grat" />
+		</a>
+	</h1>
+	<h1>
+		<a href="<c:url value='/'/>">
+			<spring:message code="404.page.error.broke" />
+		</a>
+	</h1>
 </div>
 <img src="${resources}img/shatter2.gif" class="second">
