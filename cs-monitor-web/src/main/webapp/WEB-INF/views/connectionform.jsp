@@ -7,32 +7,36 @@
 <c:url value="/resources/" var="resources" />
 <c:url value="/" var="app" />
 
+
 <security:authorize access="isAuthenticated()">
-	<form action="<c:url value='/admin/connect' />" method="post"
-		class="form-horizontal connection">
-		<div class="modal-header">
-			<h3><spring:message code="text.connection.header"/></h3>
-		</div>
-		<div class="modal-body">
-			<div class="control-group">
-				<input type="text" placeholder="<spring:message code="text.ip.or.host"/>" name="ip"	required />
+	<div id="connection-div"  style="left: -320px;position: absolute;">
+		<form action="<c:url value='/admin/connect' />" method="post"
+			class="form-horizontal connection" style="width:300px">
+			<div class="modal-header">
+				<h3><spring:message code="text.connection.header"/></h3>
 			</div>
-			<div class="control-group">
-				<input type="text" placeholder="<spring:message code="text.port"/>"		name="port" required value="27015" />
+			<div class="modal-body">
+				<div class="control-group">
+					<input type="text" placeholder="<spring:message code="text.ip.or.host"/>" name="ip"	required />
+				</div>
+				<div class="control-group">
+					<input type="text" placeholder="<spring:message code="text.port"/>"		name="port" required value="27015" />
+				</div>
+				<div class="control-group">
+					<input type="password" placeholder="<spring:message code="text.rcon"/>" name="rcon" />
+				</div>
+				<div class="control-group" id="modal-checkbox-id">
+					<label class="checkbox"> 
+						<input type="checkbox" name="register"> <spring:message code="text.save" />
+					</label>
+				</div>
 			</div>
-			<div class="control-group">
-				<input type="password" placeholder="<spring:message code="text.rcon"/>" name="rcon" />
+			<div class="modal-footer">
+				<button type="submit" class="btn">
+					<spring:message code="text.connect" />
+				</button>
 			</div>
-			<div class="control-group" id="modal-checkbox-id">
-				<label class="checkbox"> 
-					<input type="checkbox" name="register"> <spring:message code="text.save" />
-				</label>
-			</div>
-		</div>
-		<div class="modal-footer">
-			<button type="submit" class="btn">
-				<spring:message code="text.connect" />
-			</button>
-		</div>
-	</form>
+		</form>
+	</div>
+
 </security:authorize>
