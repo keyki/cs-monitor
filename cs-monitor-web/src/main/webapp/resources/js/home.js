@@ -13,8 +13,21 @@ function() {
 	                                                $(window).scrollLeft()) + "px");
 	    return this;
 	};
-	
 	$(".center").center();
-
+	
+	
+	 $('#slideleft').click(function() {
+		    var $lefty = $("#connection-div");
+		    if(parseInt($lefty.css('left'),10)<20){
+			    $lefty.animate({
+			      left: parseInt($lefty.css('left'),10) == 20 ? -$lefty.outerWidth() : 20 
+			    });
+		   }else if(parseInt($lefty.css('left'),10)>0){
+			    $lefty.animate({
+			      left: parseInt($lefty.css('left'),-10) == -350 ? $lefty.outerWidth() :-350
+			   });
+		   }
+	 });
+	
 });
 
