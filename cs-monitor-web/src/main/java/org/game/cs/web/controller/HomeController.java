@@ -20,6 +20,8 @@ public class HomeController {
     public String showLoginPage() {
         return "login";
     }
+    
+   
 
     @RequestMapping("/denied")
     public String showDeniedPage() {
@@ -31,8 +33,7 @@ public class HomeController {
         userService.createMasterUsers();
         return "redirect:/";
     }
-    
-    
+        
     @RequestMapping(value="/errors/404")
     public String handle404() {
         return "404page";
