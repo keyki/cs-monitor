@@ -33,7 +33,7 @@ body
 </head>
 <body data-spy="scroll" data-target=".bs-docs-sidebar" id="homebody" data-twttr-rendered="true">
 	<button type="button" id="slideleft" class="btn  btn-large btn-inverse"  style="position: fixed;top: 50;left: -10;">
-		<i class="icon-chevron-right" style="padding-top: 5px;"></i>
+		<i class="icon-chevron-left" style="padding-top: 5px;"></i>
 	</button>	
 	<tiles:insertAttribute name="menu" />
 	<div class="container-fluid">
