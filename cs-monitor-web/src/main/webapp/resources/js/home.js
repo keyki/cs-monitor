@@ -18,18 +18,30 @@ function() {
 	
 	 $('#slideleft').click(function() {
 		    var $lefty = $("#connection-div");
-		    if(parseInt($lefty.css('left'),10)<20){
+		    if(parseInt($lefty.css('left'),10)<0){
 			    $lefty.animate({
-			      left: parseInt($lefty.css('left'),10) == 20 ? -$lefty.outerWidth() : 20 
+			      left: parseInt($lefty.css('left'),10) == GetWidth()*0.03 ? -$lefty.outerWidth() : GetWidth()*0.03 
 			    });
 			    $('#slideleft>i').removeClass('icon-chevron-right').addClass('icon-chevron-left');
+			   
+			    if(GetWidth()*0.2>240){
+			    	$('#connectionform').width(GetWidth()*0.2);
+			    }else{
+			    	 $('#connectionform').width(240);
+			    }
 		   }else if(parseInt($lefty.css('left'),10)>0){
 			    $lefty.animate({
-			      left: parseInt($lefty.css('left'),-10) == -350 ? $lefty.outerWidth() :-350
+			      left: parseInt($lefty.css('left'),-10) == -GetWidth()*0.5 ? $lefty.outerWidth() :-GetWidth()*0.5
 			   });
 			   $('#slideleft>i').removeClass('icon-chevron-left').addClass('icon-chevron-right');
 		   }
 	 });
+	 
+	 
+	 
+	 function GetWidth(){
+		 return $(document).width();
+	  }
 	
 });
 
