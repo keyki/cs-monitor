@@ -23,7 +23,7 @@
 		<put-attribute name="before" value="/WEB-INF/views/defines/beforedefines.jsp"/>
 		<put-attribute name="after" value="/WEB-INF/views/defines/afterdefines.jsp"/>
 	</definition>
-
+	
 	<definition name="default" template="/WEB-INF/views/home.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/main.jsp" />
 		<put-attribute name="connectionform" value="/WEB-INF/views/connectionform.jsp" />
@@ -32,6 +32,7 @@
 		<put-attribute name="after" value="/WEB-INF/views/defines/afterdefines.jsp"/>
 	</definition>
 	
+
 	<definition name="access_denied" template="/WEB-INF/views/errors/accessdenied.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/denied.jsp" />
 		<put-attribute name="before" value="/WEB-INF/views/defines/beforedefines.jsp"/>
