@@ -41,7 +41,7 @@ body
 		<div class="span3"  >
 			<tiles:insertAttribute name="connectionform" />
 		</div>
-		<div class="span8 offset1">
+		<div class="span8">
 			<tiles:insertAttribute name="content" />
 		</div>
 		</div>
