@@ -9,9 +9,9 @@
 
 
 <security:authorize access="isAuthenticated()">
-	<div id="connection-div"  style="left: 20px;position: absolute;">
+	<div id="connection-div"  style="left: 3%;position: absolute;">
 		<form action="<c:url value='/admin/connect' />" method="post"
-			class="form-horizontal connection" style="width:300px">
+			class="form-horizontal connection" id="connectionform" style="width:100%">
 			<div class="modal-header">
 				<h3><spring:message code="text.connection.header"/></h3>
 			</div>
