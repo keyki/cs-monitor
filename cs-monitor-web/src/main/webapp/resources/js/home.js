@@ -22,10 +22,12 @@ function() {
 			    $lefty.animate({
 			      left: parseInt($lefty.css('left'),10) == 20 ? -$lefty.outerWidth() : 20 
 			    });
+			    $('#slideleft>i').removeClass('icon-chevron-right').addClass('icon-chevron-left');
 		   }else if(parseInt($lefty.css('left'),10)>0){
 			    $lefty.animate({
 			      left: parseInt($lefty.css('left'),-10) == -350 ? $lefty.outerWidth() :-350
 			   });
+			   $('#slideleft>i').removeClass('icon-chevron-left').addClass('icon-chevron-right');
 		   }
 	 });
 	
