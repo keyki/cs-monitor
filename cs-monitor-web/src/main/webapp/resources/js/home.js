@@ -19,14 +19,21 @@ function() {
 	
 	
 	
-	function Scroller()={
-			
-		
-		
-		
-		
+	function Scroller(){
+		this.id="#conn-div";
+		this.modifyClass="left";
+		this.modifyIconRihtClass='icon-chevron-right';
+		this.modifyIconLeftClass='icon-chevron-left';
+		this.animateSpeed="1000";
+		this.iconSelector="#slideleft>i";
+		this.nextDiv="#content-div";
+		this.formSelector='#connectionform';
+		this.offset="offset3";
+		this.pressedSize="70%";
+		this.originalSize="90%";
 	}
 	
+
 	
 	Scroller.prototype.pullLeft=function(){
 		
