@@ -16,7 +16,7 @@ function() {
 	function Scroller(){
 		this.id="#conn-div";
 		this.modifyClass="left";
-		this.modifyIconRihtClass='icon-chevron-right';
+		this.modifyIconRightClass='icon-chevron-right';
 		this.modifyIconLeftClass='icon-chevron-left';
 		this.animateSpeed="1000";
 		this.iconSelector="#slideleft>i";
@@ -39,30 +39,29 @@ function() {
 	};
 	
 	Scroller.prototype.pullLeft=function(){
-		 this.$lefty.animate({"left": parseInt( this.$lefty.css(this.modifyClass),10) == GetWidth()*0.03 ? -this.$lefty.outerWidth() : GetWidth()*0.03},"1000");
-		 $('#slideleft>i').removeClass('icon-chevron-right').addClass('icon-chevron-left');
+		 this.$lefty.animate({left: parseInt( this.$lefty.css(this.modifyClass),10) == GetWidth()*0.03 ? -this.$lefty.outerWidth() : GetWidth()*0.03},this.animateSpeed);
+		 $(this.iconSelector).removeClass(this.modifyIconRightClass).addClass(this.modifyIconLeftClass);
 		 if(GetWidth()*0.2>240){
-		    	$('#connectionform').width('100%');
-		    	$('#content-div').width('70%');
-		    	$('#content-div').addClass('offset3');
+		    	$(this.formSelector).width('100%');
+		    	$(this.nextDiv).width(this.pressedSize);
+		    	$(this.nextDiv).addClass(this.offset);
 		 }else{
-		    	 $('#connectionform').width(240);
-		    	 $('#content-div').width('70%');
-		    	 $('#content-div').addClass('offset3');
+		    	 $(this.formSelector).width(240);
+		    	 $(this.nextDiv).width(this.pressedSize);
+		    	 $(this.nextDiv).addClass(this.offset);
 		 }
 	};
 	
 	Scroller.prototype.pullRight=function(){
-		this.$lefty.animate({left: parseInt(this.$lefty.css(this.modifyClass),-10) == -GetWidth()*0.5 ? this.$lefty.outerWidth() :-GetWidth()*0.5});
-		$('#slideleft>i').removeClass('icon-chevron-left').addClass('icon-chevron-right');
-		$('#content-div').width('90%');
-		$('#content-div').removeClass('offset3');
+		this.$lefty.animate({left: parseInt(this.$lefty.css(this.modifyClass),-10) == -GetWidth()*0.5 ? this.$lefty.outerWidth() :-GetWidth()*0.5},this.animateSpeed);
+		$(this.iconSelector).removeClass(this.modifyIconLeftClass).addClass(this.modifyIconRihtClass);
+		$(this.nextDiv).width(this.originalSize);
+		$(this.nextDiv).removeClass(this.offset);
 	};
 	
-	
-	
+	var scroller=new Scroller();
 	$('#slideleft').click(function(){
-		(new Scroller()).decider();
+		scroller.decider();
 	});
 			
 			
