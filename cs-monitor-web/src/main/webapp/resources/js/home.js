@@ -33,7 +33,9 @@ function() {
 		this.originalSize="90%";
 	}
 	
-
+	Scroller.prototype.decider=function(){
+		
+	}
 	
 	Scroller.prototype.pullLeft=function(){
 		
