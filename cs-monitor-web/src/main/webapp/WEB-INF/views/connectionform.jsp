@@ -9,7 +9,7 @@
 
 
 <security:authorize access="isAuthenticated()">
-	<div id="connection-div"  style="left: 3%;position: absolute;">
+	<div id="connection-div"  >
 		<form action="<c:url value='/admin/connect' />" method="post"
 			class="form-horizontal connection" id="connectionform" style="width:100%">
 			<div class="modal-header">
