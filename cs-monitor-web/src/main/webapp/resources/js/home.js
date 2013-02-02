@@ -15,8 +15,25 @@ function() {
 	};
 	
 	
+	
+	
+	
+	
 	function Scroller()={
 			
+		
+		
+		
+		
+	}
+	
+	
+	Scroller.prototype.pullLeft=function(){
+		
+	}
+	
+	Scroller.prototype.pullRight=function(){
+		
 	}
 	
 	
