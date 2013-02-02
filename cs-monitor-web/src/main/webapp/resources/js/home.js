@@ -15,6 +15,11 @@ function() {
 	};
 	
 	
+	function Scroller()={
+			
+	}
+	
+	
 	
 	$('#slideleft').click(function() {
 		    var $lefty = $("#conn-div");
