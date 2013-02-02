@@ -38,10 +38,10 @@ body
 	<tiles:insertAttribute name="menu" />
 	<div class="container-fluid">
 		<div class="row-fluid">
-		<div class="span3"  >
+		<div class="" id="conn-div" style="left: 3%;position: absolute;">
 			<tiles:insertAttribute name="connectionform" />
 		</div>
-		<div class="span8">
+		<div class="span8 offset3" id="content-div">
 			<tiles:insertAttribute name="content" />
 		</div>
 		</div>
